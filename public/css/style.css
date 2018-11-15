@@ -1,0 +1,54 @@
+body {
+	font-family: 'Raleway', sans-serif;
+	background: #eef1f4;
+	padding-top: 130px;
+}
+hr {
+	margin: 0;
+}
+.nav-link:hover {
+	opacity: 0.8 !important;
+}
+.navbar-brand {
+	font-size: 30px !important;
+}
+.navbar-toggler {
+	color: white !important;
+	border: 0 !important;
+}
+.navbar-toggler .fa {
+	font-size: 20px;
+}
+.panel {
+	margin-bottom: 30px;
+	padding-bottom: 15px;
+	overflow: hidden;
+}
+.panel-title {
+	display: inline-block;
+	position: relative;
+	padding: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 500;
+}
+.panel-content {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+#map-wrapper {
+	height: 500px;
+	position: relative;
+}
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#footer {
+	margin-top: 30px;
+}
