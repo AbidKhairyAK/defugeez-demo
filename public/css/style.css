@@ -1,7 +1,8 @@
 body {
 	font-family: 'Raleway', sans-serif;
 	background: #eef1f4;
-	padding-top: 130px;
+	padding-top: 100px;
+	color: #333;
 }
 hr {
 	margin: 0;
@@ -19,27 +20,46 @@ hr {
 .navbar-toggler .fa {
 	font-size: 20px;
 }
-.panel {
-	margin-bottom: 30px;
+.section {
+	margin-bottom: 15px;
 	padding-bottom: 15px;
+}
+.section-wrapper {
 	overflow: hidden;
 }
-.panel-title {
+.section-separator h3 {
 	display: inline-block;
+	padding: 10px;
 	position: relative;
-	padding: 5px;
-	border-bottom-right-radius: 5px;
-	border-bottom-left-radius: 5px;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 500;
+	background: #eef1f4;
+	font-weight: bold;
+	color: #446;
 }
-.panel-content {
+.section-separator .hr-thick {
+	position: relative;
+	top: 30px;
+	border: 2px solid #557;
+	width: 320px;
+	margin: auto;
+}
+.section-separator .hr-thin {
+	position: relative;
+	top: 33px;
+	border: 1px solid #557;
+	width: 315px;
+	margin: auto;
+}
+.section-title {
+	
+}
+.section-content {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
 #map-wrapper {
-	height: 500px;
+	height: 400px;
 	position: relative;
 }
 #map {

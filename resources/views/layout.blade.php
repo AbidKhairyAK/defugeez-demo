@@ -53,38 +53,50 @@
 		    	<hr>
 			  </ul>
 		  </div>
-		
-		</div>
 
+		</div>
 	</nav>
 
 
 	<div class="container">
 
-		<div id="map-wrapper" class="panel col-sm-12 rounded bg-light shadow">
-			<h3 class="panel-title bg-primary text-white shadow-sm">
-				Peta Bencana
-			</h3>
-
-			<div id="map"></div>
-
-		</div>
-
-		<div class="col-sm-12 rounded bg-light shadow">
-			<h3 class="panel-title bg-primary text-white shadow-sm">
-				Title
-			</h3>
-
-			<div class="panel-content col-sm-12">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus fermentum eros non scelerisque. Vivamus arcu sapien, placerat vel finibus nec, consectetur id libero. Proin ac mattis neque. Maecenas blandit dolor tortor, vitae aliquet nunc ullamcorper fermentum.</p><p> Suspendisse ac quam pharetra, laoreet tortor at, pretium leo. Vivamus ut magna risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse accumsan enim ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p> Morbi pretium volutpat turpis consequat malesuada. Aenean interdum ut quam eu mollis. Vestibulum vestibulum elit a quam vulputate, quis ornare nisl dignissim. Aenean vulputate fermentum libero, quis posuere ante consectetur eget. Praesent sapien mauris, venenatis vel arcu at, varius consequat sapien.</p>
-				<p>
-					Nullam iaculis urna eget justo aliquam, ut tempus sapien sagittis. Vivamus sed laoreet justo. Vivamus tristique diam est, ut luctus lectus lobortis vitae. Vestibulum gravida ex condimentum, interdum nulla sed, feugiat eros. Donec vel sapien interdum, pulvinar diam eget, vulputate sapien. Ut ullamcorper ipsum nec interdum vulputate. Vivamus est nisl, consequat eget blandit ac, pellentesque in orci. Ut a volutpat nisl. Cras blandit tortor mi, vel facilisis enim tristique sit amet. Cras quis nunc aliquam, ultricies nibh at, tincidunt mi. Maecenas faucibus fermentum consectetur. Mauris iaculis, lacus eget laoreet pulvinar, turpis orci vulputate nunc, vel fringilla justo purus ac felis. Aliquam efficitur id massa a tincidunt. Vivamus bibendum nulla eu justo bibendum condimentum. Morbi maximus, libero eget vulputate interdum, libero enim ornare risus, ut fringilla tortor dui vel nisi. Nullam lorem justo, iaculis quis sodales eget, tristique vel leo.
-				</p>
+		<div class="section">
+			<div class="section-separator">
+				<hr class="hr-thick">
+				<hr class="hr-thin">
+				<h3>Peta Bencana</h3>
 			</div>
 
+			<div id="map-wrapper" class="section col-sm-12 rounded bg-light shadow">
+				<div id="map"></div>
+			</div>
 		</div>
 
+		<div class="section">
+			
+			<div class="section-separator">
+				<hr class="hr-thick">
+				<hr class="hr-thin">
+				<h3>Daftar Bencana</h3>
+			</div>
+
+			<div class="section-wrapper col-sm-12 rounded bg-light shadow">
+
+				<div class="section-content col-sm-12">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus fermentum eros non scelerisque. Vivamus arcu sapien, placerat vel finibus nec, consectetur id libero. Proin ac mattis neque. Maecenas blandit dolor tortor, vitae aliquet nunc ullamcorper fermentum.</p>
+					<p> 
+						Suspendisse ac quam pharetra, laoreet tortor at, pretium leo. Vivamus ut magna risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse accumsan enim ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+					</p>
+						Morbi pretium volutpat turpis consequat malesuada. Aenean interdum ut quam eu mollis. Vestibulum vestibulum elit a quam vulputate, quis ornare nisl dignissim. Aenean vulputate fermentum libero, quis posuere ante consectetur eget. Praesent sapien mauris, venenatis vel arcu at, varius consequat sapien.
+					</p>
+					<p>
+						Nullam iaculis urna eget justo aliquam, ut tempus sapien sagittis. Vivamus sed laoreet justo. Vivamus tristique diam est, ut luctus lectus lobortis vitae. Vestibulum gravida ex condimentum, interdum nulla sed, feugiat eros. Donec vel sapien interdum, pulvinar diam eget, vulputate sapien. Ut ullamcorper ipsum nec interdum vulputate.
+					</p>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 	<nav id="footer" class="navbar navbar-expand bg-dark">
