@@ -20,6 +20,9 @@ hr {
 .navbar-toggler .fa {
 	font-size: 20px;
 }
+.active-card {
+	font-size: .9rem;
+}
 .section {
 	margin-bottom: 15px;
 	padding-bottom: 15px;

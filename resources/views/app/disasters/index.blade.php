@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>{{ env('APP_PREFIX').env('APP_NAME') }} | @yield('title')</title>
 	</head>
 	<!-- Latest compiled and minified CSS -->
@@ -80,54 +82,25 @@
 				<h3>Daftar Bencana</h3>
 			</div>
 
-			<div class="section-wrapper col-sm-12 py-4 rounded bg-light shadow">
-
-				<div class="card my-3">
-					<div class="card-body pt-40">
-						<div class="row">
-							<div class="col-sm-8">
-								<div class="h3 bold font-weight-bold"><a href="https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp"> Museum Tsunami Aceh</a></div>
-								<div class="h5">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</div>
-								<div class="">status: level 2</div>
-								<div>tingkat kerusakan: level 1</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="h6">jumlah pengungsi yang terdata</div>
-								<div class="h1">230/300</div><div class="h5">orang</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="card my-3">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-8">
-								<div class="h3 bold font-weight-bold">Museum Tsunami Aceh</div>
-								<div class="h5">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</div>
-								<div class="">status: level 2</div>
-								<div>tingkat kerusakan: level 1</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="h6">jumlah pengungsi yang terdata</div>
-								<div class="h1">230/300</div><div class="h5">orang</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="card my-3">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-sm-8">
-								<div class="h3 bold font-weight-bold">Museum Tsunami Aceh</div>
-								<div class="h5">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</div>
-								<div class="">status: level 2</div>
-								<div>tingkat kerusakan: level 1</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="h6">jumlah pengungsi yang terdata</div>
-								<div class="h1">230/300</div><div class="h5">orang</div>
+			<div class="section-wrapper row">
+				<div class="col-md-6">
+					<div class="card my-3">
+						<div class="card-body pt-40 position-relative">
+							<div class="clearfix">
+								<div class="row col-md-9"><a class="h3 font-weight-bold" href="https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp"> Museum Tsunami Aceh</a>
+								</div><span class="active-card position-absolute px-4 py-2 bg-primary text-white font-weight-bold" style="top:0;right:20px;">Aktif</span></div>
+							<hr>
+							<div class="row pt-3">
+								<div class="col-md-9 pr-4">
+									<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
+									<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
+									<p class="text-danger small">Tingkat kerusakan: intermediate</p>
+									<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								</div>
+								<div class="col-sm-3">
+									<div class="small">jumlah pengungsi terdata</div>
+									<div class="h1">230</div><div class="h5">orang</div>
+								</div>
 							</div>
 						</div>
 					</div>
