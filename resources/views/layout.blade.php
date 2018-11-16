@@ -67,7 +67,7 @@
 				<h3>Peta Bencana</h3>
 			</div>
 
-			<div id="map-wrapper" class="section col-sm-12 rounded bg-light shadow">
+			<div id="map-wrapper" class="section-wrapper col-sm-12 rounded bg-light shadow">
 				<div id="map"></div>
 			</div>
 		</div>
