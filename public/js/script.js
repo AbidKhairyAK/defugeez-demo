@@ -7,9 +7,15 @@ var mymap = L.map('map').setView([-1.090675, 118.873786], 5);
 //     accessToken: 'pk.eyJ1IjoiYWJpZGtoYWlyeWFrIiwiYSI6ImNqb2g5bTdncTBpZ28za3J4eGJlNnF5Z3cifQ.ut1UXqjaV7z0KMInSQEBUQ'
 // }).addTo(mymap);
 
-var map =  L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
-	maxZoom: 19,
-	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
+// var map =  L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+// 	maxZoom: 19,
+// 	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// });
 
-map.addTo(mymap);
+// map.addTo(mymap);
+
+
+L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(mymap);
