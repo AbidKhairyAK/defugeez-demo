@@ -12,4 +12,13 @@ var map =  L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}
 	attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 });
 
+	L.marker([-1.090675, 118.873786]).addTo(mymap)
+		.bindPopup("<b>TSUNAMI ACEH</b><br />Posko 120").openPopup();
+
+	L.marker([-1.090675, 114.873782]).addTo(mymap)
+		.bindPopup("<b>GEMPA BANTUL</b><br />Posko 2.").openPopup();
+
+	L.marker([-7.090675, 119.873782]).addTo(mymap)
+		.bindPopup("<b>GEMPA DODIL</b><br />Posko 2.").openPopup();
+
 map.addTo(mymap);
