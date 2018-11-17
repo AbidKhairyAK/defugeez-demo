@@ -12,19 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('app.example');
+    return redirect('/disasters');
 });
 
 Route::get('/layout', function () {
     return view('layout');
 });
 
-Route::get('/posts', function () {
-    return view('app.posts.index');
+Route::get('/disasters', function () {
+    return view('app.disasters.index');
 });
 
-Route::get('/homey', function () {
-    return view('app.disasters.index');
+Route::get('/posts', function () {
+    return view('app.posts.index');
 });
 
 Route::get('/refugees', function () {
