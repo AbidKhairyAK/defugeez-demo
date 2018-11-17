@@ -19,6 +19,10 @@ Route::get('/layout', function () {
     return view('layout');
 });
 
+Route::get('/posts', function () {
+    return view('app.posts.index');
+});
+
 Route::get('/homey', function () {
     return view('app.disasters.index');
 });
