@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{ env('APP_PREFIX').env('APP_NAME') }} | @yield('title')</title>
-	</head>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<title>{{ env('APP_PREFIX').env('APP_NAME') }} | @yield('title')</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<!-- Font Awesome -->
@@ -18,11 +20,14 @@
 	<!-- Layout CSS -->
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	@yield('style')
+</head>
 <body>
 
 	@include('app.layouts.header')
 
-	@yield('content')
+	<div id="wrap">
+		@yield('content')
+	</div>
 
 	@include('app.layouts.footer')
 
