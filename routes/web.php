@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app.example');
 });
 
 Route::get('/layout', function () {
@@ -21,4 +21,8 @@ Route::get('/layout', function () {
 
 Route::get('/homey', function () {
     return view('app.disasters.index');
+});
+
+Route::get('/refugees', function () {
+    return view('app.refugees.index');
 });

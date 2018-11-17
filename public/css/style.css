@@ -1,11 +1,22 @@
+html {
+	height: 100%;
+}
 body {
 	font-family: 'Raleway', sans-serif;
 	background: #eef1f4;
 	padding-top: 100px;
 	color: #333;
+	height: 100%;
 }
 hr {
 	margin: 0;
+}
+#wrap {
+	min-height: 100%;
+}
+#main {
+	overflow: auto;
+	padding-bottom: 48px;
 }
 .nav-link:hover {
 	opacity: 0.8 !important;
@@ -24,8 +35,7 @@ hr {
 	font-size: .9rem;
 }
 .section {
-	margin-bottom: 15px;
-	padding-bottom: 15px;
+	margin-bottom: 30px;
 }
 .section-wrapper {
 	overflow: hidden;
@@ -73,5 +83,6 @@ hr {
 	right: 0;
 }
 #footer {
-	margin-top: 30px;
+	position: relative;
+	margin-top: -55px;
 }
