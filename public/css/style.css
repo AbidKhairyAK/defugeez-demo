@@ -25,6 +25,7 @@ hr {
 }
 .section-wrapper {
 	overflow: hidden;
+	margin-bottom: 30px;
 }
 .section-separator h3 {
 	display: inline-block;
@@ -51,7 +52,7 @@ hr {
 	margin: auto;
 }
 .section-title {
-	
+
 }
 .section-content {
 	padding-top: 15px;
@@ -71,3 +72,27 @@ hr {
 #footer {
 	margin-top: 30px;
 }
+
+/*============== pagination =============**/
+.pagination-v2 > li > a,
+.pagination-v2 > li > span {
+  background-color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  color: #007bff;
+  float: left;
+  font-size: 14px;
+  line-height: 1.42857;
+  margin-right: 5px;
+  padding: 8px 15px;
+  position: relative;
+  text-decoration: none;
+}
+.pagination-v2 > li > a.active,
+.pagination-v2 > li > a:hover,
+.pagination-v2 > li > span:hover,
+.pagination-v2 > li > a:focus,
+.pagination-v2 > li > span:focus {
+  background-color: #007bff !important;
+	color: #fff;
+  border-color: #007ddd;

@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="section">
-		
+
 		<div class="section-separator">
 			<hr class="hr-thick">
 			<hr class="hr-thin">

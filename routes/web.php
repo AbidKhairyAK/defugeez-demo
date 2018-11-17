@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('app.example');
 });
+
+Route::get('/posts', function () {
+    return view('app.posts.index');
+});
