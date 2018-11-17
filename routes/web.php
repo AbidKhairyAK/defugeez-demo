@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('app.example');
 });
+
+Route::get('/refugees', function () {
+    return view('app.refugees.index');
+});
