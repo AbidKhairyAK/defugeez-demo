@@ -19,15 +19,15 @@
 		    </li>
 		   	<hr>
 		    <li class="nav-item">
+		      <a class="nav-link text-white pr-3" href="#"><i class="fa fa-folder-open"></i> <b>Arsip</b></a>
+		    </li>
+		   	<hr>
+		    <li class="nav-item">
 		      <a class="nav-link text-white pr-3" href="#"><i class="fa fa-sign-in"></i> <b>Login</b></a>
 		    </li>
 		   	<hr>
 		    <li class="nav-item">
 		      <a class="nav-link bg-light rounded text-primary" href="#"><i class="fa fa-user-plus"></i> <b>Register</b></a>
-		    </li>
-		   	<hr>
-		    <li class="nav-item">
-		      <a class="nav-link text-white" href="#"><i class="fa fa-sign-out"></i> <b>Logout</b></a>
 		    </li>
 	    	<hr>
 		  </ul>
