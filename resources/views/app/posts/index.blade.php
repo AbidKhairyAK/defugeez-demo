@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
  crossorigin=""/>
+<link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
 <style type="text/css">
   #list .section-wrapper {
     background: white;
@@ -233,8 +234,13 @@
  crossorigin=""></script>
 <!-- Leaflet Provider -->
 <script src="/js/leaflet-provider.js"></script>
+<script src="//unpkg.com/leaflet-gesture-handling"></script>
 <script type="text/javascript">
-  var mymap = L.map('map').setView([-1.090675, 114.873782], 11);
+  var mymap = L.map('map', {
+    center: [-1.090675, 114.873782],
+    zoom: 11,
+    gestureHandling: true,
+  });
 
   var map =  L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
     maxZoom: 18,
