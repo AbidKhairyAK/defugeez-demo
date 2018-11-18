@@ -68,12 +68,27 @@ hr {
 .section-title {
 	display: block;
 	border-bottom: 1px solid #ccc !important;
-	padding-bottom: 20px;
-	padding-top: 20px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	margin-bottom: 0;
 }
 .section-content {
 	padding-top: 15px;
 	padding-bottom: 15px;
+}
+.section-more {
+display: block;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-right: -15px;
+margin-left: -15px;
+text-align: center;
+transition: all 0.2s ease;
+color: white;
+}
+.section-more:hover {
+color: white;
+text-decoration: none;
 }
 .form-group .label {
 	font-weight: bold;
