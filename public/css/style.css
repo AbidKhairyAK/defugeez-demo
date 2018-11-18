@@ -66,11 +66,17 @@ hr {
 	margin: auto;
 }
 .section-title {
-
+	display: block;
+	border-bottom: 1px solid #ccc !important;
+	padding-bottom: 20px;
+	padding-top: 20px;
 }
 .section-content {
 	padding-top: 15px;
 	padding-bottom: 15px;
+}
+.form-group .label {
+	font-weight: bold;
 }
 #map-wrapper {
 	height: 400px;
