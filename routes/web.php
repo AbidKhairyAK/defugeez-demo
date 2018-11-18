@@ -30,3 +30,17 @@ Route::get('/posts', function () {
 Route::get('/refugees', function () {
     return view('app.refugees.index');
 });
+
+// ====== Test =======
+Route::get('/test/create', function () {
+    return view('app.test.create');
+});
+Route::get('/test/edit', function () {
+    return view('app.test.edit');
+});
+Route::get('/test/store', function () {
+    return ;
+})->name('test.store');
+Route::get('/test/update', function () {
+    return ;
+})->name('test.update');
