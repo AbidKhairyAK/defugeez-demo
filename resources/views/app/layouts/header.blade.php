@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3 fixed-top shadow">
 	<div class="container">
 
-		<a class="navbar-brand" href="#"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
+		<a class="navbar-brand" href="{{ url('/disasters') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
 
 	  <!-- Toggler/collapsibe Button -->
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-links">
@@ -11,7 +11,7 @@
 	  <div class="collapse navbar-collapse justify-content-end pt-3" id="nav-links">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="#"><i class="fa fa-home"></i> <b>Beranda</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ url('/disasters') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
 		    </li>
 		    <hr>
 		    <li class="nav-item">

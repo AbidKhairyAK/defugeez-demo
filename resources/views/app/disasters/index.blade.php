@@ -26,6 +26,7 @@
 		</div>
 
 		<div class="section-wrapper row">
+
 			<div class="col-md-6">
 				<div class="card my-3">
 					<div class="card-body pt-40 position-relative">
@@ -38,7 +39,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
@@ -61,7 +62,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
@@ -84,7 +85,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
@@ -107,7 +108,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
@@ -130,7 +131,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
@@ -153,7 +154,7 @@
 								<p class="h6">Sukaramai, Baiturrahman, Kota Banda Aceh, Aceh 23116</p>
 								<p class="small lead">The myth that multitasking is a skill a person possess . Multitasking has become a heroic word in everybody's vocabulary. People take pride in stating multitasking as their strength when asked.</p>
 								<p class="text-danger small">Tingkat kerusakan: intermediate</p>
-								<a class="small" href="http://www.youtube.com">More info &raquo;</a>
+								<a class="small" href="{{ url('/posts') }}">More info &raquo;</a>
 							</div>
 							<div class="col-sm-3">
 								<div class="small">jumlah pengungsi terdata</div>
