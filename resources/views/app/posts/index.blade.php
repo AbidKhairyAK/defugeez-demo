@@ -3,15 +3,16 @@
 @section('title', 'Posko')
 
 @section('style')
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+ integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+ crossorigin=""/>
 <style type="text/css">
-  a.section-wrapper {
-    color: inherit;
+  #list .section-wrapper {
     background: white;
     transition: all 0.5s ease;
   }
-  a.section-wrapper:hover {
-    text-decoration: none !important;
-    color: inherit;
+  #list .section-wrapper:hover {
     transform: scale(1.05,1.05);
   }
 </style>
@@ -20,57 +21,74 @@
 @section('content')
 <div class="container">
 
-	<div class="section">
+  <div class="section">
+    <div class="section-separator">
+      <hr class="hr-thick">
+      <hr class="hr-thin">
+      <h3>Info Bencana</h3>
+    </div>
 
-		<div class="section-separator">
-			<hr class="hr-thick">
-			<hr class="hr-thin">
-			<h3>Info Bencana</h3>
-		</div>
+    <div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
-		<div class="section-wrapper col-sm-12 rounded bg-light shadow">
+      <div class="section-content">
+        <div class="row">
+          <div class="col-lg-6">
+            <table class="table table-hover table">
+              <tr>
+                <th width="145">Nama Bencana</th>
+                <td class="text-right">Gempa Bumi dan Tsunami</td>
+              </tr>
+              <tr>
+                <th>Lokasi Bencana</th>
+                <td class="text-right">Kota Palu, Sulawesi Tengah</td>
+              </tr>
+              <tr>
+                <th>Status Bencana</th>
+                <td class="text-right">Aktif</td>
+              </tr>
+            </table>
+          </div>
 
-			<div class="section-content col-sm-12">
-				<div class="row">
-					<div class="col-sm-6">
-						<table class="table table-hover">
-							<tr>
-								<th>Nama Bencana</th>
-								<td class="text-right">Gempa</td>
-							</tr>
-							<tr>
-								<th>Lokasi Bencana</th>
-								<td class="text-right">Gravetz 20, 966</td>
-							</tr>
-							<tr>
-								<th>Status</th>
-								<td class="text-right">Aktif</td>
-							</tr>
-						</table>
-					</div>
-					<div class="col-sm-6">
-						<table class="table table-hover">
-							<tr>
-								<th>Tingkat Kerusakan</th>
-								<td class="text-right">Parah</td>
-							</tr>
-							<tr>
-								<th>Deskripsi</th>
-								<td class="text-right">-</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
+          <div class="col-lg-6">
+            <table class="table table-hover">
+              <tr>
+                <th>Jumlah Posko</th>
+                <td class="text-right">10 Posko</td>
+              </tr>
+              <tr>
+                <th>Tingkat Kerusakan</th>
+                <td class="text-right">Sangat Parah</td>
+              </tr>
+              <tr>
+                <th>Pembuat Data Bencana</th>
+                <td class="text-right">Ahmad Iyad</td>
+              </tr>
+            </table>
+          </div>
 
-		</div>
-	</div>
+          <div class="col-lg-12">
+            <table class="table table-hover">
+              <tr>
+                <th>Deskripsi</th>
+              </tr>
+              <tr>
+                <td class="border-top-0">
+                  <p>Donec tincidunt commodo tellus. Integer mollis nisi sit amet massa vulputate, nec euismod elit aliquet. Aliquam sit amet posuere turpis. Nam lobortis justo sed congue aliquet.</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <div class="section">
 		<div class="section-separator">
 			<hr class="hr-thick">
 			<hr class="hr-thin">
-			<h3>Peta Lokasi Bencana</h3>
+			<h3>Peta Lokasi Posko</h3>
 		</div>
 
 		<div id="map-wrapper" class="section-wrapper col-sm-12 rounded bg-light shadow">
@@ -78,7 +96,7 @@
 		</div>
 	</div>
 
-  <div class="section">
+  <div id="list" class="section">
 
 		<div class="section-separator">
 			<hr class="hr-thick">
@@ -89,131 +107,105 @@
     <div class="row">
 
       <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
               <p class="mb-auto">Jumlah Pengungsi</p>
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
             </div>
           </div>
-        </a>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
       </div>
 
       <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
               <p class="mb-auto">Jumlah Pengungsi</p>
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
             </div>
           </div>
-        </a>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
       </div>
 
       <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
               <p class="mb-auto">Jumlah Pengungsi</p>
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-warning btn-sm">Status: Tidak Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
             </div>
           </div>
-        </a>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
       </div>
 
       <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
+            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
+            <div class="float-left">
+              <p class="mb-auto">Jumlah Pengungsi</p>
+              <h5><b class="text-info">300</b> / 400 jiwa</h5>
+            </div>
+            <div class="float-right mt-4">
+              <p class="btn btn-warning btn-sm mb-0">Tidak Aktif</p>
+            </div>
+          </div>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
               <p class="mb-auto">Jumlah Pengungsi</p>
               <h5><b class="text-warning">500</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
             </div>
           </div>
-        </a>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
       </div>
 
       <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
+        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+          <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
               <p class="mb-auto">Jumlah Pengungsi</p>
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
             </div>
           </div>
-        </a>
-      </div>
-
-      <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-warning btn-sm">Status: Tidak Aktif</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6">
-        <a href="{{ url('/refugees') }}" class="section-wrapper col-sm-12 d-block clearfix mb-4 shadow-sm">
-          <div class="section-content">
-            <h5 class="mb-2"><b>Posko Maguwoharjo</b></h5>
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm">Status: Masih Aktif</p>
-            </div>
-          </div>
-        </a>
+          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
+        </div>
       </div>
 
     </div>
@@ -232,4 +224,32 @@
   </div>
 
 </div>
+@endsection
+
+@section('script')
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+ integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+ crossorigin=""></script>
+<!-- Leaflet Provider -->
+<script src="/js/leaflet-provider.js"></script>
+<script type="text/javascript">
+  var mymap = L.map('map').setView([-1.090675, 114.873782], 11);
+
+  var map =  L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  });
+
+    L.marker([-1.090675, 114.713782]).addTo(mymap)
+      .bindPopup(`<b>Posko Krapyak</b><br/><a href="{{ url('/refugees') }}">Lebih Lengkap!</a>.`);
+
+    L.marker([-1.010675, 114.953782]).addTo(mymap)
+      .bindPopup(`<b>Posko Krapyak</b><br/><a href="{{ url('/refugees') }}">Lebih Lengkap!</a>.`);
+
+    L.marker([-1.151675, 114.893782]).addTo(mymap)
+      .bindPopup(`<b>Posko Krapyak</b><br/><a href="{{ url('/refugees') }}">Lebih Lengkap!</a>.`).openPopup();
+
+  map.addTo(mymap);
+</script>
 @endsection
