@@ -34,6 +34,14 @@
 			<h3>Daftar Bencana</h3>
 		</div>
 
+    <div class="btn btn-teal">
+      <div class="text-center h5">
+        <i class="fa fa-plus-circle"></i> 
+          Tambah Data Bencana
+        <i class="fa fa-plus-circle"></i>
+      </div>
+    </div>
+
     <div class="row">
 
       <div class="col-md-6">
