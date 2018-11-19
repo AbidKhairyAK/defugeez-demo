@@ -1,7 +1,3 @@
-@php
-$test = '';
-@endphp
-
 @extends('app.layouts.app')
 
 @section('title', 'Tambah Test')

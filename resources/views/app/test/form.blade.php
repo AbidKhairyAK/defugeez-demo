@@ -4,9 +4,9 @@
 		'feedback' => $errors->has('email') ? '<div class="invalid-feedback">'.$errors->first('email').'</div>' : '',
 	];
 
-	$error_blood = [
-		'invalid' => $errors->has('blood') ? 'is-invalid' : '',
-		'feedback' => $errors->has('blood') ? '<div class="invalid-feedback">'.$errors->first('blood').'</div>' : '',
+	$error_class = [
+		'invalid' => $errors->has('class') ? 'is-invalid' : '',
+		'feedback' => $errors->has('class') ? '<div class="invalid-feedback">'.$errors->first('class').'</div>' : '',
 	];
 
 	$error_status = [
@@ -50,9 +50,14 @@
 </div>
 
 <div class="form-group">
-	{!! Form::label('blood', 'Darah :', ['class' => 'label']) !!}
-	{!! Form::select('blood', ['' => '', 'A', 'B', 'O', 'AB'], null, ['class' => 'form-control '.$error_blood['invalid'], 'id' => 'blood', 'required']) !!}
-	{!! $error_blood['feedback'] !!}
+	{!! Form::label('class', 'Class :', ['class' => 'label']) !!}
+	{!! Form::select('class', [
+		'' => '', 
+		'Hacker' => 'Hacker', 
+		'Hipster' => 'Hipster', 
+		'Hustler' => 'Hustler'
+	], null, ['class' => 'form-control '.$error_class['invalid'], 'id' => 'class', 'required']) !!}
+	{!! $error_class['feedback'] !!}
 </div>
 
 <div class="form-group">

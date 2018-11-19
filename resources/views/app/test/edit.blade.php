@@ -1,7 +1,3 @@
-@php
-$test = '';
-@endphp
-
 @extends('app.layouts.app')
 
 @section('title', 'Tambah Test')
@@ -22,7 +18,8 @@ $test = '';
 
 			<div class="section-content">
 				{!! Form::model($test, [
-					'route' => 'test.update',
+					'method' => 'PUT',
+					'route' => ['test.update', $test->id],
 					'id'		=> 'test-form'
 				]) !!}
 
