@@ -8,15 +8,6 @@
  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
  crossorigin=""/>
 <link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
-<style type="text/css">
-  #list .section-wrapper {
-    background: white;
-    transition: all 0.5s ease;
-  }
-  #list .section-wrapper:hover {
-    transform: scale(1.05,1.05);
-  }
-</style>
 @endsection
 
 @section('content')
@@ -31,17 +22,30 @@
 
     <div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
+      <div class="section-option dropdown mt-3 mr-1">
+        <button type="button" class="btn btn-light" data-toggle="dropdown">
+          <i class="fa fa-ellipsis-v"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+          <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+          <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+          <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+        </div>
+      </div>
+
+      <h4 class="section-title border-bottom-0 mt-3"><b>Gempa Bumi Kota Palu</b></h4>
+      
       <div class="section-content">
         <div class="row">
           <div class="col-lg-6">
-            <table class="table table-hover table">
+            <table class="table table-hover">
               <tr>
-                <th width="145">Nama Bencana</th>
-                <td class="text-right">Gempa Bumi dan Tsunami</td>
+                <th width="150">Lokasi Bencana</th>
+                <td class="text-right">Kota Palu, Sulawesi Tengah</td>
               </tr>
               <tr>
-                <th>Lokasi Bencana</th>
-                <td class="text-right">Kota Palu, Sulawesi Tengah</td>
+                <th>Jumlah Posko</th>
+                <td class="text-right">10 Posko</td>
               </tr>
               <tr>
                 <th>Status Bencana</th>
@@ -52,10 +56,6 @@
 
           <div class="col-lg-6">
             <table class="table table-hover">
-              <tr>
-                <th>Jumlah Posko</th>
-                <td class="text-right">10 Posko</td>
-              </tr>
               <tr>
                 <th>Tingkat Kerusakan</th>
                 <td class="text-right">Sangat Parah</td>
@@ -108,8 +108,21 @@
     <div class="row">
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -117,7 +130,7 @@
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
@@ -125,8 +138,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -134,7 +160,7 @@
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
@@ -142,8 +168,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -151,7 +190,7 @@
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
@@ -159,8 +198,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -168,7 +220,7 @@
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-warning btn-sm mb-0">Tidak Aktif</p>
+              <p class="btn btn-warning btn-sm mb-0">Status: <b>Nonaktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
@@ -176,8 +228,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -185,7 +250,7 @@
               <h5><b class="text-warning">500</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
@@ -193,8 +258,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
             <div class="float-left">
@@ -202,7 +280,7 @@
               <h5><b class="text-info">300</b> / 400 jiwa</h5>
             </div>
             <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Masih Aktif</p>
+              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
             </div>
           </div>
           <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>

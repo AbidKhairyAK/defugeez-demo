@@ -68,13 +68,25 @@
 
 				<div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
+	      <div class="section-option dropdown mt-3 mr-1">
+	        <button type="button" class="btn btn-light" data-toggle="dropdown">
+	          <i class="fa fa-ellipsis-v"></i>
+	        </button>
+	        <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+	          <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+	          <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+	        </div>
+	      </div>
+
+	      <h4 class="section-title border-bottom-0 mt-3"><b>Posko Karanganyar</b></h4>
+	      
 					<div class="section-content">
 						<div class="row">
 							<div class="col-lg-6">
-								<table class="table table-hover table">
+								<table class="table table-hover">
 									<tr>
-										<th width="130">Nama Posko</th>
-										<td class="text-right">Posko Bangkit Bersama</td>
+										<th width="140">Status Posko</th>
+										<td class="text-right">Masih Beroperasi</td>
 									</tr>
 									<tr>
 										<th>Jumlah Barak</th>
@@ -89,10 +101,6 @@
 
 							<div class="col-lg-6">
 								<table class="table table-hover">
-									<tr>
-										<th>Status Posko</th>
-										<td class="text-right">Masih Beroperasi</td>
-									</tr>
 									<tr>
 										<th>Pembuat Data Posko</th>
 										<td class="text-right">Ahmad Iyad</td>

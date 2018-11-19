@@ -14,8 +14,13 @@
 		      <a class="nav-link text-white pr-3" href="{{ url('/disasters') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
 		    </li>
 		    <hr>
-		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="#"><i class="fa fa-plus-circle"></i> <b>Tambah</b></a>
+		    <li class="nav-item dropdown">
+		      <a class="nav-link text-white pr-3" data-toggle="dropdown" href=""><i class="fa fa-plus-circle"></i> <b>Tambah Data</b></a>
+		      <div class="dropdown-menu shadow border-0">
+		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Bencana</a>
+		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Posko</a>
+		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Pengungsi</a>
+		      </div>
 		    </li>
 		   	<hr>
 		    <li class="nav-item">
