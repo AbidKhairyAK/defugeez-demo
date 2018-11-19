@@ -38,9 +38,15 @@ Route::get('/test/create', function () {
 Route::get('/test/edit', function () {
     return view('app.test.edit');
 });
-Route::get('/test/store', function () {
+Route::get('/test/laporan', function () {
+    return view('app.test.report');
+});
+Route::post('/test/store', function () {
     return ;
 })->name('test.store');
-Route::get('/test/update', function () {
+Route::post('/test/update', function () {
     return ;
 })->name('test.update');
+Route::post('/test/report', function () {
+    return ;
+})->name('test.report');

@@ -27,6 +27,7 @@
           <i class="fa fa-ellipsis-v"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+          <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
           <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
           <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
           <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
@@ -115,8 +116,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
@@ -145,8 +146,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
@@ -175,8 +176,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
@@ -205,8 +206,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
@@ -235,8 +236,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
@@ -265,8 +266,8 @@
               <i class="fa fa-ellipsis-v"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
               <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
               <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
             </div>
           </div>
