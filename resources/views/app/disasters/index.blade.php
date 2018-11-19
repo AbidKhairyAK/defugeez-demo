@@ -7,15 +7,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
  crossorigin=""/>
-<style type="text/css">
-	#list .section-wrapper {
-    background: white;
-    transition: all 0.5s ease;
-  }
-  #list .section-wrapper:hover {
-    transform: scale(1.05,1.05);
-  }
-</style>
+<link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
 @endsection
 
 @section('content')
@@ -45,8 +37,21 @@
     <div class="row">
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+          
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -63,8 +68,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -81,8 +99,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -99,8 +130,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -117,8 +161,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -135,8 +192,21 @@
       </div>
 
       <div class="col-md-6">
-        <div class="section-wrapper col-sm-12 mb-4 shadow rounded">
+        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
+
+          <div class="section-option dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <i class="fa fa-ellipsis-v"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
+              <a class="dropdown-item" href="#">&rsaquo; Arsipkan</a>
+              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            </div>
+          </div>
+
           <h5 class="section-title"><b>Gempa Bumi Maguwoharjo</b></h5>
+
           <div class="section-content clearfix">
             <p>Kab. Maguwoharjo, Jawa Utara</p>
             <div class="float-left">
@@ -166,8 +236,13 @@
  crossorigin=""></script>
 <!-- Leaflet Provider -->
 <script src="/js/leaflet-provider.js"></script>
+<script src="//unpkg.com/leaflet-gesture-handling"></script>
 <script type="text/javascript">
-	var mymap = L.map('map').setView([-1.502592, 116.822409], 5);
+	var mymap = L.map('map', {
+    center: [-1.502592, 116.822409],
+    zoom: 5,
+    gestureHandling: true,
+  });
 
 	var map =  L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 		maxZoom: 18,
