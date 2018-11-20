@@ -121,189 +121,41 @@
 			<hr class="hr-thin">
 			<h3>Daftar Posko</h3>
 		</div>
-
+    <div class="">
+      <a href="{{ route('posts.create') }}" class="btn btn-info center">TAMBAH DATA</a>
+    </div>
     <div class="row">
+      @foreach($posts as $post)
+        <div class="col-md-6">
+          <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
 
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+            <div class="section-option dropdown">
+              <button type="button" class="btn btn-light" data-toggle="dropdown">
+                <i class="fa fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right border-0 shadow">
+                <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
+                <a class="dropdown-item" href="{{ route('posts.edit', $post->id) }}">&rsaquo; Edit</a>
+                <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
+              </div>
             </div>
+
+            <h5 class="section-title"><b>Posko {{ $post->name }}</b></h5>
+
+            <div class="section-content clearfix">
+              <p>{{ $post->address }}</p>
+              <div class="float-left">
+                <p class="mb-auto">Jumlah Pengungsi</p>
+                <h5><b class="text-info">300</b> / {{ $post->capacity }} jiwa</h5>
+              </div>
+              <div class="float-right mt-4">
+                <p class="btn btn-info btn-sm mb-0">Status: <b>{{ $post->status ? 'Aktif' : 'Tidak Aktif' }}</b></p>
+              </div>
+            </div>
+            <a href="{{ route('posts.show', $post->id) }}" class="section-more bg-primary">Info Lebih Lanjut</a>
           </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
         </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
-            </div>
-          </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
-            </div>
-          </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
-            </div>
-          </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-warning btn-sm mb-0">Status: <b>Nonaktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
-            </div>
-          </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-warning">500</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="section-wrapper bg-light col-sm-12 mb-4 shadow rounded">
-
-          <div class="section-option dropdown">
-            <button type="button" class="btn btn-light" data-toggle="dropdown">
-              <i class="fa fa-ellipsis-v"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right border-0 shadow">
-              <a class="dropdown-item" href="{{ url('/test/laporan') }}">&rsaquo; Laporkan</a>
-              <a class="dropdown-item" href="{{ url('/test/edit') }}">&rsaquo; Edit</a>
-              <a class="dropdown-item" href="#">&rsaquo; Hapus</a>
-            </div>
-          </div>
-
-          <h5 class="section-title"><b>Posko Maguwoharjo</b></h5>
-
-          <div class="section-content clearfix">
-            <p>Jl. Kepuhsari, Jenengan, Maguwoharjo, Kec. Depok</p>
-            <div class="float-left">
-              <p class="mb-auto">Jumlah Pengungsi</p>
-              <h5><b class="text-info">300</b> / 400 jiwa</h5>
-            </div>
-            <div class="float-right mt-4">
-              <p class="btn btn-info btn-sm mb-0">Status: <b>Aktif</b></p>
-            </div>
-          </div>
-          <a href="{{ url('/refugees') }}" class="section-more bg-primary">Info Lebih Lanjut</a>
-        </div>
-      </div>
-
+      @endforeach
     </div>
 
 	</div>

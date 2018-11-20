@@ -19,15 +19,13 @@ Route::get('/layout', function () {
     return view('layout');
 });
 
-Route::get('/disasterss', function () {
+Route::get('/disasters/testo', function () {
     return view('app.disasters.index');
 });
 
-Route::get('/posts', function () {
-    return view('app.posts.index');
-});
+Route::resource('/posts','PostsController');
 
-Route::get('/refugees', function () {
+Route::get('/refugees/testo', function () {
     return view('app.refugees.index');
 });
 
