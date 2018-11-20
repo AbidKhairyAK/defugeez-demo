@@ -32,6 +32,7 @@ Route::get('/refugees/testo', function () {
 // ====== Test =======
 
 Route::resource('/test', 'TestController');
+Route::resource('/disasters', 'DisastersController');
 
 Route::get('/test/laporan', function () {
     return view('app.test.report');
@@ -39,3 +40,6 @@ Route::get('/test/laporan', function () {
 Route::post('/test/report', function () {
     return ;
 })->name('test.report');
+
+// ======== Users =========
+Route::resource('/users', 'UsersController');

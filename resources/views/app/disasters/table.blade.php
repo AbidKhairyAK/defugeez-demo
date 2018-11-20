@@ -1,6 +1,6 @@
 @extends('app.layouts.app')
 
-@section('title', 'Test')
+@section('title', 'Disaster')
 
 @section('style')
 <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
@@ -19,11 +19,11 @@
 
 @section('content')
 <div id="main" class="container">
-		
+
 	<div class="section-separator">
 		<hr class="hr-thick">
 		<hr class="hr-thin">
-		<h3>Daftar Test</h3>
+		<h3>Daftar Bencana</h3>
 	</div>
 
 	<div class="section-wrapper rounded bg-light shadow">
@@ -31,30 +31,32 @@
 		<div class="section-content">
 			<div class="container-fluid">
 				<div class="table-responsive">
-					<a href="{{ route('test.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
-					<table id="test-table" class="table table-hover">
+					<a href="{{ route('disasters.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+					<table id="disaster-table" class="table table-hover">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Username</th>
-								<th>Email</th>
-								<th>Class</th>
+								<th>Nama Bencana</th>
+								<th>Tingkat Kerusakan</th>
+								<th>Lokasi</th>
+								<th>Tanggal</th>
 								<th>Status</th>
 								<th>Opsi</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach($tests as $test)
+							@foreach($disasters as $disaster)
 							<tr>
-								<td>{{ $test->id }}</td>
-								<td>{{ $test->username }}</td>
-								<td>{{ $test->email }}</td>
-								<td>{{ $test->class }}</td>
-								<td><span class="badge badge-{{ $test->status ? 'info' : 'warning' }}">{{ $test->status ? 'Aktif' : 'Nonaktif' }}</span></td>
+								<td>{{ $disaster->id }}</td>
+								<td>{{ $disaster->name }}</td>
+								<td>{{ $disaster->damage }}</td>
+								<td>{{ $disaster->regency_id }}</td>
+								<td>{{ $disaster->created_at }}</td>
+								<td><span class="badge badge-{{ $disaster->status ? 'info' : 'warning' }}">{{ $disaster->status ? 'Aktif' : 'Nonaktif' }}</span></td>
 								<td>
-									<a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detail{{ $test->id }}">Detail</a>
-									<a href="{{ route('test.edit', $test->id) }}" class="btn btn-sm btn-primary">Edit</a>
-									<form class="d-inline-block" action="{{ route('test.destroy', $test->id) }}" method="post">
+									<a href="" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detail{{ $disaster->id }}">Detail</a>
+									<a href="{{ route('disasters.edit', $disaster->id) }}" class="btn btn-sm btn-primary">Edit</a>
+									<form class="d-inline-block" action="{{ route('disasters.destroy', $disaster->id) }}" method="post">
 										@csrf
 										{{ method_field('DELETE') }}
 										<button type="submit" class="btn btn-sm btn-danger">Hapus</button>
@@ -63,7 +65,7 @@
 							</tr>
 
 							<!-- The Modal For Detail -->
-							<div class="modal fade" id="detail{{ $test->id }}">
+							<div class="modal fade" id="detail{{ $disaster->id }}">
 							  <div class="modal-dialog modal-dialog-centered rounded">
 							    <div class="modal-content">
 
@@ -76,33 +78,43 @@
 							      <!-- Modal body -->
 							      <div class="modal-body">
 							      	<div class="row my-2">
-							      		<span class="col-3"><b>Username</b></span>
-							      		<span class="col-9">: {{ $test->username }}</span>
+							      		<span class="col-3"><b>Nama Bencana</b></span>
+							      		<span class="col-9">: {{ $disaster->name }}</span>
 							      	</div>
 							      	<hr>
 							      	<div class="row my-2">
-							      		<span class="col-3"><b>Email</b></span>
-							      		<span class="col-9">: {{ $test->email }}</span>
+							      		<span class="col-3"><b>Provinsi</b></span>
+							      		<span class="col-9">: {{ $disaster->province_id }}</span>
 							      	</div>
 							      	<hr>
 							      	<div class="row my-2">
-							      		<span class="col-3"><b>Password</b></span>
-							      		<span class="col-9">: {{ $test->password }}</span>
+							      		<span class="col-3"><b>Kabupaten</b></span>
+							      		<span class="col-9">: {{ $disaster->regency_id }}</span>
 							      	</div>
 							      	<hr>
 							      	<div class="row my-2">
-							      		<span class="col-3"><b>Class</b></span>
-							      		<span class="col-9">: {{ $test->class }}</span>
+							      		<span class="col-3"><b>Kecamatan</b></span>
+							      		<span class="col-9">: {{ $disaster->district_id }}</span>
+							      	</div>
+							      	<hr>
+							      	<div class="row my-2">
+							      		<span class="col-3"><b>Desa</b></span>
+							      		<span class="col-9">: {{ $disaster->village_id }}</span>
+							      	</div>
+							      	<hr>
+							      	<div class="row my-2">
+							      		<span class="col-3"><b>Tingkat Kerusakan</b></span>
+							      		<span class="col-9">: {{ $disaster->damage }}</span>
 							      	</div>
 							      	<hr>
 							      	<div class="row my-2">
 							      		<span class="col-3"><b>status</b></span>
-							      		<span class="col-9">: {{ $test->status ? 'Aktif' : 'Nonaktif' }}</span>
+							      		<span class="col-9">: {{ $disaster->status ? 'Aktif' : 'Nonaktif' }}</span>
 							      	</div>
 							      	<hr>
 							      	<div class="row my-2">
 							      		<span class="col-3"><b>Deskripsi</b></span>
-							      		<span class="col-9">: {{ $test->desc }}</span>
+							      		<span class="col-9">: {{ $disaster->description }}</span>
 							      	</div>
 							      </div>
 
@@ -130,7 +142,7 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		$('#test-table').DataTable();
+		$('#disaster-table').DataTable();
 	})
 
 </script>

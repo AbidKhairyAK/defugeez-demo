@@ -26,7 +26,7 @@
 		    <li class="nav-item dropdown">
 		      <a class="nav-link text-white pr-3" data-toggle="dropdown" href=""><i class="fa fa-database"></i> <b>Basis Data</b></a>
 		      <div class="dropdown-menu shadow border-0">
-		      	<a class="dropdown-item" href="#">&rsaquo; Relawan</a>
+		      	<a class="dropdown-item" href="{{ route('users.index') }}">&rsaquo; Relawan</a>
 		      	<a class="dropdown-item" href="#">&rsaquo; Organisasi</a>
 		      	<a class="dropdown-item" href="#">&rsaquo; Bencana</a>
 		      	<a class="dropdown-item" href="#">&rsaquo; Posko</a>

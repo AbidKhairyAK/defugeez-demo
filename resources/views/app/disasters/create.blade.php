@@ -1,6 +1,6 @@
 @extends('app.layouts.app')
 
-@section('title', 'Tambah Test')
+@section('title', 'Tambah Bencana')
 
 @section('content')
 <div id="main" class="container">
@@ -9,20 +9,20 @@
 		<div class="section-separator">
 			<hr class="hr-thick">
 			<hr class="hr-thin">
-			<h3>Daftar Test</h3>
+			<h3>Daftar Bencana</h3>
 		</div>
 
 		<div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
-			<h5 class="section-title">Tambah Daftar Test</h5>
+			<h5 class="section-title">Tambah Daftar Bencana</h5>
 
 			<div class="section-content">
-				{!! Form::model($test, [
-					'route' => 'test.store',
-					'id'		=> 'test-form'
+				{!! Form::model($disaster, [
+					'route' => 'disasters.store',
+					'id'		=> 'disaster-form'
 				]) !!}
 
-				@include('app.test.form')
+				@include('app.disasters.form')
 
 				{!! Form::close() !!}
 			</div>

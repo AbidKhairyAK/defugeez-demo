@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Test;
+use App\Model\Disaster;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class TestController extends Controller
+class DisastersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::all();
+      $disasters = Disaster::all();
 
-        return view('app.test.table', compact('tests'));
+      return view('app.disasters.table', compact('disasters'));
     }
 
     /**
@@ -27,9 +28,9 @@ class TestController extends Controller
      */
     public function create()
     {
-        $test = new Test();
+      $disaster = new Disaster();
 
-        return view('app.test.create', compact('test'));
+      return view('app.disasters.create', compact('disaster'));
     }
 
     /**
@@ -38,20 +39,20 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\TestStoreRequest $request)
-    {
-        Test::create($request->all());
+     public function store(Requests\DisasterStoreRequest $request)
+     {
+         Disaster::create($request->all());
 
-        return redirect('/test');    
-    }
+         return redirect('/disasters');
+     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Test $test)
+    public function show($id)
     {
         //
     }
@@ -59,40 +60,40 @@ class TestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $test = Test::findOrFail($id);
-        
-        return view('app.test.edit', compact('test'));
+      $disaster = Disaster::findOrFail($id);
+
+      return view('app.disasters.edit', compact('disaster'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        Test::findOrFail($id)->update($request->all());
+     public function update(Requests\DisasterUpdateRequest $request, $id)
+     {
+         Disaster::findOrFail($id)->update($request->all());
 
-        return redirect('/test');    
-    }
+         return redirect('/disasters');
+     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Test::findOrFail($id)->delete();
+      Disaster::findOrFail($id)->delete();
 
-        return redirect('/test');
+      return redirect('/disasters');
     }
 }

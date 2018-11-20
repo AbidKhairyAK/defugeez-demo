@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Test;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Model\User;
 
-class TestController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        $tests = Test::all();
+        $users = User::orderBy('created_at', 'desc')->get();
 
-        return view('app.test.table', compact('tests'));
+        return view('app.users.table', compact('users'));
     }
 
     /**
@@ -27,9 +27,9 @@ class TestController extends Controller
      */
     public function create()
     {
-        $test = new Test();
+        $user = new User();
 
-        return view('app.test.create', compact('test'));
+        return view('app.users.create', compact('user'));
     }
 
     /**
@@ -38,61 +38,60 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\TestStoreRequest $request)
+    public function store(Requests\UserStoreRequest $request)
     {
-        Test::create($request->all());
+        User::create($request->all());
 
-        return redirect('/test');    
+        return redirect('users');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Test $test)
+    public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $test = Test::findOrFail($id);
-        
-        return view('app.test.edit', compact('test'));
+        $user = User::findOrFail($id);
+
+        return view('app.users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        Test::findOrFail($id)->update($request->all());
+        User::findOrFail($id)->update($request->all());
 
-        return redirect('/test');    
+        return redirect('users');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Test  $test
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Test::findOrFail($id)->delete();
+        User::findOrFail($id)->delete();
 
-        return redirect('/test');
+        return redirect('users');
     }
 }
