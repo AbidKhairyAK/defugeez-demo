@@ -19,7 +19,7 @@ Route::get('/layout', function () {
     return view('layout');
 });
 
-Route::get('/disasters', function () {
+Route::get('/disasterss', function () {
     return view('app.disasters.index');
 });
 
@@ -34,6 +34,7 @@ Route::get('/refugees', function () {
 // ====== Test =======
 
 Route::resource('/test', 'TestController');
+Route::resource('/disasters', 'DisastersController');
 
 Route::get('/test/laporan', function () {
     return view('app.test.report');
