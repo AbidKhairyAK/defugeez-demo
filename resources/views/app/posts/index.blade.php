@@ -204,5 +204,14 @@
       .bindPopup(`<b>Posko Krapyak</b><br/><a href="{{ url('/refugees') }}">Lebih Lengkap!</a>.`).openPopup();
 
   map.addTo(mymap);
+
+
+  mymap.on('click', function(e){
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    
+    L.marker([lat, lng]).addTo(mymap)
+      .bindPopup("<b>Bencana Baru</b>.").openPopup();
+  });
 </script>
 @endsection

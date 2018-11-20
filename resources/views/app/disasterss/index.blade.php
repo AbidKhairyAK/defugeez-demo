@@ -271,9 +271,14 @@
 
 	map.addTo(mymap);
 
-    marker.on('click', function(ev){
-      var latlng = map.mouseEventToLatLng(ev.originalEvent);
-      console.log(latlng.lat + ', ' + latlng.lng);
-    });
+  map.on('click', function(e){
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    
+
+    L.marker([lat, lng]).addTo(mymap)
+      .bindPopup("<b>Bencana Baru</b>.").openPopup();
+  });
+
 </script>
 @endsection
