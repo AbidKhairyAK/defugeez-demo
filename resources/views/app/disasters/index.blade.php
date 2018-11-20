@@ -247,6 +247,7 @@
 	var mymap = L.map('map', {
     center: [-1.502592, 116.822409],
     zoom: 5,
+    minZoom: 5,
     gestureHandling: true,
   });
 
@@ -265,5 +266,10 @@
 			.bindPopup("<b>GEMPA DODIL</b><br />Posko 2.").openPopup();
 
 	map.addTo(mymap);
+
+    marker.on('click', function(ev){
+      var latlng = map.mouseEventToLatLng(ev.originalEvent);
+      console.log(latlng.lat + ', ' + latlng.lng);
+    });
 </script>
 @endsection

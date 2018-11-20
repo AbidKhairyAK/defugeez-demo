@@ -41,3 +41,6 @@ Route::get('/test/laporan', function () {
 Route::post('/test/report', function () {
     return ;
 })->name('test.report');
+
+// ======== Users =========
+Route::resource('/users', 'UsersController');
