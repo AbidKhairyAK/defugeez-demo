@@ -34,6 +34,10 @@
 			<h3>Daftar Bencana</h3>
 		</div>
 
+    <div class="bg-primary text-center rounded mb-4">
+      <a href="#" class="col-sm-12 btn btn-primary font-weight-bold">Tambah Data Bencana</a>
+    </div>
+
     <div class="row">
 
       <div class="col-md-6">

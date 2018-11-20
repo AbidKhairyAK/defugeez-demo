@@ -66,6 +66,19 @@
 					<h3>Info Posko</h3>
 				</div>
 
+				  <div class="section">
+				    <div class="section-separator">
+				      <div class="row">
+				        <a href="#" class="btn btn-warning col m-3 py-4 font-weight-bold display-1 shadow">
+				          Tambah Posko
+				        </a>
+				        <a href="#" class="btn btn-info col m-3 py-4 font-weight-bold display-1 shadow">
+				          Tambah Pengungsi
+				        </a>
+				      </div>
+				    </div>
+				  </div>
+
 				<div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
 	      <div class="section-option dropdown mt-3 mr-1">
@@ -238,6 +251,16 @@
 				<hr class="hr-thin">
 				<h3>Daftar Pengungsi</h3>
 			</div>
+
+			  <div class="section">
+			    <div class="section-separator">
+			      <div class="row">
+			        <a href="#" class="btn btn-outline-primary col m-3 py-4 font-weight-bold display-1 shadow">
+			          Tambah Pengungsi
+			        </a>
+			      </div>
+			    </div>
+			  </div>
 
 			<div class="section-wrapper col-sm-12 rounded bg-light shadow">
 
