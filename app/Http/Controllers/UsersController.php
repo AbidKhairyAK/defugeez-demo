@@ -17,6 +17,13 @@ class UsersController extends Controller
     {
         $users = User::orderBy('created_at', 'desc')->get();
 
+        return view('app.users.index', compact('users'));
+    }
+
+    public function table()
+    {
+        $users = User::orderBy('created_at', 'desc')->get();
+
         return view('app.users.table', compact('users'));
     }
 

@@ -35,7 +35,7 @@
 		</div>
 
     <div class="bg-primary text-center rounded mb-4">
-      <a href="#" class="col-sm-12 btn btn-primary font-weight-bold">Tambah Data Bencana</a>
+      <a href="#" class="col-sm-12 btn btn-lg btn-primary font-weight-bold py-3 shadow">Tambah Data Bencana</a>
     </div>
 
     <div class="row">

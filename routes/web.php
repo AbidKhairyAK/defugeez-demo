@@ -15,31 +15,25 @@ Route::get('/', function () {
     return redirect('/disasters');
 });
 
-Route::get('/layout', function () {
-    return view('layout');
-});
-
-Route::get('/disasters/testo', function () {
-    return view('app.disasters.index');
-});
-
+// ======== Resource =========
+Route::resource('/users', 'UsersController');
 Route::resource('/posts','PostsController');
+Route::resource('/disasters', 'DisastersController');
 
-Route::get('/refugees/testo', function () {
-    return view('app.refugees.index');
-});
+// ======== Table ==========
+Route::get('/users/table', 'UsersController@table')->name('users.table');
+Route::get('/posts/table', 'PostsController@table')->name('posts.table');
+Route::get('/disasters/table', 'DisastersController@table')->name('disasters.table');
+
 
 // ====== Test =======
 
 Route::resource('/test', 'TestController');
-Route::resource('/disasters', 'DisastersController');
 
 Route::get('/test/laporan', function () {
     return view('app.test.report');
 });
+
 Route::post('/test/report', function () {
     return ;
 })->name('test.report');
-
-// ======== Users =========
-Route::resource('/users', 'UsersController');
