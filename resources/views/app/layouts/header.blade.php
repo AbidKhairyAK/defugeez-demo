@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3 fixed-top shadow">
 	<div class="container">
 
-		<a class="navbar-brand" href="{{ url('/disasters') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
+		<a class="navbar-brand" href="{{ route('disasters.index') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
 
 	  <!-- Toggler/collapsibe Button -->
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-links">
@@ -11,14 +11,14 @@
 	  <div class="collapse navbar-collapse justify-content-end pt-3" id="nav-links">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ url('/disasters') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ route('disasters.index') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
 		    </li>
 		    <hr>
 		    <li class="nav-item dropdown">
 		      <a class="nav-link text-white pr-3" data-toggle="dropdown" href=""><i class="fa fa-plus-circle"></i> <b>Tambah Data</b></a>
 		      <div class="dropdown-menu shadow border-0">
-		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Bencana</a>
-		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Posko</a>
+		      	<a class="dropdown-item" href="{{ route('disasters.create') }}">&rsaquo; Bencana</a>
+		      	<a class="dropdown-item" href="{{ route('posts.create') }}">&rsaquo; Posko</a>
 		      	<a class="dropdown-item" href="{{ url('/test/create') }}">&rsaquo; Pengungsi</a>
 		      </div>
 		    </li>
@@ -26,11 +26,11 @@
 		    <li class="nav-item dropdown">
 		      <a class="nav-link text-white pr-3" data-toggle="dropdown" href=""><i class="fa fa-database"></i> <b>Basis Data</b></a>
 		      <div class="dropdown-menu shadow border-0">
-		      	<a class="dropdown-item" href="{{ route('users.index') }}">&rsaquo; Relawan</a>
-		      	<a class="dropdown-item" href="#">&rsaquo; Organisasi</a>
-		      	<a class="dropdown-item" href="#">&rsaquo; Bencana</a>
-		      	<a class="dropdown-item" href="#">&rsaquo; Posko</a>
-		      	<a class="dropdown-item" href="#">&rsaquo; Pengungsi</a>
+		      	<a class="dropdown-item" href="{{ route('users.table') }}">&rsaquo; Relawan</a>
+		      	<a class="dropdown-item" href="">&rsaquo; Organisasi</a>
+		      	<a class="dropdown-item" href="{{ route('disasters.table') }}">&rsaquo; Bencana</a>
+		      	<a class="dropdown-item" href="{{ route('posts.table') }}">&rsaquo; Posko</a>
+		      	<a class="dropdown-item" href="">&rsaquo; Pengungsi</a>
 		      </div>
 		    </li>
 		   	<hr>

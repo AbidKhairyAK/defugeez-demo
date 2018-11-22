@@ -19,6 +19,13 @@ class PostsController extends Controller
         return view('app.posts.index', compact('posts'));
     }
 
+    public function table()
+    {
+        $posts = Post::all();
+
+        return view('app.posts.table', compact('posts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -18,6 +18,13 @@ class DisastersController extends Controller
     {
       $disasters = Disaster::all();
 
+      return view('app.disasters.index', compact('disasters'));
+    }
+
+    public function table()
+    {
+      $disasters = Disaster::all();
+
       return view('app.disasters.table', compact('disasters'));
     }
 
