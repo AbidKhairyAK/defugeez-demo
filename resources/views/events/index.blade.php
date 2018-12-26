@@ -64,69 +64,69 @@
       @endforeach
     </div>
 
-    <div class="centered mb-3">
+    <div class="centered mb-3 mt-4">
       <h3 class="text-center">Donasi</h3>
     </div>
 
-        <div class="row mb-5">
-          <div class="col-md-4">
-            <div class="card rounded overflow-hidden">
-                <div class="card-img-top">
-                  <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
-                </div>
-              <div class="card-body">
-                <h4 class="card-title">Pembangunan Sekolah untuk Palu</h4>
-                <hr>
-                <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" style="height: 20px;width:48%"></div>
-                </div>
-                <div class="small">Terkumpul</div>
-                <div>Rp. 21.590.834</div>
-              </div>
-              <div class="bg-primary text-center p-2">
-                <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-              </div>
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <div class="card rounded overflow-hidden shadow">
+            <div class="card-img-top">
+              <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card rounded overflow-hidden">
-                <div class="card-img-top">
-                  <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
-                </div>
-              <div class="card-body">
-                <h4 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h4>
-                <hr>
-                <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" style="height: 20px;width:60%"></div>
-                </div>
-                <div class="small">Terkumpul</div>
-                <div>Rp. 8.750.322</div>
-              </div>
-              <div class="bg-primary text-center p-2">
-                <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-              </div>
+          <div class="card-body">
+            <h4 class="card-title">Pembangunan Sekolah untuk Palu</h4>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar" style="height: 20px;width:48%"></div>
             </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 21.590.834</div>
           </div>
-          <div class="col-md-4">
-            <div class="card rounded overflow-hidden">
-                <div class="card-img-top">
-                  <img src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-                </div>
-              <div class="card-body">
-                <h4 class="card-title">Donasi Korban Gempa Palu & Donggala</h4>
-                <hr>
-                <div class="progress" style="height: 20px;">
-                  <div class="progress-bar" style="height: 20px;width:60%"></div>
-                </div>
-                <div class="small">Terkumpul</div>
-                <div>Rp. 87.983.992 </div>
-              </div>
-              <div class="bg-primary text-center p-2">
-                <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-              </div>
-            </div>
+          <div class="bg-primary text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
           </div>
+        </div>
       </div>
+      <div class="col-md-4">
+        <div class="card rounded overflow-hidden shadow">
+            <div class="card-img-top">
+              <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
+            </div>
+          <div class="card-body">
+            <h4 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h4>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 8.750.322</div>
+          </div>
+          <div class="bg-primary text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card rounded overflow-hidden shadow">
+            <div class="card-img-top">
+              <img src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
+            </div>
+          <div class="card-body">
+            <h4 class="card-title">Donasi Korban Gempa Palu & Donggala</h4>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 87.983.992 </div>
+          </div>
+          <div class="bg-primary text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+    </div>
   
   </div>
 
@@ -150,20 +150,20 @@
     L.marker(['{{ $event->latitude }}', '{{ $event->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('posts.page', $event->id) }}">{{ $event->name }}</a>');
   @endforeach
 
-  var marker = {};
+  // var marker = {};
 
-  mymap.on('click', function(e){
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
+  // mymap.on('click', function(e){
+  //   var lat = e.latlng.lat;
+  //   var lng = e.latlng.lng;
 
-    if (marker) {
-      mymap.removeLayer(marker);
-    }
+  //   if (marker) {
+  //     mymap.removeLayer(marker);
+  //   }
 
-    marker = L.marker([lat, lng])
-    .addTo(mymap)
-      .bindPopup(lat+', '+lng)
-      .openPopup();
-  });
+  //   marker = L.marker([lat, lng])
+  //   .addTo(mymap)
+  //     .bindPopup(lat+', '+lng)
+  //     .openPopup();
+  // });
 </script>
 @endsection

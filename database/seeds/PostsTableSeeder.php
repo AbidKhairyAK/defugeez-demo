@@ -29,11 +29,15 @@ class PostsTableSeeder extends Seeder
             $village = $faker->randomElement(DB::table('villages')->where('district_id', $district)->pluck('id'));
             $name = 'Posko '.$faker->lastName.' '.Village::find($village)->name;
             $coord = [
-                'lat' => $event->latitude,
-                'lng' => $event->longitude,
+                'lat' => [
+                    'min' => $event->latitude - 0.05,
+                    'max' => $event->latitude + 0.05,
+                ],
+                'lng' => [
+                    'min' => $event->longitude - 0.1,
+                    'max' => $event->longitude + 0.1,
+                ],
             ];
-            $lat = $coord['lat'] + 0.1;
-            $lng = $coord['lng'] + 0.1;
             $date_at = $carbon->subDay()->toDateString();
 
     		$data[$i] = [
@@ -53,8 +57,8 @@ class PostsTableSeeder extends Seeder
 		    	'status' => $faker->boolean(80),
                 'created_at' => $date_at,
                 'updated_at' => $date_at,
-                'latitude' => $faker->latitude($coord['lat'], $lat),
-                'longitude' => $faker->longitude($coord['lng'], $lng),
+                'latitude' => $faker->latitude($coord['lat']['min'], $coord['lat']['max']),
+                'longitude' => $faker->longitude($coord['lng']['min'], $coord['lng']['max']),
     		];
     	}
 

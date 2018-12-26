@@ -7,6 +7,8 @@ use App\Model\Post;
 use App\Model\Refugee;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class RefugeesController extends Controller
 {
@@ -25,11 +27,38 @@ class RefugeesController extends Controller
     public function page($id)
     {
         $post = Post::findOrFail($id);
-        $refugees = Refugee::where('post_id', $id)->orderBy('created_at', 'desc')->get();
+        $data = Refugee::where('post_id', $id)->orderBy('created_at', 'desc');
+        $healths = DB::table('refugees')->where('post_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
+
+        $ageParam = Carbon::now()->subYears(17)->toDateString();
+
+        $ages = [
+            clone $data,
+            clone $data,
+            clone $data
+        ];
+
+        $agesCount = [
+            $ages[0]->where([
+                ['birthdate', '>=', $ageParam],
+                ['gender', '=', 'L']
+            ])->count(),
+
+            $ages[1]->where([
+                ['birthdate', '>=', $ageParam],
+                ['gender', '=', 'P']
+            ])->count(),
+
+            $ages[2]->where([
+                ['birthdate', '<', $ageParam]
+            ])->count(),
+        ];
+
+        $refugees = $data->get();
 
         session(['post_id' => $id]);
 
-        return view('refugees.index', compact('post', 'refugees'));
+        return view('refugees.index', compact('post', 'refugees', 'healths', 'agesCount'));
     }
 
     /**
