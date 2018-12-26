@@ -21,17 +21,17 @@ class EventsTableSeeder extends Seeder
             [
                 'lat' => [
                     'min' => -5,
-                    'max' => 5,
+                    'max' => 1,
                 ],
                 'lng' => [
                     'min' => 100,
-                    'max' => 105,
+                    'max' => 104,
                 ],
             ],
             [
                 'lat' => [
                     'min' => -3,
-                    'max' => 3,
+                    'max' => 1,
                 ],
                 'lng' => [
                     'min' => 109,
@@ -41,7 +41,7 @@ class EventsTableSeeder extends Seeder
             [
                 'lat' => [
                     'min' => -4,
-                    'max' => 0,
+                    'max' => -2,
                 ],
                 'lng' => [
                     'min' => 119,
@@ -55,19 +55,19 @@ class EventsTableSeeder extends Seeder
                 ],
                 'lng' => [
                     'min' => 105,
-                    'max' => 122,
+                    'max' => 115,
                 ],
             ],
-            [
-                'lat' => [
-                    'min' => -5,
-                    'max' => -0,
-                ],
-                'lng' => [
-                    'min' => 131,
-                    'max' => 137,
-                ],
-            ],
+            // [
+            //     'lat' => [
+            //         'min' => -5,
+            //         'max' => -0,
+            //     ],
+            //     'lng' => [
+            //         'min' => 131,
+            //         'max' => 137,
+            //     ],
+            // ],
             [
                 'lat' => [
                     'min' => -8,
@@ -83,13 +83,18 @@ class EventsTableSeeder extends Seeder
             'Gempa Bumi', 'Tsunami', 'Erupsi Gunung', 'Banjir Bandang', 'Lumpur Panas', 'Kebakaran Hutan', 'Kecelakaan Industri'
         ];
 
+        $island = -1;
+
         for ($i=0; $i < 10; $i++) { 
+
+            if ($i % 2 == 0) {
+                $island++;
+            }
 
             $province = $faker->randomElement(DB::table('provinces')->pluck('id'));
             $regency = $faker->randomElement(DB::table('regencies')->where('province_id', $province)->pluck('id'));
             $id_user = $faker->randomElement(DB::table('users')->where('role', 2)->orWhere('role', 1)->pluck('id'));
             $date_at = $carbon->subDay()->toDateString();
-            $island = rand(0, (count($coords) - 1));
             $lat = $coords[$island]['lat'];
             $lng = $coords[$island]['lng'];
             $event = $events[rand(0, (count($events) - 1))]. ' ' . Regency::find($regency)->name;
