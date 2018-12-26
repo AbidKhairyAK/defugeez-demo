@@ -122,9 +122,9 @@
 @section('script')
 <script type="text/javascript">
   var mymap = L.map('mapid', {
-      center: [-1.0878905, 119.7075195],
-      zoom: 13,
-      minZoom: 10,
+      center: [{{ $event->latitude }}, {{ $event->longitude }}],
+      zoom: 12,
+      minZoom: 5,
       gestureHandling: true,
   });
 
@@ -132,11 +132,9 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
-  L.marker([-1.0868905, 119.7075195]).addTo(mymap).bindPopup('hehe');
-  L.marker([-1.0828905, 119.7015195]).addTo(mymap).bindPopup('hehe');
-  L.marker([-1.0808905, 119.7205195]).addTo(mymap).bindPopup('hehe');
-  L.marker([-1.0808905, 119.7275195]).addTo(mymap).bindPopup('hehe');
-  L.marker([-1.0908905, 119.6875195]).addTo(mymap).bindPopup('hehe');
+  @foreach($posts as $post)
+    L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('refugees.page', $post->id) }}">{{ $post->name }}</a>');
+  @endforeach
 
 </script>
 @endsection

@@ -90,7 +90,21 @@
       <div class="bg-light p-3 mb-4 shadow">
         <h5 class="text-center mb-3">&laquo; Berdasarkan Kapasitas &raquo;</h5>
         <div class="progress" style="height: 40px;">
-          <div class="progress-bar" style="height: 40px;width:60%"><h6 class="m-0"><b>120 / 200</b></h6></div>
+          <?php
+            $count = $refugees->count();
+            $capacity = $post->capacity;
+            $percent = round(($count / $capacity) * 100);
+            if ($percent < 30) {
+              $bg = 'success';
+            } else if ($percent < 60) {
+              $bg = 'info';
+            } else if ($percent < 90) {
+              $bg = 'warning';
+            } else {
+              $bg = 'danger';
+            }
+          ?>
+          <div class="progress-bar bg-{{ $bg }}" style="height: 40px;width:{{ $percent.'%' }}"><h6 class="m-0"><b>{{ $count }} Jiwa / {{ $capacity }} Kuota</b></h6></div>
         </div>
       </div>
 
@@ -124,52 +138,99 @@
         <div class="col-md-6 mb-4">
           <div class="rounded shadow p-3 bg-light col-sm-12">
 
-            <h5 class="section-title border-bottom pb-1"><b>Makanan</b></h5>
-            <ul class="pl-4">
-                <li class="#"> Makanan 1 </li>
-                <li class="#"> Makanan 2  </li>
-                <li class="#"> Makanan 3 </li>
-                <li class="#"> Makanan 4 </li>
-            </ul>
+            <h5 class="section-title pb-1"><b>Permintaan Kebutuhan</b></h5>
+            <table class="table table-hover ">
+              <thead>
+                <tr class="bg-secondary text-white">
+                  <th width="10">#</th>
+                  <th>Nama Kebutuhan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Kebutuhan 1</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Kebutuhan 2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Kebutuhan 3</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Kebutuhan 4</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Kebutuhan 5</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Kebutuhan 6</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kebutuhan 7</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
         <div class="col-md-6 mb-4">
           <div class="rounded shadow p-3 bg-light col-sm-12">
 
-            <h5 class="section-title border-bottom pb-1"><b>Pakaian</b></h5>
-            <ul class="pl-4">
-                <li class="#"> Pakaian 1 </li>
-                <li class="#"> Pakaian 2  </li>
-                <li class="#"> Pakaian 3 </li>
-                <li class="#"> Pakaian 4 </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-4">
-          <div class="rounded shadow p-3 bg-light col-sm-12">
-
-            <h5 class="section-title border-bottom pb-1"><b>Obat-obatan</b></h5>
-            <ul class="pl-4">
-                <li class="#"> Obat-obatan 1 </li>
-                <li class="#"> Obat-obatan 2  </li>
-                <li class="#"> Obat-obatan 3 </li>
-                <li class="#"> Obat-obatan 4 </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 mb-4">
-          <div class="rounded shadow p-3 bg-light col-sm-12">
-
-            <h5 class="section-title border-bottom pb-1"><b>Lain-lain</b></h5>
-            <ul class="pl-4">
-                <li class="#"> Lain-lain 1 </li>
-                <li class="#"> Lain-lain 2  </li>
-                <li class="#"> Lain-lain 3 </li>
-                <li class="#"> Lain-lain 4 </li>
-            </ul>
+            <h5 class="section-title border-bottom pb-1"><b>Kebutuhan Diterima</b></h5>
+            
+            <table class="table table-hover ">
+              <thead>
+                <tr class="bg-secondary text-white">
+                  <th width="10">#</th>
+                  <th>Nama Kebutuhan</th>
+                  <th>Tanggal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Kebutuhan 1</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Kebutuhan 2</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Kebutuhan 3</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Kebutuhan 4</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Kebutuhan 5</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Kebutuhan 6</td>
+                  <td>01/01/2019</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>Kebutuhan 7</td>
+                  <td>01/01/2019</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -311,7 +372,11 @@
               labels: ["Sehat", "Sakit Ringan", "Sakit Parah", "Meninggal"],
               datasets: [{
                   label: '# of Votes',
-                  data: [10, 9, 3, 5],
+                  data: [
+                    @foreach($healths as $health)
+                      {{ $health->total }},
+                    @endforeach
+                  ],
                   backgroundColor: [
                       '#28a745',
                       '#ffc107',
@@ -339,7 +404,11 @@
               labels: ["Pria Dewasa", "Wanita", "Anak-anak"],
               datasets: [{
                   label: '# of Votes',
-                  data: [3, 5, 7],
+                  data: [
+                    @foreach($agesCount as $age)
+                      {{ $age }},
+                    @endforeach
+                  ],
                   backgroundColor: [
                       '#28a745',
                       '#007bff',

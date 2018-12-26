@@ -17,7 +17,7 @@ class RefugeesTableSeeder extends Seeder
     {
         $faker = Factory::create('id_ID');
         $carbon = Carbon::now()->addMonth();
-        $birth = Carbon::now()->subYears(2);
+        $birth = Carbon::now()->subYears(10);
         $genders = ['L', 'P'];
         $bloods = ['A', 'B', 'O', 'AB'];
         $users = DB::table('users')->pluck('id');
@@ -32,6 +32,7 @@ class RefugeesTableSeeder extends Seeder
     		$origin = 'Jl. ' . $faker->address;
             $date_at = $carbon->subDay()->toDateString();
             $birth_date = $birth->subDay()->toDateString();
+            $randHealth = $faker->boolean(90);
 
     		$data[$i] = [
 		    	'event_id' => $event_id,
@@ -41,7 +42,7 @@ class RefugeesTableSeeder extends Seeder
 		    	'gender' => $faker->randomElement($genders),
 		    	'origin' => $origin,
 		    	'birthdate' => $birth_date,
-		    	'health' => rand(1, 4),
+		    	'health' => $randHealth ? rand(1, 3) : 4,
 		    	'status' => rand(1, 4),
 		    	'blood_type' => $faker->randomElement($bloods),
 		    	'barrack' => rand(1, $post->barracks),
