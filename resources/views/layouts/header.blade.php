@@ -11,7 +11,7 @@
 	  <div class="collapse navbar-collapse justify-content-end pt-3" id="nav-links">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <b>Berandah</b></a>
 		    </li>
 		    <li class="nav-item dropdown">
 		      <a class="nav-link text-white pr-3" data-toggle="dropdown" href="#"><i class="fa fa-plus-circle"></i> <b>Tambah Data</b></a>
