@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Model\Event;
 use App\Model\Post;
+use App\Model\Refugee;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -26,10 +29,39 @@ class PostsController extends Controller
     {
         $event = Event::findOrFail($id);
         $posts = Post::where('event_id', $id)->orderBy('created_at', 'desc')->get();
+        
+        $data = Refugee::where('event_id', $id)->orderBy('created_at', 'desc');
+
+        // Summary
+        $healths = Refugee::where('event_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
+
+        $ageParam = Carbon::now()->subYears(17)->toDateString();
+
+        $ages = [
+            clone $data,
+            clone $data,
+            clone $data
+        ];
+
+        $agesCount = [
+            $ages[0]->where([
+                ['birthdate', '>=', $ageParam],
+                ['gender', '=', 'L']
+            ])->count(),
+
+            $ages[1]->where([
+                ['birthdate', '>=', $ageParam],
+                ['gender', '=', 'P']
+            ])->count(),
+
+            $ages[2]->where([
+                ['birthdate', '<', $ageParam]
+            ])->count(),
+        ];
 
         session(['event_id' => $id]);
 
-        return view('posts.index', compact('event', 'posts'));
+        return view('posts.index', compact('event', 'posts', 'healths', 'agesCount'));
     }
 
     /**

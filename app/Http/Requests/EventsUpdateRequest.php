@@ -29,6 +29,8 @@ class EventsUpdateRequest extends FormRequest
             'regency_id' => 'required', 
             'damage' => 'required',
             'status' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ];
     }
 }

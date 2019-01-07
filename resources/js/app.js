@@ -18,6 +18,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('location-form', require('./components/location/Form.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
@@ -32,5 +33,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#vue'
 });

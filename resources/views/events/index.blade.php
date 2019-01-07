@@ -23,6 +23,7 @@
 
     <div class="row">
 
+      <?php $count = 1; ?>
       @foreach($events as $event)
 
       <div class="col-md-6 mb-4">
@@ -60,9 +61,16 @@
           <a href="{{ route('posts.page', $event->id) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>
-
+      <?php
+        if ($count >= 6) {
+          break;
+        }
+        $count++;
+      ?>
       @endforeach
     </div>
+
+    <h5 class="text-right"><a href="#">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered mb-3 mt-4">
       <h3 class="text-center">Donasi</h3>

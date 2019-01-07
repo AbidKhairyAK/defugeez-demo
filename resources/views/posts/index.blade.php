@@ -78,6 +78,7 @@
 
     <div class="row">
 
+      <?php $counter = 1; ?>
       @foreach($posts as $post)
       <div class="col-md-6 mb-4">
         <div class="rounded shadow p-3 bg-light col-sm-12">
@@ -113,17 +114,118 @@
           <a href="{{ route('refugees.page', $post->id) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>
+
+      <?php
+        if ($counter >= 4) {
+          break;
+        }
+        $counter++;
+      ?>
       @endforeach
+    </div>
+    
+    <h5 class="text-right"><a href="#">Tampilkan lebih banyak &raquo;</a></h5>
+
+    <div class="centered my-3">
+      <h3 class="text-center">Grafik Bencana</h3>
+    </div>
+
+    <div class="bg-light p-3 mb-4 shadow">
+      <h5 class="text-center mb-3">&laquo; Pengungsi Yang Terdata &raquo;</h5>
+      <div class="progress" style="height: 40px;">
+        <div class="progress-bar bg-info" style="height: 40px;width:100%"><h6 class="m-0"><b>{{ $event->refugees->count() }} Jiwa / {{ $event->posts->count() }} Posko</b></h6></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="bg-light p-3 mb-4 shadow">
+          <h5 class="text-center mb-3">&laquo; Berdasarkan Gender & Usia &raquo;</h5>
+          <canvas id="gender" height="150"></canvas>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="bg-light p-3 mb-4 shadow">
+          <h5 class="text-center mb-3">&laquo; Berdasarkan Kesehatan &raquo;</h5>
+          <canvas id="health" height="150"></canvas>
+        </div>
+      </div>
     </div>
 
   </div>
 @endsection
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script type="text/javascript">
+  $(document).ready(function() {
+      var health = document.getElementById("health").getContext('2d');
+      var healthChart = new Chart(health, {
+          type: 'doughnut',
+          data: {
+              labels: ["Sehat", "Sakit Ringan", "Sakit Parah", "Meninggal"],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [
+                    @foreach($healths as $health)
+                      {{ $health->total }},
+                    @endforeach
+                  ],
+                  backgroundColor: [
+                      '#28a745',
+                      '#ffc107',
+                      '#dc3545',
+                      '#6c757d'
+                  ]
+              }]
+          },
+          options: {
+            legend: {
+              position: 'right',
+            },
+            layout: {
+              padding: {
+                right: 30,
+              }
+            }
+          }
+      });
+
+      var gender = document.getElementById("gender").getContext('2d');
+      var genderChart = new Chart(gender, {
+          type: 'pie',
+          data: {
+              labels: ["Pria Dewasa", "Wanita", "Anak-anak"],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [
+                    @foreach($agesCount as $age)
+                      {{ $age }},
+                    @endforeach
+                  ],
+                  backgroundColor: [
+                      '#28a745',
+                      '#007bff',
+                      '#ffc107',
+                  ]
+              }]
+          },
+          options: {
+            legend: {
+              position: 'right',
+            },
+            layout: {
+              padding: {
+                right: 30,
+              }
+            }
+          }
+      });
+  });
+
   var mymap = L.map('mapid', {
       center: [{{ $event->latitude }}, {{ $event->longitude }}],
-      zoom: 12,
+      zoom: 11,
       minZoom: 5,
       gestureHandling: true,
   });

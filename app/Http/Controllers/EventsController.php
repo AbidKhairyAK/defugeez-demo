@@ -23,7 +23,7 @@ class EventsController extends Controller
 
     public function page()
     {
-        $events = Event::orderBy('created_at')->get();
+        $events = Event::where('status', 1)->orderBy('created_at')->get();
 
         // Toastr::success('Selamat datang di aplikasi <b>deFugeez</b>', 'Hello!');
 

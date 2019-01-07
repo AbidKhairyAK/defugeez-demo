@@ -69,3 +69,9 @@ Route::post('login', 'UsersController@login')->name('login');
 Route::get('register', 'UsersController@registerForm')->name('register');
 Route::post('register', 'UsersController@register')->name('register');
 Route::post('logout', 'UsersController@logout')->name('logout');
+
+// ajax request only
+Route::get('/location/province', 'LocationController@province');
+Route::get('/location/regency', 'LocationController@regency');
+Route::get('/location/district', 'LocationController@district');
+Route::get('/location/village', 'LocationController@village');

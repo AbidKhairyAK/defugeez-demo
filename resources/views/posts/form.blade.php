@@ -24,12 +24,10 @@
 			'feedback' => $errors->has('regency_id') ? '<span class="invalid-feedback">'.$errors->first('regency_id').'</span>' : ''
 		];
 		$district_id = [
-			'invalid' => $errors->has('district_id') ? 'is-invalid' : '',
-			'feedback' => $errors->has('district_id') ? '<span class="invalid-feedback">'.$errors->first('district_id').'</span>' : ''
+			'feedback' => $errors->has('district_id') ? $errors->first('district_id') : null
 		];
 		$village_id = [
-			'invalid' => $errors->has('village_id') ? 'is-invalid' : '',
-			'feedback' => $errors->has('village_id') ? '<span class="invalid-feedback">'.$errors->first('village_id').'</span>' : ''
+			'feedback' => $errors->has('village_id') ? $errors->first('village_id') : null
 		];
 		$capacity = [
 			'invalid' => $errors->has('capacity') ? 'is-invalid' : '',
@@ -47,6 +45,12 @@
 			'invalid' => $errors->has('longitude') ? 'is-invalid' : '',
 			'feedback' => $errors->has('longitude') ? '<span class="invalid-feedback">'.$errors->first('longitude').'</span>' : ''
 		];
+
+		$current_province = $event->exists ? $event->province_id : null;
+		$current_regency = $event->exists ? $event->regency_id : null;
+		$current_district = $post->exists ? $post->district_id : null;
+		$current_village = $post->exists ? $post->village_id : null;
+		$marker = $post->exists ? "L.marker([".$post->latitude.",".$post->longitude."]).addTo(mymap)" : null;
 	@endphp
 
 	@if($post->exists)
@@ -81,36 +85,34 @@
 		{!! Form::text('address', null, ['class' => 'form-control', 'id' => 'address', 'required']) !!}
 	</div>
 
-	<div class="form-group">
-		{!! Form::label('province_id', 'Provinsi', ['class' => 'font-weight-bold']) !!}
-		{!! Form::select('province_id', [$event->province_id => $event->province->name], null, 
-		['class' => 'form-control select2'.$province_id['invalid'], 'id' => 'province_id', 'required']) !!}
-		{!! $province_id['feedback'] !!}
+	<div class="row">
+		<div class="form-group col-sm-6">
+			{!! Form::label('province_id', 'Provinsi', ['class' => 'font-weight-bold']) !!}
+			{!! Form::select('province_id', [$event->province_id => $event->province->name], null, 
+			['class' => 'form-control '.$province_id['invalid'], 'id' => 'province_id', 'required']) !!}
+			{!! $province_id['feedback'] !!}
+		</div>
+
+		<div class="form-group col-sm-6">
+			{!! Form::label('regency_id', 'Kabupaten', ['class' => 'font-weight-bold']) !!}
+			{!! Form::select('regency_id', [$event->regency_id => $event->regency->name], null,
+			['class' => 'form-control '.$regency_id['invalid'], 'id' => 'regency_id', 'required']) !!}
+			{!! $regency_id['feedback'] !!}
+		</div>
 	</div>
 
-	<div class="form-group">
-		{!! Form::label('regency_id', 'Kabupaten', ['class' => 'font-weight-bold']) !!}
-		{!! Form::select('regency_id', [$event->regency_id => $event->regency->name], null,
-		['class' => 'form-control select2'.$regency_id['invalid'], 'id' => 'regency_id', 'required']) !!}
-		{!! $regency_id['feedback'] !!}
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('district_id', 'Kecamatan', ['class' => 'font-weight-bold']) !!}
-		{!! Form::select('district_id', 
-		['' => '', '1101010' => 'kecamatan1', '1101020' => 'kecamatan2'], 
-		null,
-		['class' => 'form-control select2'.$district_id['invalid'], 'id' => 'district_id', 'required']) !!}
-		{!! $district_id['feedback'] !!}
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('village_id', 'Kelurahan', ['class' => 'font-weight-bold']) !!}
-		{!! Form::select('village_id', 
-		['' => '', '1101010001' => 'kelurahan1', '1101010002' => 'kelurahan2'], 
-		null,
-		['class' => 'form-control select2'.$village_id['invalid'], 'id' => 'village_id', 'required']) !!}
-		{!! $village_id['feedback'] !!}
+	<div id="vue">
+		<location-form 
+			display_district="true" 
+			display_village="true"
+			error_district="{{ $district_id['feedback'] }}"
+			error_village="{{ $village_id['feedback'] }}"
+			province_id="{{ $current_province }}"
+			regency_id="{{ $current_regency }}"
+			district_id="{{ $current_district }}"
+			village_id="{{ $current_village }}"
+			grid="col-sm-6"
+		></location-form>
 	</div>
 
 	<div class="form-group">
@@ -138,16 +140,17 @@
 	</div>
 	<div class="d-flex justify-content-center">
 		<div>
-			<a href="#" class="btn btn-secondary"> Cancel </a>
+			<a href="{{ route('posts.page', session('event_id')) }}" class="btn btn-secondary"> Cancel </a>
 			<button type="submit" class="btn btn-info">Submit</button>
 		</div>
 	</div>
 
 @section('script')
+<script src="/js/app.js"></script>
 <script type="text/javascript">
   var mymap = L.map('mapid', {
       center: [{{ $event->latitude }}, {{ $event->longitude }}],
-      zoom: 10,
+      zoom: 11,
       minZoom: 5,
       gestureHandling: true,
   });
@@ -156,7 +159,7 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
-  var marker = {};
+  var marker = {{ $marker }}
 
   mymap.on('click', function(e){
     var lat = e.latlng.lat;

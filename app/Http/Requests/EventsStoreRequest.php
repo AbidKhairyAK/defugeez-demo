@@ -28,6 +28,8 @@ class EventsStoreRequest extends FormRequest
             'province_id' => 'required', 
             'regency_id' => 'required', 
             'damage' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
         ];
     }
 }
