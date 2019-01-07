@@ -1,4 +1,4 @@
-<nav id="footer" class="navbar navbar-expand bg-dark fixed-bottom">
+<nav id="footer" class="navbar navbar-expand bg-dark">
 	<div class="container">
 	  <ul class="navbar-nav mr-auto">
 	    <li class="nav-item">
