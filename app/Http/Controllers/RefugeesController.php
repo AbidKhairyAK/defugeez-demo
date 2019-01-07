@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use App\Model\Post;
 use App\Model\Refugee;
-use App\Http\Requests;
-use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Model\Demand;
 
 class RefugeesController extends Controller
 {
@@ -28,7 +29,9 @@ class RefugeesController extends Controller
     {
         $post = Post::findOrFail($id);
         $data = Refugee::where('post_id', $id)->orderBy('created_at', 'desc');
-        $healths = DB::table('refugees')->where('post_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
+
+        // Summary
+        $healths = Refugee::where('post_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
 
         $ageParam = Carbon::now()->subYears(17)->toDateString();
 
@@ -54,11 +57,22 @@ class RefugeesController extends Controller
             ])->count(),
         ];
 
+        // Demands
+        $requested_demands = Demand::where([
+            ['post_id', '=', $id],
+            ['type', '=', 0],
+        ])->orderBy('created_at', 'desc')->get();
+
+        $received_demands = Demand::where([
+            ['post_id', '=', $id],
+            ['type', '=', 1],
+        ])->orderBy('created_at', 'desc')->get();
+
         $refugees = $data->get();
 
         session(['post_id' => $id]);
 
-        return view('refugees.index', compact('post', 'refugees', 'healths', 'agesCount'));
+        return view('refugees.index', compact('post', 'refugees', 'healths', 'agesCount', 'requested_demands', 'received_demands'));
     }
 
     /**
@@ -146,11 +160,13 @@ class RefugeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         Refugee::findOrFail($id)->delete();
 
         Toastr::success('Data Pengungsi Berhasil Dihapus!', 'Hapus Data Pengungsi');
+
+        $request->session()->flash('refugees_tab', 'refugees');
 
         return redirect('page/refugees/'.session('post_id'));
     }

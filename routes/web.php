@@ -55,6 +55,7 @@ Route::resource('/users', 'UsersController');
 Route::resource('/events', 'EventsController');
 Route::resource('/refugees', 'RefugeesController');
 Route::resource('/posts', 'PostsController');
+Route::resource('/demands', 'DemandsController');
 
 Route::get('/donations', function() {
 	return view('donations.detail');
