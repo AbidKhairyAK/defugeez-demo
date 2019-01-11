@@ -51,7 +51,7 @@ class ListsController extends Controller
     		$events = $events->where('name', 'like', '%'.$keyword.'%');
     	}
 
-    	$events = $events->orderBy('status', 'asc')->orderBy('created_at', 'desc')->paginate(10);
+    	$events = $events->orderBy('status', 'desc')->orderBy('created_at', 'desc')->paginate(10);
     	
     	return view('lists.events_list', compact('events', 'keyword'));
     }

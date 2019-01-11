@@ -4,9 +4,9 @@
     <h3 class="text-center">Info Posko</h3>
   </div>
 
-  <div class="bg-light p-3 rounded shadow">
+  <div class="bg-light p-3 mb-5 rounded shadow">
 
-  <h4 class="border-bottom-0 mb-3"><b>{{ $post->name }}</b></h4>
+    <h4 class="border-bottom-0 mb-3"><b>{{ $post->name }}</b></h4>
 
     <div class="row">
         <div class="col-lg-6">
@@ -51,6 +51,14 @@
             <tr>
               <td class="border-top-0">
                 <p>{{ $post->description ?: '-' }}</p>
+              </td>
+            </tr>
+            <tr>
+              <th>Lokasi Peta <button class="btn btn-sm locate">Bandingkan lokasi anda</button></th>
+            </tr>
+            <tr>
+              <td>
+                <div id="mapid" style="height: 300px;"></div>
               </td>
             </tr>
           </table>

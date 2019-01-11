@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="bg-info text-center p-2">
-          <a href="{{ route('posts.page', $event->id) }}" class="text-white h6">Info Lebih Lanjut</a>
+          <a href="{{ route('posts.page', $event->id) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
         </div>
       </div>
       @endforeach
@@ -131,10 +131,10 @@
   
   </div>
 
-
 @endsection
 
 @section('script')
+<script src="/js/markers.js"></script>
 <script type="text/javascript">
   var mymap = L.map('mapid', {
       center: [-1.0878905, 117.7075195],
@@ -147,8 +147,23 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
+  var damage = '',
+      icon = '',
+      popupText = '';
+
   @foreach($event_markers as $event)
-    L.marker(['{{ $event->latitude }}', '{{ $event->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('posts.page', $event->id) }}">{{ $event->name }}</a>');
+    damage = {{ $event->damage }}
+
+    switch(damage){
+      case 1: icon = redIcon; break;
+      case 2: icon = yellowIcon; break;
+      case 3: icon = blueIcon; break;
+      case 4: icon = greenIcon; break;
+    }
+
+    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $event->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $event->regency->name }}</div><div class="my-2"><span><i class="fa fa-bolt"></i></span> {{ $event->damageName() }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $event->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('posts.page', $event->id) }}">info lebih lanjut &raquo;</a></div';
+
+    L.marker(['{{ $event->latitude }}', '{{ $event->longitude }}'], {icon: icon}).addTo(mymap).bindPopup(popupText);
   @endforeach
 
   // var marker = {};

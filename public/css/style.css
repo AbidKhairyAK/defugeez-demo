@@ -30,3 +30,7 @@ html, body {
   bottom: 0;
   width: 100%;
 }
+.leaflet-popup-content-wrapper span {
+  display: inline-block;
+  width: 15px;
+}

@@ -221,14 +221,17 @@
       zoom: 11,
       minZoom: 5,
       gestureHandling: true,
-  });
+  }),
+  popupText = '';
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
   @foreach($post_markers as $post)
-    L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('refugees.page', $post->id) }}">{{ $post->name }}</a>');
+    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $post->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $post->village->name }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $post->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('refugees.page', $post->id) }}">info lebih lanjut &raquo;</a></div';
+
+    L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap).bindPopup(popupText);
   @endforeach
 
 </script>
