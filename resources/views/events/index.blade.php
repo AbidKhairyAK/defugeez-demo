@@ -18,14 +18,12 @@
     </div>
 
     <div class="text-center">
-      <a href="{{ route('events.create') }}" class="btn btn-primary mb-3 px-5 shadow-sm">Tambah Bencana</a>
+      <a href="{{ route('events.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Bencana</a>
     </div>
 
     <div class="row">
 
-      <?php $count = 1; ?>
       @foreach($events as $event)
-
       <div class="col-md-6 mb-4">
         <div class="rounded shadow p-3 bg-light col-sm-12">
 
@@ -57,22 +55,17 @@
             </div>
           </div>
         </div>
-        <div class="bg-primary text-center p-2">
+        <div class="bg-info text-center p-2">
           <a href="{{ route('posts.page', $event->id) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>
-      <?php
-        if ($count >= 6) {
-          break;
-        }
-        $count++;
-      ?>
       @endforeach
+
     </div>
 
-    <h5 class="text-right"><a href="#">Tampilkan lebih banyak &raquo;</a></h5>
+    <h5 class="text-right mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
 
-    <div class="centered mb-3 mt-4">
+    {{-- <div class="centered mb-3 mt-4">
       <h3 class="text-center">Donasi</h3>
     </div>
 
@@ -91,7 +84,7 @@
             <div class="small">Terkumpul</div>
             <div>Rp. 21.590.834</div>
           </div>
-          <div class="bg-primary text-center p-2">
+          <div class="bg-info text-center p-2">
             <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
           </div>
         </div>
@@ -110,7 +103,7 @@
             <div class="small">Terkumpul</div>
             <div>Rp. 8.750.322</div>
           </div>
-          <div class="bg-primary text-center p-2">
+          <div class="bg-info text-center p-2">
             <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
           </div>
         </div>
@@ -129,12 +122,12 @@
             <div class="small">Terkumpul</div>
             <div>Rp. 87.983.992 </div>
           </div>
-          <div class="bg-primary text-center p-2">
+          <div class="bg-info text-center p-2">
             <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   
   </div>
 
@@ -154,7 +147,7 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
-  @foreach($events as $event)
+  @foreach($event_markers as $event)
     L.marker(['{{ $event->latitude }}', '{{ $event->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('posts.page', $event->id) }}">{{ $event->name }}</a>');
   @endforeach
 

@@ -9,7 +9,7 @@
 
   <div class="row">
 
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-5">
       <div class="rounded shadow p-3 bg-light col-sm-12">
 
         <h5 class="section-title pb-1"><b>Permintaan Kebutuhan</b></h5>
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-5">
       <div class="rounded shadow p-3 bg-light col-sm-12">
 
         <h5 class="section-title border-bottom pb-1"><b>Kebutuhan Diterima</b></h5>

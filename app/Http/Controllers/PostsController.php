@@ -28,7 +28,8 @@ class PostsController extends Controller
     public function page($id)
     {
         $event = Event::findOrFail($id);
-        $posts = Post::where('event_id', $id)->orderBy('created_at', 'desc')->get();
+        $posts = Post::where('event_id', $id)->orderBy('created_at', 'desc')->limit(4)->get();
+        $post_markers = Post::where('event_id', $id)->get();
         
         $data = Refugee::where('event_id', $id)->orderBy('created_at', 'desc');
 
@@ -61,7 +62,7 @@ class PostsController extends Controller
 
         session(['event_id' => $id]);
 
-        return view('posts.index', compact('event', 'posts', 'healths', 'agesCount'));
+        return view('posts.index', compact('event', 'posts', 'post_markers', 'healths', 'agesCount'));
     }
 
     /**

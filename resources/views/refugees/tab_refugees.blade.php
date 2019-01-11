@@ -11,7 +11,7 @@
     <a href="#" class="btn btn-success mb-3 px-5 shadow-sm">Import File Excel</a>
   </div>
 
-  <div class="rounded shadow p-3 bg-light col-sm-12">
+  <div class="rounded shadow p-3 mb-5 bg-light col-sm-12">
 
     <table id="example" class="table table-hover" style="width:100%">
       <thead>

@@ -21,10 +21,6 @@ Route::prefix('page')->group(function(){
 	Route::get('refugees/{id}', 'RefugeesController@page')->name('refugees.page');
 });
 
-Route::get('/login', function() {
-  return view('auth.login');
-});
-
 Route::get('/donations/form', function() {
   return view('donations.form');
 })->name('donations.form');
@@ -75,3 +71,11 @@ Route::get('/location/province', 'LocationController@province');
 Route::get('/location/regency', 'LocationController@regency');
 Route::get('/location/district', 'LocationController@district');
 Route::get('/location/village', 'LocationController@village');
+
+Route::get('search', 'ListsController@search')->name('search');
+
+Route::prefix('list')->group(function(){
+	Route::get('events', 'ListsController@eventsList')->name('events.list');
+	Route::get('posts/{id?}', 'ListsController@postsList')->name('posts.list');
+	Route::get('refugees/{id?}', 'ListsController@refugeesList')->name('refugees.list');
+});

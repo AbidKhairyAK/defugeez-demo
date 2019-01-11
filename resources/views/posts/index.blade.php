@@ -78,7 +78,6 @@
 
     <div class="row">
 
-      <?php $counter = 1; ?>
       @foreach($posts as $post)
       <div class="col-md-6 mb-4">
         <div class="rounded shadow p-3 bg-light col-sm-12">
@@ -114,17 +113,11 @@
           <a href="{{ route('refugees.page', $post->id) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>
-
-      <?php
-        if ($counter >= 4) {
-          break;
-        }
-        $counter++;
-      ?>
       @endforeach
+
     </div>
     
-    <h5 class="text-right"><a href="#">Tampilkan lebih banyak &raquo;</a></h5>
+    <h5 class="text-right"><a href="{{ route('posts.list', $event->id) }}">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered my-3">
       <h3 class="text-center">Grafik Bencana</h3>
@@ -234,7 +227,7 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(mymap);
 
-  @foreach($posts as $post)
+  @foreach($post_markers as $post)
     L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap).bindPopup('<a href="{{ route('refugees.page', $post->id) }}">{{ $post->name }}</a>');
   @endforeach
 
