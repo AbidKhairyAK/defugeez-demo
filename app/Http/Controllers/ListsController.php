@@ -20,19 +20,19 @@ class ListsController extends Controller
     			break;
     		
     		case 'posko':
-    			return $this->postsList($keyword);
+    			return $this->postsList(null, $keyword);
     			break;
     		
     		case 'pengungsi':
-    			return $this->refugeesList($keyword);
+    			return $this->refugeesList(null, $keyword);
     			break;
     		
     		case 'relawan':
-    			return $this->volunteersList($keyword);
+    			return $this->volunteersList(null, $keyword);
     			break;
     		
     		case 'organisasi':
-    			return $this->organizationsList($keyword);
+    			return $this->organizationsList(null, $keyword);
     			break;
 
     		default:

@@ -74,8 +74,12 @@
   @endforeach
   </div>
 
-  <div class="my-4 d-flex justify-content-center">   	
-  	{{ $posts->appends(['keyword' => $keyword, 'filter' => 'posko'])->links() }}
+  <div class="my-4 d-flex justify-content-center">
+  	@if($keyword)
+  		{{ $posts->appends(['keyword' => $keyword, 'filter' => 'posko'])->links() }}
+  	@else
+  		{{ $posts->links() }}
+  	@endif
   </div>
 
   @endif
