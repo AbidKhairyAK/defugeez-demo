@@ -1,6 +1,6 @@
 var markerIcon = L.Icon.extend({
     options: {
-        shadowUrl: '../img/app/marker-shadow.png',
+        shadowUrl:    '../img/app/marker-shadow.png',
         iconSize:     [40, 40],
         shadowSize:   [50, 30],
         iconAnchor:   [20, 40],

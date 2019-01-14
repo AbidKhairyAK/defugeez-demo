@@ -73,7 +73,7 @@
     </div>
 
     <div class="text-center">
-      <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3 px-5 shadow-sm">Tambah Posko</a>
+      <a href="{{ route('posts.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
     </div>
 
     <div class="row">
@@ -109,7 +109,7 @@
             </div>
           </div>
         </div>
-        <div class="bg-primary text-center p-2">
+        <div class="bg-info text-center p-2">
           <a href="{{ route('refugees.page', $post->id) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>

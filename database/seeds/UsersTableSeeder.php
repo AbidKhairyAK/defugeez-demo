@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         $carbon = Carbon::now()->addMonth();
 
         for ($i=0; $i < 100; $i++) { 
+            $organization = $faker->randomElement(DB::table('organizations')->pluck('id'));
             $province = $faker->randomElement(DB::table('provinces')->pluck('id'));
             $regency = $faker->randomElement(DB::table('regencies')->where('province_id', $province)->pluck('id'));
             $district = $faker->randomElement(DB::table('districts')->where('regency_id', $regency)->pluck('id'));
@@ -28,7 +29,7 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->unique()->freeEmail,
                 'password' => bcrypt('asdqwe123'),
-                'organization_id' => 1,
+                'organization_id' => $organization,
                 'nik' => $faker->creditCardNumber,
                 'address' => 'jl. '.$faker->streetName,
                 'province_id' => $province,

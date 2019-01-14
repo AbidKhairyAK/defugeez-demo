@@ -4,7 +4,7 @@
   </div>
 
   <div class="text-center">
-    <a href="{{ route('demands.create') }}" class="btn btn-primary mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
+    <a href="{{ route('demands.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
   </div>
 
   <div class="row">

@@ -6,7 +6,7 @@
 
   
   <div class="text-center">
-    <a href="{{ route('refugees.create') }}" class="btn btn-primary mb-3 px-5 shadow-sm">Tambah Pengungsi</a>
+    <a href="{{ route('refugees.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Pengungsi</a>
     <b class="p-2">- OR -</b>
     <a href="#" class="btn btn-success mb-3 px-5 shadow-sm">Import File Excel</a>
   </div>
@@ -34,7 +34,7 @@
           <td>{!! $refugee->statusLabel() !!}</td>
           <td>
             <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">Detail</a>
-            <a class="btn btn-sm btn-primary" href="{{ route('refugees.edit', $refugee->id) }}">Edit</a>
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">Edit</a>
             <form class="d-inline-block" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
@@ -49,7 +49,7 @@
             <div class="modal-content">
 
               <!-- Modal Header -->
-              <div class="modal-header bg-primary">
+              <div class="modal-header bg-info">
                 <h4 class="modal-title text-white">Detail Pengungsi</h4>
                 <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
               </div>

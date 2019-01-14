@@ -36,7 +36,7 @@ class DemandsTableSeeder extends Seeder
     		];
         }
 
-        DB::table('demands')->truncate();
+        // DB::table('demands')->truncate();
         DB::table('demands')->insert($data);
     }
 }

@@ -33,13 +33,14 @@ class RefugeesTableSeeder extends Seeder
             $date_at = $carbon->subDay()->toDateString();
             $birth_date = $birth->subDay()->toDateString();
             $randHealth = $faker->boolean(90);
+            $gender = $faker->randomElement($genders);
 
     		$data[$i] = [
 		    	'event_id' => $event_id,
 		    	'post_id' => $post_id,
 		    	'user_id' => $user_id,
-		    	'name' => $faker->name,
-		    	'gender' => $faker->randomElement($genders),
+		    	'name' => $faker->name($gender == 'L' ? 'male' : 'female'),
+		    	'gender' => $gender,
 		    	'origin' => $origin,
 		    	'birthdate' => $birth_date,
 		    	'health' => $randHealth ? rand(1, 3) : 4,

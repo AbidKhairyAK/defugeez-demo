@@ -15,17 +15,17 @@
   <div class="container">
 
   <ul class="nav nav-pills justify-content-center py-3">
-	  <li clas>
-	    <a class="border border-primary border-right-0 rounded-0 px-5 shadow nav-link  {{ session('refugees_tab') ? '' : 'active' }}" data-toggle="pill" href="#info">Informasi</a>
+	  <li>
+	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') ? '' : 'active' }}" data-toggle="pill" href="#info">Informasi</a>
 	  </li>
-	  <li clas>
-	    <a class="border border-primary border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'summary' ? 'active' : '' }}" data-toggle="pill" href="#summary">Ringkasan</a>
+	  <li>
+	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'summary' ? 'active' : '' }}" data-toggle="pill" href="#summary">Ringkasan</a>
 	  </li>
-	  <li clas>
-	    <a class="border border-primary border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'demands' ? 'active' : '' }}" data-toggle="pill" href="#demands">Kebutuhan</a>
+	  <li>
+	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'demands' ? 'active' : '' }}" data-toggle="pill" href="#demands">Kebutuhan</a>
 	  </li>
-	  <li clas>
-	    <a class="border border-primary rounded-0 px-5 shadow nav-link  {{ session('refugees_tab') == 'refugees' ? 'active' : '' }}" data-toggle="pill" href="#refugees">Pengungsi</a>
+	  <li>
+	    <a class="border border-info rounded-0 px-5 shadow nav-link  {{ session('refugees_tab') == 'refugees' ? 'active' : '' }}" data-toggle="pill" href="#refugees">Pengungsi</a>
 	  </li>
 	</ul>
 
@@ -56,27 +56,6 @@
   }).addTo(mymap);
 
   L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap);
-
-  $('.locate').click(function(){
-    mymap.locate({setView: true, maxZoom: 16});
-  });
-
-  function onLocationFound(e) {
-      var radius = e.accuracy / 2;
-
-      L.marker(e.latlng).addTo(mymap)
-          .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-      L.circle(e.latlng, radius).addTo(mymap);
-  }
-
-  mymap.on('locationfound', onLocationFound);
-
-  function onLocationError(e) {
-      alert(e.message);
-  }
-
-  mymap.on('locationerror', onLocationError);
 
   $(document).ready(function() {
 

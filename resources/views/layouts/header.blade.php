@@ -14,7 +14,7 @@
 		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="#"><i class="fa fa-dashboard"></i> <b>Dashboard</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-dashboard"></i> <b>Organisasi</b></a>
 		    </li>
 		    @if(!auth()->user())
 		    <li class="nav-item">

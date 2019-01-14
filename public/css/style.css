@@ -34,3 +34,7 @@ html, body {
   display: inline-block;
   width: 15px;
 }
+.nav-pills .nav-link.active, 
+.nav-pills .show>.nav-link {
+  background-color: #17a2b8;
+}

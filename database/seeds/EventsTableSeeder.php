@@ -106,7 +106,7 @@ class EventsTableSeeder extends Seeder
                 'regency_id' => $regency,
                 'damage' => rand(1,4),
                 'description' => $faker->paragraph,
-                'status' => $faker->boolean(70),
+                'status' => $faker->boolean(80),
                 'created_at' => $date_at,
                 'updated_at' => $date_at,
                 'latitude' => $faker->latitude($lat['min'], $lat['max']),

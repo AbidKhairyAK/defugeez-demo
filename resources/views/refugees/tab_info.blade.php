@@ -54,7 +54,7 @@
               </td>
             </tr>
             <tr>
-              <th>Lokasi Peta <button class="btn btn-sm locate">Bandingkan lokasi anda</button></th>
+              <th>Lokasi Peta</th>
             </tr>
             <tr>
               <td>

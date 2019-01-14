@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Model\Organization;
+use App\Http\Requests;
+use Brian2694\Toastr\Facades\Toastr;
+
+class OrganizationsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    public function page()
+    {
+        $organizations = Organization::orderBy('created_at', 'asc')->get();
+
+        return view('organizations.index', compact('organizations'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $organization = new Organization();
+
+        return view('organizations.create', compact('organization'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Requests\OrganizationsStoreRequest $request)
+    {
+        $image = $request->file('logo_image');
+        $name = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = public_path('/img/logo');
+        $image->move($destinationPath, $name);
+
+        $request->merge([
+            'logo' => $name
+        ]);
+
+        Organization::create($request->all());
+
+        Toastr::success('Data Organisasi Berhasil Ditambahkan!', 'Tambah Data Organisasi');
+
+        return redirect('page/organizations');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $organization = Organization::findOrFail($id);
+
+        return view('organizations.edit', compact('organization'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Requests\OrganizationsUpdateRequest $request, $id)
+    {
+        $organization = Organization::findOrFail($id);
+
+        if ($image = $request->file('logo_image')) {
+
+            unlink(public_path('/img/logo/'.$organization->logo));
+
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/img/logo');
+            $image->move($destinationPath, $name);
+
+            $request->merge([
+                'logo' => $name
+            ]);
+        }
+
+        $organization->update($request->all());
+
+        Toastr::success('Data Organisasi Berhasil Diedit!', 'Edit Data Organisasi');
+
+        return redirect('page/organizations');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $organization = Organization::findOrFail($id);
+
+        unlink(public_path('/img/logo/'.$organization->logo));
+
+        $organization->delete();
+
+        Toastr::success('Data Organisasi Berhasil Dihapus!', 'Hapus Data Organisasi');
+
+        return redirect('page/organizations');
+    }
+}

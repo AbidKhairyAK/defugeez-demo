@@ -16,9 +16,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('page')->group(function(){
+	Route::get('organizations', 'OrganizationsController@page')->name('organizations.page');
 	Route::get('events', 'EventsController@page')->name('events.page');
 	Route::get('posts/{id}', 'PostsController@page')->name('posts.page');
 	Route::get('refugees/{id}', 'RefugeesController@page')->name('refugees.page');
+	Route::get('users/{id}', 'UsersController@page')->name('users.page');
 });
 
 Route::get('/donations/form', function() {
@@ -47,6 +49,7 @@ Route::get('/form', function(){
 	return view('refugees.create', compact('test'));
 });
 
+Route::resource('/organizations', 'OrganizationsController');
 Route::resource('/users', 'UsersController');
 Route::resource('/events', 'EventsController');
 Route::resource('/refugees', 'RefugeesController');
