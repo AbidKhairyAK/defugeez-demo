@@ -25,6 +25,7 @@ class OrganizationsStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
+            'chairman' => 'required|max:255',
             'address' => 'required|max:255',
             'village_id' => 'required',
             'district_id' => 'required',

@@ -34,6 +34,7 @@ class UsersStoreRequest extends FormRequest
             'district_id' => 'required',
             'village_id' => 'required',
             'phone' => 'max:15',
+            // 'role' => 'required',
         ];
     }
 }

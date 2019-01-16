@@ -26,7 +26,7 @@ class UsersUpdateRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|unique:users,email,'.$this->route('user'),
-            'password' => 'required|confirmed|max:20',
+            'password' => 'required_with:password_confirmation|confirmed|max:20',
             'nik' => 'max:17|unique:users,nik,'.$this->route('user'),
             'address' => 'required',
             'province_id' => 'required',

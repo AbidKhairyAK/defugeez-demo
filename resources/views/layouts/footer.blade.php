@@ -2,7 +2,7 @@
 	<div class="container">
 	  <ul class="navbar-nav mr-auto">
 	    <li class="nav-item">
-	      <a class="nav-link text-white" href="#">&copy; Copyright DE.inc. All right reserved.</a>
+	      <a class="nav-link text-white" href="#">&copy; <span class="d-none d-md-inline">Copyright</span> DE.inc. <span class="d-none d-md-inline">All right reserved.</span></a>
 	    </li>
 	  </ul>
 	  <ul class="navbar-nav">

@@ -3,11 +3,17 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Laracasts\Presenter\PresentableTrait;
+use App\Http\Presenter\OrganizationPresenter;
 
 class Organization extends Model
 {
+    use PresentableTrait;
+
+    protected $presenter = OrganizationPresenter::class;
+
     protected $fillable = [
-        'name', 'address', 'village_id', 'district_id', 'regency_id', 'province_id', 'email', 'phone', 'account_number', 'profile', 'logo'
+        'name', 'chairman', 'address', 'village_id', 'district_id', 'regency_id', 'province_id', 'email', 'phone', 'account_number', 'profile', 'logo'
     ];
 
     public function users()

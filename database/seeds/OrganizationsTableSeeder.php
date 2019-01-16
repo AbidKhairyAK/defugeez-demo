@@ -17,9 +17,26 @@ class OrganizationsTableSeeder extends Seeder
         $faker = Factory::create('id_ID');
     	$fakerDK = Factory::create('de_DK');
         $carbon = Carbon::now()->addMonth();
-        $instances = ['Ormas', 'Persatuan', 'Aksi', 'Kelompok', 'Pemuda', 'Relawan']; 
+        $instances = ['Ormas', 'Persatuan', 'Aksi', 'Kelompok', 'Pemuda', 'Relawan'];
 
-        for ($i=1; $i <= 10; $i++) { 
+        $data[0] = [
+            'name' => 'Tanpa Organisasi',
+            'chairman' => 'masing-masing relawan',
+            'address' => '-',
+            'village_id' => null,
+            'district_id' => null,
+            'regency_id' => null,
+            'province_id' => null,
+            'email' => '-',
+            'phone' => '-',
+            'account_number' => '-',
+            'profile' => 'Ini merupakan kumpulan data para relawan yang tidak terikat organisasi / independen',
+            'logo' => 'none.png',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+
+        for ($i=1; $i <= 10; $i++) {
 
         	$provinces = $faker->randomElement(DB::table('provinces')->pluck('id'));
         	$regencies = $faker->randomElement(DB::table('regencies')->where('province_id', $provinces)->pluck('id'));
@@ -29,6 +46,7 @@ class OrganizationsTableSeeder extends Seeder
 
             $data[$i] = [
                 'name' => $faker->randomElement($instances).' '.$fakerDK->unique()->firstName.' '.$fakerDK->unique()->lastName,
+                'chairman' => $faker->name,
                 'address' => 'Jl. '.$faker->unique()->streetName,
                 'village_id' => $villages,
                 'district_id' => $districts,
@@ -44,7 +62,10 @@ class OrganizationsTableSeeder extends Seeder
             ];
         }
 
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
         // DB::table('organizations')->truncate();
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        
         DB::table('organizations')->insert($data);
     }
 }

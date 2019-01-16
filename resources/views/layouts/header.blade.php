@@ -3,36 +3,44 @@
 
 		<a class="navbar-brand" style="font-size: 30px;" href="{{ url('/') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
 
-	  <!-- Toggler/collapsibe Button -->
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-links">
-	    <span class="fa fa-bars"></span>
-	  </button>
-
-	  <div class="collapse navbar-collapse justify-content-end pt-3" id="nav-links">
-		  <ul class="navbar-nav">
+		  <ul class="navbar-nav justify-content-end pt-3" id="nav-links">
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <b>Beranda</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <span class="d-none d-md-inline-block"><b>Beranda</b></span></a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-dashboard"></i> <b>Organisasi</b></a>
+		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-institution"></i> <span class="d-none d-md-inline-block"><b>Organisasi</b></span></a>
 		    </li>
 		    @if(!auth()->user())
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> <b>Login</b></a>
-		    </li>
-		    <li class="nav-item">
-		      <a class="nav-link bg-light rounded text-primary" href="{{ route('login') }}"><i class="fa fa-user-plus"></i> <b>Register</b></a>
+		      <a class="nav-link text-white" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> <span class="d-none d-md-inline-block"><b>Login / Register</b></span></a>
 		    </li>
 		    @else
 		    <li class="nav-item">
-		    	<form class="d-inline-block" action="{{ route('logout') }}" method="post">
-		    		@csrf
-		      	<button class="nav-link text-white btn btn-primary pr-3"><i class="fa fa-sign-in"></i> <b>Logout</b></button>
-		    	</form>
+		    	<div class="dropdown">
+
+		    		<button class="btn btn-sm btn-outline-info" data-toggle="dropdown">
+		    			<img src="{{ Avatar::create(session('username'))->toBase64() }}" style="width: 40px; margin-top: -8px;">
+		    		</button>
+
+		    		<div class="dropdown-menu dropdown-menu-right shadow">
+		    			<div class="dropdown-item text-center">
+		    				<img src="{{ Avatar::create(session('username'))->toBase64() }}">
+		    				<p class="mt-2">{{ session('username') }} - {{ session('organization') }}</p>
+		    				<hr>
+		    			</div>
+		    			<div class="dropdown-item d-flex justify-content-between">
+		    				<a class="btn btn-info" href="">Profil</a>
+					    	<form class="d-inline-block" action="{{ route('logout') }}" method="post">
+					    		@csrf
+					      	<button class="btn btn-info">Logout</button>
+					    	</form>
+		    			</div>
+		    		</div>
+
+		    	</div>
 		    </li>
 		    @endif
 		  </ul>
-	  </div>
 
 	</div>
 

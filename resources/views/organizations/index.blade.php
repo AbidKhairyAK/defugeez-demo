@@ -22,9 +22,9 @@
             <div class="row">
               <div class="col-sm-8">
                 <h5 class="section-title border-bottom pb-1"><b>{{ $organization->name }}</b></h5>
-                <p>{{ $organization->regency->name }}, {{ $organization->province->name }}</p>
+                <p>{{ $organization->present()->halfAddress }}</p>
                 <p class="mb-auto">Anggota Terdaftar</p>
-                <h5><b class="text-info">{{ $organization->users->count() }}</b> orang</h5>
+                <h5><b class="text-info">{{ $organization->users->count() }}</b> relawan</h5>
               </div>
               <div class="col-sm-4 text-right">
                 <img class="w-75" src="/img/logo/{{ $organization->logo }}">

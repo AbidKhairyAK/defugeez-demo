@@ -3,6 +3,10 @@
 		'invalid' => $errors->has('name') ? 'is-invalid' : '',
 		'feedback' => $errors->has('name') ? '<span class="invalid-feedback">'.$errors->first('name').'</span>' : ''
 	];
+	$chairman = [
+		'invalid' => $errors->has('chairman') ? 'is-invalid' : '',
+		'feedback' => $errors->has('chairman') ? '<span class="invalid-feedback">'.$errors->first('chairman').'</span>' : ''
+	];
 	$address = [
 		'invalid' => $errors->has('address') ? 'is-invalid' : '',
 		'feedback' => $errors->has('address') ? '<span class="invalid-feedback">'.$errors->first('address').'</span>' : ''
@@ -53,6 +57,12 @@
 	{!! Form::label('name', 'Nama Organisasi', ['class' => 'font-weight-bold']) !!}
 	{!! Form::text('name', null, ['class' => 'form-control '.$name['invalid'], 'id' => 'name', 'required']) !!}
 	{!! $name['feedback'] !!}
+</div>
+
+<div class="form-group">
+	{!! Form::label('chairman', 'Nama Ketua Organisasi', ['class' => 'font-weight-bold']) !!}
+	{!! Form::text('chairman', null, ['class' => 'form-control '.$chairman['invalid'], 'id' => 'chairman', 'required']) !!}
+	{!! $chairman['feedback'] !!}
 </div>
 
 <div class="form-group">
@@ -135,16 +145,3 @@
 <!-- Jasny Bootstrap -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 @endsection
-
-{{-- dataHadits.map((hadits) => {
-
-	title = hadits.title;
-
-	return (
-
-		<View>
-			<Text>{title.substr(0, 10)}</Text>
-		</View>
-
-	);
-}) --}}

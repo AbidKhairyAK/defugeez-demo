@@ -37,13 +37,17 @@ class UsersTableSeeder extends Seeder
                 'district_id' => $district,
                 'village_id' => $village,
                 'phone' => $faker->unique()->e164PhoneNumber,
-                'role' => rand(1,3),
+                'role' => rand(2,3),
                 'status' => $faker->boolean(80),
                 'created_at' => $date_at,
                 'updated_at' => $date_at,
             ];
         }
         
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        // DB::table('users')->truncate();
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
         DB::table('users')->insert($data);
     }
 }
