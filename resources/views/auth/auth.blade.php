@@ -23,6 +23,10 @@
 
 <div class="container">
 
+	<div class="text-center mb-2">
+		<a class="bg-info text-white py-1 px-2 rounded" href="{{ url('/') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
+	</div>
+
   <h2 class="text-center mb-4">@yield('title')</h2>
   
 	<div class="col-md-6 offset-md-3 mb-5 bg-light shadow rounded p-4">

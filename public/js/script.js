@@ -4,7 +4,6 @@ $('.search-trigger').click(function(){
 	$('.search-container').slideToggle(function(){
 		$('.search-input').focus();
 	});
-	$('input[name=filter]').val('bencana');
 });
 
 $('.search-container .dropdown-item').click(function(){

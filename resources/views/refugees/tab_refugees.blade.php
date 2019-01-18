@@ -5,40 +5,64 @@
   </div>
 
   
-  <div class="text-center">
-    <a href="{{ route('refugees.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Pengungsi</a>
-    <b class="p-2">- OR -</b>
-    <a href="#" class="btn btn-success mb-3 px-5 shadow-sm">Import File Excel</a>
+  <div class="text-center mb-3">
+    <a href="{{ route('refugees.create') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
+    <b class="p-2 d-block d-md-inline">- OR -</b>
+    <a href="#" class="btn btn-success px-5 shadow-sm">Import File Excel</a>
   </div>
 
-  <div class="rounded shadow p-3 mb-5 bg-light col-sm-12">
+  <p class="text-center mt-3">&lArr; swipe &rArr;</p>
 
-    <table id="example" class="table table-hover" style="width:100%">
+  <div id="refugees-section" class="rounded shadow p-3 mb-5 bg-light col-sm-12">
+
+    <table id="refugees-table" class="table table-hover" style="width:100%">
       <thead>
         <tr>
+          <th class="d-table-cell d-md-none">Opsi</th>
           <th>Nama</th>
           <th>gender</th>
           <th>Tanggal Lahir</th>
           <th>Kesehatan</th>
           <th>Status</th>
-          <th>Opsi</th>
+          <th class="d-none d-md-table-cell">Opsi</th>
         </tr>
       </thead>
       <tbody>
         @foreach($refugees as $refugee)
         <tr>
+          <td class="d-table-cell d-md-none">
+            <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+              <i class="fa fa-address-card"></i>
+            </a>
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+              <i class="fa fa-edit"></i>
+            </a>
+            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+              @csrf
+              {{ method_field('DELETE') }}
+              <button class="btn btn-sm btn-danger" type="submit">
+                <i class="fa fa-trash"></i>
+              </button>
+            </form>
+          </td>
           <td>{{ $refugee->name }}</td>
           <td>{{ $refugee->gender }}</td>
           <td>{{ $refugee->birthdate }}</td>
           <td>{!! $refugee->healthLabel() !!}</td>
           <td>{!! $refugee->statusLabel() !!}</td>
-          <td>
-            <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">Detail</a>
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">Edit</a>
-            <form class="d-inline-block" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+          <td class="d-none d-md-table-cell">
+            <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+              <i class="fa fa-address-card"></i> Detail
+            </a>
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
-              <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+              <button class="btn btn-sm btn-danger" type="submit">
+                <i class="fa fa-trash"></i> Hapus
+              </button>
             </form>
           </td>
         </tr>

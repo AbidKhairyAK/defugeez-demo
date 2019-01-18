@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Bencana');
+@section('title', 'Daftar Pengungsi');
 
 @section('content')
-<div class="container">
+<div id="list" class="container">
 	
   @if(isset($keyword))
 	
   <div class="my-4">
     <div class="rounded shadow p-3 bg-light col-sm-12">
     	<h5>Menampilkan hasil pencarian kata: <b>{{ $keyword }}</b></h5>
-    	<h5>Berdasarkan filter: <b>Bencana</b></h5>
+    	<h5>Berdasarkan filter: <b>Pengungsi</b></h5>
     </div>
   </div>
 
@@ -19,7 +19,7 @@
   @endif
 
   <div class="centered my-4">
-    <h3 class="text-center">~ Daftar Bencana ~</h3>
+    <h3 class="text-center">~ Daftar Pengungsi ~</h3>
   </div>
 
   @if(!$refugees->count())
@@ -32,34 +32,58 @@
 
   @else
 
-	<div class="rounded shadow p-3 mb-5 bg-light">
+  	<p class="text-center mt-3 d-block d-md-none">&lArr; swipe &rArr;</p>
 
-	  <table id="example" class="table table-hover" style="width:100%">
+	<div id="refugees-section" class="rounded shadow p-3 mb-5 bg-light">
+
+	  <table id="refugees-table" class="table table-hover" style="width:100%">
 	    <thead>
 	      <tr>
+	        <th class="d-table-cell d-md-none">Opsi</th>
 	        <th>Nama</th>
 	        <th>gender</th>
 	        <th>Tanggal Lahir</th>
 	        <th>Kesehatan</th>
 	        <th>Status</th>
-	        <th>Opsi</th>
+	        <th class="d-none d-md-table-cell">Opsi</th>
 	      </tr>
 	    </thead>
 	    <tbody>
 	      @foreach($refugees as $refugee)
 	      <tr>
+	        <td class="d-table-cell d-md-none">
+	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+	            <i class="fa fa-address-card"></i>
+	          </a>
+	          <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+	            <i class="fa fa-edit"></i>
+	          </a>
+	          <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+	            @csrf
+	            {{ method_field('DELETE') }}
+	            <button class="btn btn-sm btn-danger" type="submit">
+	              <i class="fa fa-trash"></i>
+	            </button>
+	          </form>
+	        </td>
 	        <td>{{ $refugee->name }}</td>
 	        <td>{{ $refugee->gender }}</td>
 	        <td>{{ $refugee->birthdate }}</td>
 	        <td>{!! $refugee->healthLabel() !!}</td>
 	        <td>{!! $refugee->statusLabel() !!}</td>
-	        <td>
-	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">Detail</a>
-	          <a class="btn btn-sm btn-primary" href="{{ route('refugees.edit', $refugee->id) }}">Edit</a>
-	          <form class="d-inline-block" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+	        <td class="d-none d-md-table-cell">
+	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+	            <i class="fa fa-address-card"></i> Detail
+	          </a>
+	          <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+	            <i class="fa fa-edit"></i> Edit
+	          </a>
+	          <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
 	            @csrf
 	            {{ method_field('DELETE') }}
-	            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+	            <button class="btn btn-sm btn-danger" type="submit">
+	              <i class="fa fa-trash"></i> Hapus
+	            </button>
 	          </form>
 	        </td>
 	      </tr>
@@ -70,7 +94,7 @@
 	          <div class="modal-content">
 
 	            <!-- Modal Header -->
-	            <div class="modal-header bg-primary">
+	            <div class="modal-header bg-info">
 	              <h4 class="modal-title text-white">Detail Pengungsi</h4>
 	              <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
 	            </div>
@@ -110,12 +134,12 @@
 	                <span class="col text-right">{{ $refugee->barrack }}</span>
 	              </div>
 	              <div class="row py-2">
-	                <span class="col"><b>Deskripsi :</b></span>
-	                <span class="col text-right">{{ $refugee->description }}</span>
-	              </div>
-	              <div class="row py-2">
 	                <span class="col"><b>Posko :</b></span>
 	                <span class="col text-right">{{ $refugee->post->name }}</span>
+	              </div>
+	              <div class="row py-2">
+	                <span class="col"><b>Deskripsi :</b></span>
+	                <span class="col text-right">{{ $refugee->description }}</span>
 	              </div>
 	              <div class="row py-2">
 	                <span class="col"><b>Peristiwa :</b></span>

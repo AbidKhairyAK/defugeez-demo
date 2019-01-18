@@ -3,7 +3,7 @@
 @section('title', 'Relawan')
 
 @section('content')
-  <div class="container">
+  <div id="users" class="container">
 
     <div class="centered my-3">
       <h3 class="text-center">Info Organisasi</h3>
@@ -86,31 +86,53 @@
       <a href="{{ route('users.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
     </div>
 
-    <div class="rounded shadow p-3 mb-5 bg-light col-sm-12">
-      <table id="users" class="table table-hover" style="width:100%">
+    <div id="users-section" class="rounded shadow p-3 mb-5 bg-light col-sm-12">
+      <table id="users-table" class="table table-hover" style="width:100%">
         <thead>
           <tr>
+            <th class="d-table-cell d-md-none">Opsi</th>
             <th>Nama</th>
             <th>Email</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Opsi</th>
+            <th class="d-none d-md-table-cell">Opsi</th>
           </tr>
         </thead>
         <tbody>
           @foreach($users as $user)
           <tr>
+            <td class="d-table-cell d-md-none">
+              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
+                <i class="fa fa-address-card"></i>
+              </a>
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+                <i class="fa fa-edit"></i>
+              </a>
+              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button class="btn btn-sm btn-danger" type="submit">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </form>
+            </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->present()->roleFormatted }}</td>
             <td>{!! $user->present()->statusFormatted !!}</td>
-            <td>
-              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">Detail</a>
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">Edit</a>
-              <form class="d-inline-block" action="{{ route('users.destroy', $user->id) }}" method="post">
+            <td class="d-none d-md-table-cell">
+              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
+                <i class="fa fa-address-card"></i> Detail
+              </a>
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+                <i class="fa fa-edit"></i> Edit
+              </a>
+              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                <button class="btn btn-sm btn-danger" type="submit">
+                  <i class="fa fa-trash"></i> Hapus
+                </button>
               </form>
             </td>
           </tr>
@@ -171,7 +193,7 @@
 
 @section('script')
 <script type="text/javascript">
-    $('#users').DataTable({
+    $('#users-table').DataTable({
       "order": []
     });
 </script>

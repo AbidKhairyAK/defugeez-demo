@@ -1,18 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info py-3 fixed-top shadow" style="flex-direction: column;">
 	<div class="container">
 
-		<a class="navbar-brand" style="font-size: 30px;" href="{{ url('/') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
+		<a class="navbar-brand" href="{{ url('/') }}"><i>{{ env('APP_PREFIX') }}</i><b>{{ env('APP_NAME') }}</b></a>
 
 		  <ul class="navbar-nav justify-content-end pt-3" id="nav-links">
 		    <li class="nav-item">
 		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <span class="d-none d-md-inline-block"><b>Beranda</b></span></a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-institution"></i> <span class="d-none d-md-inline-block"><b>Organisasi</b></span></a>
+		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-user"></i> <span class="d-none d-md-inline-block"><b>Organisasi</b></span></a>
 		    </li>
 		    @if(!auth()->user())
 		    <li class="nav-item">
-		      <a class="nav-link text-white" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> <span class="d-none d-md-inline-block"><b>Login / Register</b></span></a>
+		      <a class="nav-link text-white" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> <b>Login<span class="d-none d-md-inline-block"> / Register</span></b></a>
 		    </li>
 		    @else
 		    <li class="nav-item">
@@ -50,7 +50,7 @@
 
 	      <div class="input-group-prepend">
 	        <button type="button" class="btn btn-light border" data-toggle="dropdown">
-            <i class="fa fa-filter"></i> <span class="d-none d-md-inline">Berdasarkan:</span> <span class="search-filter font-weight-bold">Bencana</span>
+            <i class="fa fa-filter"></i> <span class="d-none d-md-inline">Berdasarkan:</span> <span class="search-filter font-weight-bold">{{ isset($filter) ? title_case($filter) : 'Pengungsi' }}</span>
           </button>
           <div class="dropdown-menu">
             <a class="dropdown-item" style="cursor: pointer;">Nama Bencana</a>
@@ -62,7 +62,7 @@
 	      </div>
 
 	      <input type="text" name="keyword" class="form-control search-input">
-	      <input type="hidden" name="filter">
+	      <input type="hidden" name="filter" value="{{ isset($filter) ? $filter : 'pengungsi' }}">
 	    
 	      <div class="input-group-append">
 	        <button class="btn btn-light border" type="submit"><i class="fa fa-search"></i> <span class="d-none d-md-inline">Cari</span></button> 

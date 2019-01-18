@@ -4,10 +4,7 @@
 
 @section('style')
 <style type="text/css">
-  #demands tbody td:first-child {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  
 </style>
 @endsection
 
@@ -16,16 +13,16 @@
 
   <ul class="nav nav-pills justify-content-center py-3">
 	  <li>
-	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') ? '' : 'active' }}" data-toggle="pill" href="#info">Informasi</a>
+	    <a class="border border-info rounded-0 mb-2 mx-1 px-5 shadow nav-link {{ session('refugees_tab') ? '' : 'active' }}" data-toggle="pill" href="#info">Informasi</a>
 	  </li>
 	  <li>
-	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'summary' ? 'active' : '' }}" data-toggle="pill" href="#summary">Ringkasan</a>
+	    <a class="border border-info rounded-0 mb-2 mx-1 px-5 shadow nav-link {{ session('refugees_tab') == 'summary' ? 'active' : '' }}" data-toggle="pill" href="#summary">Ringkasan</a>
 	  </li>
 	  <li>
-	    <a class="border border-info border-right-0 rounded-0 px-5 shadow nav-link {{ session('refugees_tab') == 'demands' ? 'active' : '' }}" data-toggle="pill" href="#demands">Kebutuhan</a>
+	    <a class="border border-info rounded-0 mb-2 mx-1 px-5 shadow nav-link {{ session('refugees_tab') == 'demands' ? 'active' : '' }}" data-toggle="pill" href="#demands">Kebutuhan</a>
 	  </li>
 	  <li>
-	    <a class="border border-info rounded-0 px-5 shadow nav-link  {{ session('refugees_tab') == 'refugees' ? 'active' : '' }}" data-toggle="pill" href="#refugees">Pengungsi</a>
+	    <a class="border border-info rounded-0 mb-2 mx-1 px-5 shadow nav-link  {{ session('refugees_tab') == 'refugees' ? 'active' : '' }}" data-toggle="pill" href="#refugees">Pengungsi</a>
 	  </li>
 	</ul>
 
@@ -59,7 +56,7 @@
 
   $(document).ready(function() {
 
-    $('#example').DataTable();
+    $('#refugees-table').DataTable();
 
     var health = document.getElementById("health").getContext('2d');
     var healthChart = new Chart(health, {
