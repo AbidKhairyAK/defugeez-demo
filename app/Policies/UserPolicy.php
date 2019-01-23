@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        $user->role <= 2;
     }
 
     /**
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->role == 1;
+        return ($user->role == 1) || ($user->id == $model->id);
     }
 
     /**

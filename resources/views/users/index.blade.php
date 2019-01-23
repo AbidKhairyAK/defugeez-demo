@@ -77,7 +77,6 @@
       </div>
     </div>
 
-    @can('users.view', $organization)
     <div class="centered mb-3 mt-5">
       <h3 class="text-center">Daftar Relawan</h3>
     </div>
@@ -102,9 +101,12 @@
           @foreach($users as $user)
           <tr>
             <td class="d-table-cell d-md-none">
+
+              @can('users.view', $organization)
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i>
               </a>
+              @endcan
 
               @can('users.update', $user)
               <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
@@ -128,9 +130,12 @@
             <td>{{ $user->present()->roleFormatted }}</td>
             <td>{!! $user->present()->statusFormatted !!}</td>
             <td class="d-none d-md-table-cell">
+              
+              @can('users.view', $organization)
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i> Detail
               </a>
+              @endcan
 
               @can('users.update', $user)
               <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
@@ -201,7 +206,6 @@
         </tbody>
       </table>
     </div>
-    @endcan
 
   </div>
 @endsection

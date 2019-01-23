@@ -19,6 +19,10 @@
 		'invalid' => $errors->has('password') ? 'is-invalid' : '',
 		'feedback' => $errors->has('password') ? '<span class="invalid-feedback">'.$errors->first('password').'</span>' : ''
 	];
+	$password_old = [
+		'invalid' => $errors->has('password_old') ? 'is-invalid' : '',
+		'feedback' => $errors->has('password_old') ? '<span class="invalid-feedback">'.$errors->first('password_old').'</span>' : ''
+	];
 	$password_confirmation = [
 		'invalid' => $errors->has('password_confirmation') ? 'is-invalid' : '',
 		'feedback' => $errors->has('password_confirmation') ? '<span class="invalid-feedback">'.$errors->first('password_confirmation').'</span>' : ''
@@ -54,9 +58,11 @@
 	$current_regency = $user->exists ? $user->regency_id : null;
 	$current_district = $user->exists ? $user->district_id : null;
 	$current_village = $user->exists ? $user->village_id : null;
+
+	$password_old_msg = session('password_old') ?: '';
+
 @endphp
 
-{{-- @if($user->exists) --}}
 <div class="form-group {{ !$user->exists ? 'd-none' : '' }}">
 	{!! Form::label('status', 'Status :', ['class' => 'label mr-4 font-weight-bold']) !!}
 	<div class="custom-control custom-radio custom-control-inline">
@@ -69,7 +75,6 @@
 	</div>
 	{!! $status['feedback'] !!}
 </div>
-{{-- @endif --}}
 
 <div class="form-group">
 	{!! Form::label('name', 'Nama Lengkap', ['class' => 'font-weight-bold']) !!}
@@ -84,27 +89,40 @@
 </div>
 
 <div class="form-group">
-	{!! Form::label('email', 'Email', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	{!! Form::label('email', 'Email', ['class' => 'font-weight-bold']) !!}
 	{!! Form::text('email', null, ['class' => 'form-control '.$email['invalid'], 'id' => 'email', 'required']) !!}
 	{!! $email['feedback'] !!}
 </div>
 
 <div class="row">
-	<div class="form-group col-md-6">
-		{!! Form::label('password', 'Password', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	<div class="form-group {{ !$user->exists ? 'd-none col-md-6' : 'col-md-4' }}">
+		{!! Form::label('password_old', 'Password Lama', ['class' => 'font-weight-bold']) !!}
+		{!! Form::password('password_old', ['class' => 'form-control '.$password_old['invalid'], 'id' => 'password_old']) !!}
+		{!! $password_old['feedback'] !!}
+		<p class="small text-danger">{{ $password_old_msg }}</p>
+	</div>
+
+	<div class="form-group {{ !$user->exists ? 'col-md-6' : 'col-md-4' }}">
+		{!! !$user->exists
+			? Form::label('password', 'Password', ['class' => 'font-weight-bold']) 
+			: Form::label('password', 'Password Baru', ['class' => 'font-weight-bold']) 
+		!!}
 		{!! Form::password('password', ['class' => 'form-control '.$password['invalid'], 'id' => 'password']) !!}
 		{!! $password['feedback'] !!}
 	</div>
 
-	<div class="form-group col-md-6">
-		{!! Form::label('password_confirmation', 'Ulangi Password', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	<div class="form-group {{ !$user->exists ? 'col-md-6' : 'col-md-4' }}">
+		{!! !$user->exists
+			? Form::label('password_confirmation', 'Ulangi Password', ['class' => 'font-weight-bold']) 
+			: Form::label('password_confirmation', 'Ulangi Password Baru', ['class' => 'font-weight-bold']) 
+		!!}
 		{!! Form::password('password_confirmation', ['class' => 'form-control '.$password_confirmation['invalid'], 'id' => 'password_confirmation']) !!}
 		{!! $password_confirmation['feedback'] !!}
 	</div>
 </div>
 
 <div class="form-group">
-	{!! Form::label('address', 'Alamat', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	{!! Form::label('address', 'Alamat', ['class' => 'font-weight-bold']) !!}
 	{!! Form::text('address', null, ['class' => 'form-control '.$address['invalid'], 'id' => 'address', 'required']) !!}
 	{!! $address['feedback'] !!}
 </div>
@@ -125,13 +143,13 @@
 
 
 <div class="form-group">
-	{!! Form::label('phone', 'Nomor HP / WA', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	{!! Form::label('phone', 'Nomor HP / WA', ['class' => 'font-weight-bold']) !!}
 	{!! Form::text('phone', null, ['class' => 'form-control number'.$phone['invalid'], 'id' => 'phone', 'required']) !!}
 	{!! $phone['feedback'] !!}
 </div>
 
 <div class="form-group">
-	{!! Form::label('role', 'Role / Peran', ['class' => 'font-weight-bold']) !!}<span class="small text-muted"></span>
+	{!! Form::label('role', 'Role / Peran', ['class' => 'font-weight-bold']) !!}
 	{!! Form::select('role', [
 		'' => '', 
 		2 => 'Admin',

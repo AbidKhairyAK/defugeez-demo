@@ -7,6 +7,7 @@ use App\Model\User;
 use App\Model\Organization;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -104,7 +105,23 @@ class UsersController extends Controller
 
         $this->authorize('users.update', $user);
 
+        if ($request->password_old && $request->password_confirmation && $request->password) {
+            if (!Hash::check($request->password_old, $user->password)) {
+                session()->flash('password_old', 'Password lama anda salah!');
+                return redirect()->back();
+            }
+        } else {
+            unset($request['password_old']);
+            unset($request['password_confirmation']);
+            unset($request['password']);
+        }
+
         $user->update($request->all());
+
+        session(['user_id' => auth()->user()->id]);
+        session(['organization_id' => auth()->user()->organization->id]);
+        session(['username' => auth()->user()->name]);
+        session(['organization' => auth()->user()->organization->name]);
 
         Toastr::success('Data Relawan Berhasil Diedit!', 'Edit Data Relawan');
 

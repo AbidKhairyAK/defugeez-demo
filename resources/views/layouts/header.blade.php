@@ -30,7 +30,7 @@
 		    				<hr>
 		    			</div>
 		    			<div class="dropdown-item d-flex justify-content-between">
-		    				<a class="btn btn-info" href="">Profil</a>
+		    				<a class="btn btn-info" href="{{ route('users.edit', session('user_id')) }}">Profil</a>
 					    	<form class="d-inline-block" action="{{ route('logout') }}" method="post">
 					    		@csrf
 					      	<button class="btn btn-info">Logout</button>

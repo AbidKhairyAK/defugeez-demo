@@ -88,6 +88,11 @@ class AuthController extends Controller
 
     public function logout()
     {
+        session(['user_id' => false]);
+        session(['organization_id' => false]);
+        session(['username' => false]);
+        session(['organization' => false]);
+
         Auth::logout();
 
         return redirect('/');
