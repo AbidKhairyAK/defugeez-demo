@@ -28,6 +28,8 @@ class DemandsController extends Controller
     {
         $demand = new Demand();
 
+        $this->authorize('demands.create');
+
         return view('demands.create', compact('demand'));
     }
 
@@ -40,9 +42,11 @@ class DemandsController extends Controller
     public function store(Requests\DemandsStoreRequest $request)
     {
         $request->merge([
-            'user_id' => 1,
+            'user_id' => session('user_id'),
             'post_id' => session('post_id'),
         ]);
+
+        $this->authorize('demands.create');
 
         Demand::create($request->all());
 
@@ -74,6 +78,8 @@ class DemandsController extends Controller
     {
         $demand = Demand::findOrFail($id);
 
+        $this->authorize('demands.update', $demand);
+
         return view('demands.edit', compact('demand'));
     }
 
@@ -91,7 +97,11 @@ class DemandsController extends Controller
             'post_id' => session('post_id'),
         ]);
         
-        Demand::findOrFail($id)->update($request->all());
+        $demand = Demand::findOrFail($id);
+        
+        $this->authorize('demands.update', $demand);
+
+        $demand->update($request->all());
 
         $request->session()->flash('refugees_tab', 'demands');
 
@@ -108,7 +118,11 @@ class DemandsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        Demand::findOrFail($id)->delete();
+        $demand = Demand::findOrFail($id);
+        
+        $this->authorize('demands.update', $demand);
+
+        $demand->delete();
 
         Toastr::success('Data Kebutuhan Berhasil Dihapus!', 'Hapus Data Kebutuhan');
 

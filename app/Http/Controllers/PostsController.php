@@ -75,6 +75,8 @@ class PostsController extends Controller
         $post = new Post();
         $event = Event::findOrFail(session('event_id'));
 
+        $this->authorize('posts.create');
+
         return view('posts.create', compact('post', 'event'));
     }
 
@@ -87,10 +89,12 @@ class PostsController extends Controller
     public function store(Requests\PostsStoreRequest $request)
     {
         $request->merge([
-            'user_id' => 1,
-            'organization_id' => 1,
+            'user_id' => session('user_id'),
+            'organization_id' => session('organization_id'),
             'event_id' => session('event_id'),
         ]);
+
+        $this->authorize('posts.create');
 
         Post::create($request->all());
 
@@ -121,6 +125,8 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $event = Event::findOrFail(session('event_id'));
 
+        $this->authorize('posts.update', $post);
+
         return view('posts.edit', compact('post', 'event'));
     }
 
@@ -133,7 +139,16 @@ class PostsController extends Controller
      */
     public function update(Requests\PostsUpdateRequest $request, $id)
     {
-        Post::findOrFail($id)->update($request->all());
+        $request->merge([
+            'user_id' => session('user_id'),
+            'organization_id' => session('organization_id'),
+        ]);
+        
+        $post = Post::findOrFail($id);
+
+        $this->authorize('posts.update', $post);
+
+        $post->update($request->all());
 
         Toastr::success('Data Posko Berhasil Diedit!', 'Edit Data Posko');
 
@@ -148,7 +163,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        Post::findOrFail($id)->delete();
+        $post = Post::findOrFail($id);
+
+        $this->authorize('posts.update', $post);
+
+        $post->delete();
 
         Toastr::success('Data Posko Berhasil Dihapus!', 'Hapus Data Posko');
 

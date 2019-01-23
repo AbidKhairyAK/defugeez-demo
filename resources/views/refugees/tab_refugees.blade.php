@@ -4,14 +4,17 @@
     <h3 class="text-center">Data Pengungsi</h3>
   </div>
 
-  
   <div class="text-center mb-3">
+    @can('refugees.create')
     <a href="{{ route('refugees.create') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
+    @else
+    <a href="{{ route('login') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
+    @endcan
     <b class="p-2 d-block d-md-inline">- OR -</b>
     <a href="#" class="btn btn-success px-5 shadow-sm">Import File Excel</a>
   </div>
 
-  <p class="text-center mt-3">&lArr; swipe &rArr;</p>
+  <p class="text-center mt-3 d-block d-md-none">&lArr; swipe &rArr;</p>
 
   <div id="refugees-section" class="rounded shadow p-3 mb-5 bg-light col-sm-12">
 
@@ -34,9 +37,18 @@
             <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
               <i class="fa fa-address-card"></i>
             </a>
+
+            @can('refugees.update', $refugee)
             <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
               <i class="fa fa-edit"></i>
             </a>
+            @else
+            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
+              <i class="fa fa-edit"></i>
+            </a>
+            @endcan
+
+            @can('refugees.delete', $refugee)
             <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
@@ -44,6 +56,12 @@
                 <i class="fa fa-trash"></i>
               </button>
             </form>
+            @else
+            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
+              <i class="fa fa-trash"></i>
+            </a>
+            @endcan
+
           </td>
           <td>{{ $refugee->name }}</td>
           <td>{{ $refugee->gender }}</td>
@@ -54,9 +72,18 @@
             <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
               <i class="fa fa-address-card"></i> Detail
             </a>
+
+            @can('refugees.update', $refugee)
             <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
               <i class="fa fa-edit"></i> Edit
             </a>
+            @else
+            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            @endcan
+            
+            @can('refugees.delete', $refugee)
             <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
@@ -64,6 +91,12 @@
                 <i class="fa fa-trash"></i> Hapus
               </button>
             </form>
+            @else
+            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
+              <i class="fa fa-trash"></i> Hapus
+            </a>
+            @endcan
+
           </td>
         </tr>
 

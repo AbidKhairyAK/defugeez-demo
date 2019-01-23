@@ -11,6 +11,11 @@ use App\Model\Organization;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
     public function registerForm()
     {
      	$user = new User();
@@ -73,7 +78,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-        	session(['username' => Auth::user()->name]);
+            session(['user_id' => Auth::user()->id]);
+            session(['organization_id' => Auth::user()->organization->id]);
+            session(['username' => Auth::user()->name]);
         	session(['organization' => Auth::user()->organization->name]);
             return redirect()->intended('/');
         }

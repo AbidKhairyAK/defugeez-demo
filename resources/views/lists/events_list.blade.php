@@ -44,12 +44,19 @@
 	        </button>
 	        <div class="dropdown-menu shadow" aria-labelledby="dropdownMenu2">
 	          <a href="#" class="dropdown-item">Laporkan</a>
+
+	          @can('events.update', $event)
 	          <a href="{{ route('events.edit', $event->id) }}" class="dropdown-item">Edit</a>
+	          @endcan
+	          
+	          @can('events.delete', $event)
 	          <form action="{{ route('events.destroy', $event->id) }}" method="post">
 	            @csrf
 	            {{ method_field("DELETE") }}
 	            <button class="dropdown-item btn" type="submit">Delete</button>
 	          </form>
+	          @endcan
+
 	        </div>
 	      </div>
 

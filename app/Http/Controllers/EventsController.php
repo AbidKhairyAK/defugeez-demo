@@ -38,6 +38,8 @@ class EventsController extends Controller
     {
         $event = new Event();
 
+        $this->authorize('events.create');
+
         return view('events.create', compact('event'));
     }
 
@@ -50,8 +52,10 @@ class EventsController extends Controller
     public function store(Requests\EventsStoreRequest $request)
     {
         $request->merge([
-            'user_id' => 1,
+            'user_id' => session('user_id'),
         ]);
+
+        $this->authorize('events.create');
 
         Event::create($request->all());
 
@@ -81,6 +85,8 @@ class EventsController extends Controller
     {
         $event = Event::findOrFail($id);
 
+        $this->authorize('events.update', $event);
+
         return view('events.edit', compact('event'));
     }
 
@@ -93,7 +99,15 @@ class EventsController extends Controller
      */
     public function update(Requests\EventsUpdateRequest $request, $id)
     {
-        Event::findOrFail($id)->update($request->all());
+        $request->merge([
+            'user_id' => session('user_id'),
+        ]);
+        
+        $event = Event::findOrFail($id);
+
+        $this->authorize('events.update', $event);
+
+        $event->update($request->all());
 
         Toastr::success('Data Peristiwa Berhasil Diedit!', 'Edit Data Peristiwa');
 
@@ -108,7 +122,11 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        Event::findOrFail($id)->delete();
+        $event = Event::findOrFail($id);
+
+        $this->authorize('events.delete', $event);
+        
+        $event->delete();
 
         Toastr::success('Data Peristiwa Berhasil Dihapus!', 'Hapus Data Peristiwa');
 

@@ -4,7 +4,11 @@
   </div>
 
   <div class="text-center">
+    @can('demands.create')
     <a href="{{ route('demands.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
+    @else
+    <a href="{{ route('login') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
+    @endcan
   </div>
 
   <div class="row">
@@ -28,8 +32,19 @@
                 <form action="{{ route('demands.destroy', $demand->id) }}" method="post">
                   {{ method_field('DELETE') }}
                   @csrf
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-success" href="{{ route('demands.edit', $demand->id) }}"><i class="fa fa-edit"></i></a>
+
+                  @can('demands.update', $demand)
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('demands.edit', $demand->id) }}"><i class="fa fa-edit"></i></a>
+                  @else
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('login') }}"><i class="fa fa-edit"></i></a>  
+                  @endcan
+
+                  @can('demands.delete', $demand)
                   <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  @else
+                  <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
+                  @endcan
+
                 </form>
               </td>
               <td>{{ $demand->name }}</td>
@@ -61,8 +76,19 @@
                 <form action="{{ route('demands.destroy', $demand->id) }}" method="post">
                   {{ method_field('DELETE') }}
                   @csrf
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-success" href="{{ route('demands.edit', $demand->id) }}"><i class="fa fa-edit"></i></a>
+
+                  @can('demands.update', $demand)
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('demands.edit', $demand->id) }}"><i class="fa fa-edit"></i></a>
+                  @else
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('login') }}"><i class="fa fa-edit"></i></a>  
+                  @endcan
+
+                  @can('demands.delete', $demand)
                   <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  @else
+                  <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
+                  @endcan
+
                 </form>
               </td>
               <td>{{ $demand->name }}</td>

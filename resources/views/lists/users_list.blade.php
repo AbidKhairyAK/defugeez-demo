@@ -48,40 +48,54 @@
 	    <tbody>
 	      @foreach($users as $user)
 	      <tr>
-	        <td class="d-table-cell d-md-none">
-	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
-	            <i class="fa fa-address-card"></i>
-	          </a>
-	          <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
-	            <i class="fa fa-edit"></i>
-	          </a>
-	          <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
-	            @csrf
-	            {{ method_field('DELETE') }}
-	            <button class="btn btn-sm btn-danger" type="submit">
-	              <i class="fa fa-trash"></i>
-	            </button>
-	          </form>
-	        </td>
+            <td class="d-table-cell d-md-none">
+              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
+                <i class="fa fa-address-card"></i>
+              </a>
+
+              @can('users.update', $user)
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+                <i class="fa fa-edit"></i>
+              </a>
+              @endcan
+
+              @can('users.delete', $user)
+              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button class="btn btn-sm btn-danger" type="submit">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </form>
+              @endcan
+
+            </td>
 	        <td>{{ $user->name }}</td>
 	        <td>{{ $user->email }}</td>
 	        <td>{{ $user->present()->roleFormatted }}</td>
 	        <td>{!! $user->present()->statusFormatted !!}</td>
-	        <td class="d-none d-md-table-cell">
-	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
-	            <i class="fa fa-address-card"></i> Detail
-	          </a>
-	          <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
-	            <i class="fa fa-edit"></i> Edit
-	          </a>
-	          <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
-	            @csrf
-	            {{ method_field('DELETE') }}
-	            <button class="btn btn-sm btn-danger" type="submit">
-	              <i class="fa fa-trash"></i> Hapus
-	            </button>
-	          </form>
-	        </td>
+            <td class="d-none d-md-table-cell">
+              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
+                <i class="fa fa-address-card"></i> Detail
+              </a>
+
+              @can('users.update', $user)
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+                <i class="fa fa-edit"></i> Edit
+              </a>
+              @endcan
+
+              @can('users.delete', $user)
+              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button class="btn btn-sm btn-danger" type="submit">
+                  <i class="fa fa-trash"></i> Hapus
+                </button>
+              </form>
+              @endcan
+
+            </td>
 	      </tr>
 
 	      <!-- The Modal -->

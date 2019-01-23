@@ -35,6 +35,8 @@ class OrganizationsController extends Controller
     {
         $organization = new Organization();
 
+        $this->authorize('organizations.create');
+
         return view('organizations.create', compact('organization'));
     }
 
@@ -46,6 +48,8 @@ class OrganizationsController extends Controller
      */
     public function store(Requests\OrganizationsStoreRequest $request)
     {
+        $this->authorize('organizations.create');
+
         $image = $request->file('logo_image');
         $name = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = public_path('/img/logo');
@@ -83,6 +87,8 @@ class OrganizationsController extends Controller
     {
         $organization = Organization::findOrFail($id);
 
+        $this->authorize('organizations.update', $organization);
+
         return view('organizations.edit', compact('organization'));
     }
 
@@ -96,6 +102,8 @@ class OrganizationsController extends Controller
     public function update(Requests\OrganizationsUpdateRequest $request, $id)
     {
         $organization = Organization::findOrFail($id);
+
+        $this->authorize('organizations.update', $organization);
 
         if ($image = $request->file('logo_image')) {
 
@@ -126,6 +134,8 @@ class OrganizationsController extends Controller
     public function destroy($id)
     {
         $organization = Organization::findOrFail($id);
+
+        $this->authorize('organizations.delete', $organization);
 
         unlink(public_path('/img/logo/'.$organization->logo));
 

@@ -9,75 +9,75 @@
       <h3 class="text-center">Info Organisasi</h3>
     </div>
 
-
     <div class="bg-light p-3 rounded shadow">
 
       <h4 class="border-bottom-0 mb-3"><b>{{ $organization->name }}</b></h4>
 
       <div class="row">
-          <div class="col-lg-6">
-            <table class="table table-hover">
-              <tr>
-                <th width="170">Alamat Kantor</th>
-                <td class="text-right">{{ $organization->present()->fullAddress }}</td>
-              </tr>
-              <tr>
-                <th>Ketua Organisasi</th>
-                <td class="text-right">{{ $organization->chairman }}</td>
-              </tr>
-              <tr>
-                <th>Email</th>
-                <td class="text-right">{{ $organization->email }}</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-lg-6">
-            <table class="table table-hover">
-              <tr>
-                <th>Anggota Terdaftar</th>
-                <td class="text-right">{{ $organization->users->count() }} Relawan</td>
-              </tr>
-              <tr>
-                <th>Nomor HP / WA</th>
-                <td class="text-right">{{ $organization->phone }}</td>
-              </tr>
-              <tr>
-                <th>Nomor Rekening</th>
-                <td class="text-right">{{ $organization->account_number }}</td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-lg-3">
-            <table class="table table-hover">
-              <tr>
-                <th>Logo</th>
-              </tr>
-              <tr>
-                <td class="border-top-0 text-center">
-                  <img class="w-75" src="/img/logo/{{ $organization->logo }}">
-                </td>
-              </tr>
-            </table>
-          </div>
-
-          <div class="col-lg-9">
-            <table class="table table-hover">
-              <tr>
-                <th>Profil Singkat</th>
-              </tr>
-              <tr>
-                <td class="border-top-0">
-                  <p style="line-height: 1.75">{{ $organization->profile ?: '-' }}</p>
-                </td>
-              </tr>
-            </table>
-          </div>
-
+        <div class="col-lg-6">
+          <table class="table table-hover">
+            <tr>
+              <th width="170">Alamat Kantor</th>
+              <td class="text-right">{{ $organization->present()->fullAddress }}</td>
+            </tr>
+            <tr>
+              <th>Ketua Organisasi</th>
+              <td class="text-right">{{ $organization->chairman }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td class="text-right">{{ $organization->email }}</td>
+            </tr>
+          </table>
         </div>
+
+        <div class="col-lg-6">
+          <table class="table table-hover">
+            <tr>
+              <th>Anggota Terdaftar</th>
+              <td class="text-right">{{ $organization->users->count() }} Relawan</td>
+            </tr>
+            <tr>
+              <th>Nomor HP / WA</th>
+              <td class="text-right">{{ $organization->phone }}</td>
+            </tr>
+            <tr>
+              <th>Nomor Rekening</th>
+              <td class="text-right">{{ $organization->account_number }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-3">
+          <table class="table table-hover">
+            <tr>
+              <th>Logo</th>
+            </tr>
+            <tr>
+              <td class="border-top-0 text-center">
+                <img class="w-75" src="/img/logo/{{ $organization->logo }}">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-9">
+          <table class="table table-hover">
+            <tr>
+              <th>Profil Singkat</th>
+            </tr>
+            <tr>
+              <td class="border-top-0">
+                <p style="line-height: 1.75">{{ $organization->profile ?: '-' }}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
     </div>
 
+    @can('users.view', $organization)
     <div class="centered mb-3 mt-5">
       <h3 class="text-center">Daftar Relawan</h3>
     </div>
@@ -105,9 +105,14 @@
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i>
               </a>
+
+              @can('users.update', $user)
               <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
                 <i class="fa fa-edit"></i>
               </a>
+              @endcan
+
+              @can('users.delete', $user)
               <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
@@ -115,6 +120,8 @@
                   <i class="fa fa-trash"></i>
                 </button>
               </form>
+              @endcan
+
             </td>
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
@@ -124,9 +131,14 @@
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i> Detail
               </a>
+
+              @can('users.update', $user)
               <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
                 <i class="fa fa-edit"></i> Edit
               </a>
+              @endcan
+
+              @can('users.delete', $user)
               <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
@@ -134,6 +146,8 @@
                   <i class="fa fa-trash"></i> Hapus
                 </button>
               </form>
+              @endcan
+
             </td>
           </tr>
 
@@ -187,6 +201,7 @@
         </tbody>
       </table>
     </div>
+    @endcan
 
   </div>
 @endsection

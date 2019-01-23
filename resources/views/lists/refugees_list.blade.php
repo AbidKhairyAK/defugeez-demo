@@ -32,7 +32,7 @@
 
   @else
 
-  	<p class="text-center mt-3 d-block d-md-none">&lArr; swipe &rArr;</p>
+  <p class="text-center mt-3 d-block d-md-none">&lArr; swipe &rArr;</p>
 
 	<div id="refugees-section" class="rounded shadow p-3 mb-5 bg-light">
 
@@ -51,41 +51,72 @@
 	    <tbody>
 	      @foreach($refugees as $refugee)
 	      <tr>
-	        <td class="d-table-cell d-md-none">
-	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
-	            <i class="fa fa-address-card"></i>
-	          </a>
-	          <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
-	            <i class="fa fa-edit"></i>
-	          </a>
-	          <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
-	            @csrf
-	            {{ method_field('DELETE') }}
-	            <button class="btn btn-sm btn-danger" type="submit">
-	              <i class="fa fa-trash"></i>
-	            </button>
-	          </form>
-	        </td>
+	        
+          <td class="d-table-cell d-md-none">
+            <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+              <i class="fa fa-address-card"></i>
+            </a>
+
+            @can('refugees.update', $refugee)
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+              <i class="fa fa-edit"></i>
+            </a>
+            @else
+            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
+              <i class="fa fa-edit"></i>
+            </a>
+            @endcan
+
+            @can('refugees.delete', $refugee)
+            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+              @csrf
+              {{ method_field('DELETE') }}
+              <button class="btn btn-sm btn-danger" type="submit">
+                <i class="fa fa-trash"></i>
+              </button>
+            </form>
+            @else
+            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
+              <i class="fa fa-trash"></i>
+            </a>
+            @endcan
+
+          </td>
 	        <td>{{ $refugee->name }}</td>
 	        <td>{{ $refugee->gender }}</td>
 	        <td>{{ $refugee->birthdate }}</td>
 	        <td>{!! $refugee->healthLabel() !!}</td>
 	        <td>{!! $refugee->statusLabel() !!}</td>
-	        <td class="d-none d-md-table-cell">
-	          <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
-	            <i class="fa fa-address-card"></i> Detail
-	          </a>
-	          <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
-	            <i class="fa fa-edit"></i> Edit
-	          </a>
-	          <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
-	            @csrf
-	            {{ method_field('DELETE') }}
-	            <button class="btn btn-sm btn-danger" type="submit">
-	              <i class="fa fa-trash"></i> Hapus
-	            </button>
-	          </form>
-	        </td>
+          <td class="d-none d-md-table-cell">
+            <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#refugee{{ $refugee->id }}">
+              <i class="fa fa-address-card"></i> Detail
+            </a>
+
+            @can('refugees.update', $refugee)
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            @else
+            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
+              <i class="fa fa-edit"></i> Edit
+            </a>
+            @endcan
+            
+            @can('refugees.delete', $refugee)
+            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+              @csrf
+              {{ method_field('DELETE') }}
+              <button class="btn btn-sm btn-danger" type="submit">
+                <i class="fa fa-trash"></i> Hapus
+              </button>
+            </form>
+            @else
+            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
+              <i class="fa fa-trash"></i> Hapus
+            </a>
+            @endcan
+
+          </td>
 	      </tr>
 
 	      <!-- The Modal -->

@@ -53,20 +53,22 @@ Route::prefix('list')->group(function(){
 	Route::get('refugees/{id?}', 'ListsController@refugeesList')->name('refugees.list');
 });
 
-// Route::get('/donations/form', function() {
-//   return view('donations.form');
-// })->name('donations.form');
+// Donations
 
-// Route::get('/donations/payment', function() {
-//   return view('donations.payment');
-// })->name('donations.payment');
+Route::get('/donations/form', function() {
+  return view('donations.form');
+})->name('donations.form');
 
-// Route::get('/donations/summary', function() {
-//   return view('donations.summary');
-// })->name('donations.summary');
+Route::get('/donations/payment', function() {
+  return view('donations.payment');
+})->name('donations.payment');
 
-// Route::get('/donations', function() {
-// 	return view('donations.detail');
-// })->name('donations');
+Route::get('/donations/summary', function() {
+  return view('donations.summary');
+})->name('donations.summary');
+
+Route::get('/donations', function() {
+	return view('donations.detail');
+})->name('donations');
 
 // Route::get('/message', 'UsersController@message');

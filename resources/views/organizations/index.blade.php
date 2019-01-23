@@ -10,7 +10,7 @@
     </div>
 
     <div class="text-center">
-      <a href="{{ route('organizations.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Organisasi</a>
+      <a href="{{ route('organization-register') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Organisasi</a>
     </div>
 
     <div class="row">

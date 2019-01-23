@@ -17,9 +17,11 @@
       <h3 class="text-center">Daftar Bencana</h3>
     </div>
 
+    @can('events.create')
     <div class="text-center">
       <a href="{{ route('events.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Bencana</a>
     </div>
+    @endcan
 
     <div class="row">
 
@@ -33,12 +35,19 @@
             </button>
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenu2">
               <a href="#" class="dropdown-item">Laporkan</a>
+
+              @can('events.update', $event)
               <a href="{{ route('events.edit', $event->id) }}" class="dropdown-item">Edit</a>
+              @endcan
+              
+              @can('events.delete', $event)
               <form action="{{ route('events.destroy', $event->id) }}" method="post">
                 @csrf
                 {{ method_field("DELETE") }}
                 <button class="dropdown-item btn" type="submit">Delete</button>
               </form>
+              @endcan
+
             </div>
           </div>
 
@@ -56,21 +65,21 @@
           </div>
         </div>
         <div class="bg-info text-center p-2">
-          <a href="{{ route('posts.page', $event->id) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
+          <a href="{{ route('posts.page', $event->id) }}" class="h6 text-white">Info Lebih Lanjut &raquo;</a>
         </div>
       </div>
       @endforeach
 
     </div>
 
-    <h5 class="text-right mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
+    <h5 class="text-right text-info mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
 
-    {{-- <div class="centered mb-3 mt-4">
+    <div class="centered mb-3 mt-4">
       <h3 class="text-center">Donasi</h3>
     </div>
 
     <div class="row mb-5">
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <div class="card rounded overflow-hidden shadow">
             <div class="card-img-top">
               <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
@@ -79,7 +88,7 @@
             <h4 class="card-title">Pembangunan Sekolah untuk Palu</h4>
             <hr>
             <div class="progress" style="height: 20px;">
-              <div class="progress-bar" style="height: 20px;width:48%"></div>
+              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
             </div>
             <div class="small">Terkumpul</div>
             <div>Rp. 21.590.834</div>
@@ -89,7 +98,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <div class="card rounded overflow-hidden shadow">
             <div class="card-img-top">
               <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
@@ -98,7 +107,7 @@
             <h4 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h4>
             <hr>
             <div class="progress" style="height: 20px;">
-              <div class="progress-bar" style="height: 20px;width:60%"></div>
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
             </div>
             <div class="small">Terkumpul</div>
             <div>Rp. 8.750.322</div>
@@ -108,7 +117,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <div class="card rounded overflow-hidden shadow">
             <div class="card-img-top">
               <img src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
@@ -117,7 +126,7 @@
             <h4 class="card-title">Donasi Korban Gempa Palu & Donggala</h4>
             <hr>
             <div class="progress" style="height: 20px;">
-              <div class="progress-bar" style="height: 20px;width:60%"></div>
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
             </div>
             <div class="small">Terkumpul</div>
             <div>Rp. 87.983.992 </div>
@@ -127,7 +136,7 @@
           </div>
         </div>
       </div>
-    </div> --}}
+    </div>
   
   </div>
 

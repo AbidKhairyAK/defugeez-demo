@@ -73,7 +73,11 @@
     </div>
 
     <div class="text-center">
+      @can('posts.create')
       <a href="{{ route('posts.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
+      @else
+      <a href="{{ route('login') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
+      @endcan
     </div>
 
     <div class="row">
@@ -88,12 +92,19 @@
             </button>
             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenu2">
               <a href="#" class="dropdown-item">Laporkan</a>
+
+              @can('posts.update', $post)
               <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a>
+              @endcan
+
+              @can('posts.delete', $post)
               <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                 @csrf
                 {{ method_field("DELETE") }}
                 <button class="dropdown-item btn" type="submit">Delete</button>
               </form>
+              @endcan
+
             </div>
           </div>
 
@@ -117,7 +128,7 @@
 
     </div>
     
-    <h5 class="text-right"><a href="{{ route('posts.list', $event->id) }}">Tampilkan lebih banyak &raquo;</a></h5>
+    <h5 class="text-right text-info"><a href="{{ route('posts.list', $event->id) }}">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered my-3">
       <h3 class="text-center">Grafik Bencana</h3>

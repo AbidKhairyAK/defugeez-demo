@@ -41,8 +41,6 @@ class ListsController extends Controller
     			return "filter pencarian salah";
     			break;
     	}
-
-    	// dd('mengapa');
     }
 
     public function eventsList($keyword = null, $filter = null)

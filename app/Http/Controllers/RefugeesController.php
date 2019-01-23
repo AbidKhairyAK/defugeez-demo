@@ -85,6 +85,8 @@ class RefugeesController extends Controller
         $refugee = new refugee();
         $post = Post::findOrFail(session('post_id'));
 
+        $this->authorize('refugees.create');
+
         return view('refugees.create', compact('refugee', 'post'));
     }
 
@@ -97,10 +99,12 @@ class RefugeesController extends Controller
     public function store(Requests\RefugeesStoreRequest $request)
     {
         $request->merge([
-            'user_id' => 1,
+            'user_id' => session('user_id'),
             'post_id' => session('post_id'),
             'event_id' => session('event_id'),
         ]);
+
+        $this->authorize('refugees.create');
 
         Refugee::create($request->all());
 
@@ -133,6 +137,8 @@ class RefugeesController extends Controller
         $refugee = Refugee::findOrFail($id);
         $post = Post::findOrFail(session('post_id'));
 
+        $this->authorize('refugees.update', $refugee);
+
         return view('refugees.edit', compact('refugee', 'post'));
     }
 
@@ -145,7 +151,15 @@ class RefugeesController extends Controller
      */
     public function update(Requests\RefugeesUpdateRequest $request, $id)
     {
-        Refugee::findOrFail($id)->update($request->all());
+        $request->merge([
+            'user_id' => session('user_id'),
+        ]);
+
+        $refugee = Refugee::findOrFail($id);
+
+        $this->authorize('refugees.update', $refugee);
+
+        $refugee->update($request->all());
 
         $request->session()->flash('refugees_tab', 'refugees');
 
@@ -162,7 +176,11 @@ class RefugeesController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        Refugee::findOrFail($id)->delete();
+        $refugee = Refugee::findOrFail($id);
+
+        $this->authorize('refugees.delete', $refugee);
+
+        $refugee->delete();
 
         Toastr::success('Data Pengungsi Berhasil Dihapus!', 'Hapus Data Pengungsi');
 

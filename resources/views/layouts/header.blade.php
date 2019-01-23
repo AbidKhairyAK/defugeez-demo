@@ -25,7 +25,8 @@
 		    		<div class="dropdown-menu dropdown-menu-right shadow">
 		    			<div class="dropdown-item text-center">
 		    				<img src="{{ Avatar::create(session('username'))->toBase64() }}">
-		    				<p class="mt-2">{{ session('username') }} - {{ session('organization') }}</p>
+		    				<p class="mt-3 mb-1"><b>{{ session('username') }}</b></p>
+		    				<p class="mt-0">{{ session('organization') }}</p>
 		    				<hr>
 		    			</div>
 		    			<div class="dropdown-item d-flex justify-content-between">

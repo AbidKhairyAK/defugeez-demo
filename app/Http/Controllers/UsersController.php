@@ -39,6 +39,8 @@ class UsersController extends Controller
     {
         $user = new User();
 
+        $this->authorize('users.create');
+
         return view('users.create', compact('user'));
     }
 
@@ -53,6 +55,8 @@ class UsersController extends Controller
         $request->merge([
             'organization_id' => session('organization_id'),
         ]);
+
+        $this->authorize('users.create');
 
         User::create($request->all());
 
@@ -82,6 +86,8 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $this->authorize('users.update', $user);
+
         return view('users.edit', compact('user'));
     }
 
@@ -94,7 +100,11 @@ class UsersController extends Controller
      */
     public function update(Requests\UsersUpdateRequest $request, $id)
     {
-        User::findOrFail($id)->update($request->all());
+        $user = User::findOrFail($id);
+
+        $this->authorize('users.update', $user);
+
+        $user->update($request->all());
 
         Toastr::success('Data Relawan Berhasil Diedit!', 'Edit Data Relawan');
 
@@ -109,7 +119,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        $user = User::findOrFail($id);
+
+        $this->authorize('users.delete', $user);
+
+        $user->delete();
 
         Toastr::success('Data Relawan Berhasil Dihapus!', 'Hapus Data Relawan');
 
