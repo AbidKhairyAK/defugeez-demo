@@ -1,7 +1,7 @@
 <div id="info" class="tab-pane {{ session('refugees_tab') ? 'fade' : 'active' }}">
 
   <div class="centered my-3">
-    <h3 class="text-center">Info Posko</h3>
+    <h3 class="text-center">- Info Posko -</h3>
   </div>
 
   <div class="bg-light p-3 mb-5 rounded shadow">

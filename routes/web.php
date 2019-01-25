@@ -72,3 +72,7 @@ Route::get('/donations', function() {
 })->name('donations');
 
 // Route::get('/message', 'UsersController@message');
+
+Route::post('refugees/{post_id}/import', 'RefugeesController@import')->name('refugees.import');
+Route::get('refugees/{post_id}/export', 'RefugeesController@export')->name('refugees.export');
+Route::get('refugees/{post_id}/format', 'RefugeesController@format')->name('refugees.format');

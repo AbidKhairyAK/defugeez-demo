@@ -6,7 +6,7 @@
   <div class="container">
 
     <div class="centered my-3">
-      <h3 class="text-center">Titik Bencana</h3>
+      <h3 class="text-center">- Titik Bencana -</h3>
     </div>
 
     <div class="bg-light rounded shadow">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="centered mb-3 mt-5">
-      <h3 class="text-center">Daftar Bencana</h3>
+      <h3 class="text-center">- Daftar Bencana -</h3>
     </div>
 
     @can('events.create')
@@ -75,7 +75,7 @@
     <h5 class="text-right text-info mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered mb-3 mt-4">
-      <h3 class="text-center">Donasi</h3>
+      <h3 class="text-center">- Daftar Donasi -</h3>
     </div>
 
     <div class="row mb-5">

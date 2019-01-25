@@ -1,7 +1,7 @@
 <div id="refugees" class="tab-pane  {{ session('refugees_tab') == 'refugees' ? 'active' : 'fade' }}">
 
   <div class="centered my-3">
-    <h3 class="text-center">Data Pengungsi</h3>
+    <h3 class="text-center">- Data Pengungsi -</h3>
   </div>
 
   <div class="text-center mb-3">
@@ -11,8 +11,59 @@
     <a href="{{ route('login') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
     @endcan
     <b class="p-2 d-block d-md-inline">- OR -</b>
-    <a href="#" class="btn btn-success px-5 shadow-sm">Import File Excel</a>
+    <button type="button" data-toggle="modal" data-target="#excel" class="btn btn-success px-5 shadow-sm">Import / Export Excel</button>
   </div>
+
+  {{-- Modal Import Export Excel --}}
+
+  <div class="modal fade" id="excel">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header bg-success">
+          <h4 class="modal-title text-white">Import / Export Excel</h4>
+          <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h5>Import Dari Excel</h5>
+          <p class="small">Fitur yang berfungsi untuk memasukkan data pengungsi dari file dengan format Excel kedalam aplikasi <i>de</i><b>Fugeez</b>.</p>
+          <span class="small"><i>catatan:</i></span>
+          <ul class="pl-3">
+            <li class="small"><i>file yang ingin di import harus mengikuti format excel yang telah ditetapkan. silahkan download format file dibawah</i></li>
+            <li class="small"><i>usahakan untuk tidak meng-import pengungsi yang sama berkali-kali, untuk menghindari duplikasi data</i></li>
+            <li class="small"><i>untuk menghindari duplikasi data, silahkan hapus file / data di dalam file anda setelah mengimport</i></li>
+          </ul>
+          <div class="row">
+            <div class="col-sm-6">
+              <a href="{{ route('refugees.format', $post->id) }}" class="btn btn-block btn-secondary" data-toggle="tooltip" title="Download file format excel sebelum meng-import data pengungsi">Download Format File</a>
+            </div>
+            <div class="col-sm-6">
+              @can('refugees.create')
+              <form id="import-form" accept="application/vnd.ms-excel" method="post" action="{{ route('refugees.import', $post->id) }}" enctype="multipart/form-data" class="d-block">
+                @csrf
+                <label class="d-block">
+                  <a class="btn btn-block btn-success text-white" data-toggle="tooltip" title="Import data pengungsi dari file excel">Import Dari Excel</a>
+                  <input type="file" name="import" id="import-excel" class="d-none" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+                </label>
+              </form>
+              @else
+                <a href="{{ route('login') }}" class="btn btn-block btn-success text-white" data-toggle="tooltip" title="Import data pengungsi dari file excel">Import Dari Excel</a>
+              @endcan
+            </div>
+          </div>
+          <hr>
+          <h5>Export Ke Excel</h5>
+          <p class="small">Fitur yang berfungsi untuk mengubah dan mendownload data pengungsi ke dalam file dengan format Excel.</p>
+          <a href="{{ route('refugees.export', $post->id) }}" class="btn btn-block btn-success" data-toggle="tooltip" title="export data pengungsi ke file excel">Export Ke Excel</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {{-- Modal Import Export Excel --}}
 
   <p class="text-center mt-3 d-block d-md-none">&lArr; swipe &rArr;</p>
 
@@ -171,3 +222,4 @@
     </table>
   </div>
 </div>
+

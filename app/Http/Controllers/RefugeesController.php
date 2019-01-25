@@ -10,6 +10,9 @@ use Carbon\Carbon;
 use App\Model\Post;
 use App\Model\Refugee;
 use App\Model\Demand;
+use App\Imports\RefugeesImport;
+use App\Exports\RefugeesExport;
+use App\Exports\FormatFileExport;
 
 class RefugeesController extends Controller
 {
@@ -187,5 +190,37 @@ class RefugeesController extends Controller
         $request->session()->flash('refugees_tab', 'refugees');
 
         return redirect('page/refugees/'.session('post_id'));
+    }
+
+    public function export($post_id)
+    {
+        $post = Post::find($post_id);
+        $file_name = "deFugeez - Daftar Pengungsi ".$post->name." - ".$post->event->name.".xlsx";
+
+        return (new RefugeesExport($post_id))->download($file_name);
+    }
+
+    public function import(Request $request, $post_id)
+    {
+        $post = Post::find($post_id);
+        $post_id= $post_id;
+        $event_id = $post->event->id;
+        $user_id = auth()->user()->id;
+
+        (new RefugeesImport($event_id, $post_id, $user_id))->import($request->file('import'));
+
+        Toastr::success('File Excel berhasil di-import!', 'Import Excel');
+
+        $request->session()->flash('refugees_tab', 'refugees');
+
+        return redirect('page/refugees/'.session('post_id'));
+    }
+
+    public function format($post_id)
+    {
+        $post = Post::find($post_id);
+        $file_name = "deFugeez - Import Pengungsi ".$post->name." - ".$post->event->name.".xlsx";
+
+        return (new FormatFileExport)->download($file_name);
     }
 }

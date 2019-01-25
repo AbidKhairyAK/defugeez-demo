@@ -6,7 +6,7 @@
   <div class="container">
 
     <div class="centered my-3">
-      <h3 class="text-center">Info Bencana</h3>
+      <h3 class="text-center">- Info Bencana -</h3>
     </div>
 
 
@@ -61,7 +61,7 @@
     </div>
 
     <div class="centered  mb-3 mt-5">
-      <h3 class="text-center">Titik Posko</h3>
+      <h3 class="text-center">- Titik Posko -</h3>
     </div>
 
     <div class="bg-light rounded shadow">
@@ -69,7 +69,7 @@
     </div>
 
     <div class="centered mb-3 mt-5">
-      <h3 class="text-center">Posko</h3>
+      <h3 class="text-center">- Daftar Posko -</h3>
     </div>
 
     <div class="text-center">
@@ -131,7 +131,7 @@
     <h5 class="text-right text-info"><a href="{{ route('posts.list', $event->id) }}">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered my-3">
-      <h3 class="text-center">Grafik Bencana</h3>
+      <h3 class="text-center">- Grafik Bencana -</h3>
     </div>
 
     <div class="bg-light p-3 mb-4 shadow">

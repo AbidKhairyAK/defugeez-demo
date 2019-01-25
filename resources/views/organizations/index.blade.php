@@ -6,7 +6,7 @@
   <div class="container">
 
     <div class="centered mb-3 mt-5">
-      <h3 class="text-center">Daftar Organisasi</h3>
+      <h3 class="text-center">- Daftar Organisasi -</h3>
     </div>
 
     <div class="text-center">

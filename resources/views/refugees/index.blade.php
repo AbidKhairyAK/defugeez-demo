@@ -58,6 +58,10 @@
 
     $('#refugees-table').DataTable();
 
+    $('#import-excel').change(function(){
+      $('#import-form').submit();
+    });
+
     var health = document.getElementById("health").getContext('2d');
     var healthChart = new Chart(health, {
         type: 'doughnut',

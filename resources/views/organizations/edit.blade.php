@@ -12,7 +12,7 @@
 		<div class="rounded bg-light shadow">
 			<div class="m-3 p-3">
 
-			<div class="h4 font-weight-bold text-primary mb-4">Edit Daftar Organisasi</div>
+			<div class="h4 font-weight-bold text-primary mb-4">- Edit Organisasi -</div>
 				{!! Form::model($organization, [
 					'method' => 'PUT',
 					'route' => ['organizations.update', $organization->id],

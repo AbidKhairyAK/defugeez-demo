@@ -6,7 +6,7 @@
   <div id="users" class="container">
 
     <div class="centered my-3">
-      <h3 class="text-center">Info Organisasi</h3>
+      <h3 class="text-center">- Info Organisasi -</h3>
     </div>
 
     <div class="bg-light p-3 rounded shadow">
@@ -78,7 +78,7 @@
     </div>
 
     <div class="centered mb-3 mt-5">
-      <h3 class="text-center">Daftar Relawan</h3>
+      <h3 class="text-center">- Daftar Relawan -</h3>
     </div>
 
     <div class="text-center">

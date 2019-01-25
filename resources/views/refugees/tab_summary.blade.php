@@ -1,6 +1,6 @@
 <div id="summary" class="tab-pane {{ session('refugees_tab') == 'summary' ? 'active' : 'fade' }}">
   <div class="centered my-3">
-    <h3 class="text-center">Ringkasan Data Posko</h3>
+    <h3 class="text-center">- Ringkasan Data Posko -</h3>
   </div>
 
   <div class="bg-light p-3 mb-4 shadow">

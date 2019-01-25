@@ -12,7 +12,7 @@
 		<div class="rounded bg-light shadow">
 			<div class="m-3 mb-5 p-3">
 
-			<div class="h4 font-weight-bold text-primary mb-4">Tambah Daftar Organisasi</div>
+			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Organisasi -</div>
 				{!! Form::model($organization, [
 					'method' => 'POST',
 					'route' => 'organizations.store',

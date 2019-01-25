@@ -12,7 +12,7 @@
 		<div class="rounded bg-light shadow">
 			<div class="m-3 p-3">
 
-			<div class="h4 font-weight-bold text-primary mb-4">Tambah Daftar Posko</div>
+			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Posko -</div>
 				{!! Form::model($post, [
 					'method' => 'POST',
 					'route' => 'posts.store',

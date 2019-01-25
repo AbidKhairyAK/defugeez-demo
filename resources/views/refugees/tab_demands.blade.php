@@ -1,6 +1,6 @@
 <div id="demands" class="tab-pane {{ session('refugees_tab') == 'demands' ? 'active' : 'fade' }}">
   <div class="centered my-3">
-    <h3 class="text-center">Kebutuhan Posko</h3>
+    <h3 class="text-center">- Kebutuhan Posko -</h3>
   </div>
 
   <div class="text-center">

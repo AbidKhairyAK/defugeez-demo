@@ -29,7 +29,7 @@ class Refugee extends Model
     {
     	$index = $this->status - 1;
     	$color = ['success', 'info', 'warning', 'danger'];
-    	$name = ['di tempat', 'di jemput', 'pindah posko', 'hilang'];
+    	$name = ['di tempat', 'sudah pulang', 'pindah posko', 'hilang'];
     	$status = '<span class="badge badge-'.$color[$index].'">'.$name[$index].'</span>';
 
     	return $status;

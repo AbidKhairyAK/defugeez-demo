@@ -1,14 +1,14 @@
 html, body {
-   margin:0;
-   padding:0;
-   height:100%;
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 #container {
   /*height:100%;*/
   min-height:100%;
   position:relative;
   padding-top: 90px;
-  font-family: Raleway;
   background-color: #eee;
 }
 #wrap {

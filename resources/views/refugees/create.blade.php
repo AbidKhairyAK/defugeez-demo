@@ -10,7 +10,7 @@
 		<div class="rounded bg-light shadow">
 			<div class="m-3 p-3">
 
-			<div class="h4 font-weight-bold text-primary mb-4">Tambah Pengungsi</div>
+			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Pengungsi -</div>
 				{!! Form::model($refugee, [
 					'method' => 'POST',
 					'route' => 'refugees.store',

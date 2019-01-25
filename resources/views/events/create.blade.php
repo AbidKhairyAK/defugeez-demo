@@ -12,7 +12,7 @@
 		<div class="rounded bg-light shadow">
 			<div class="m-3 p-3">
 
-			<div class="h4 font-weight-bold text-primary mb-4">Tambah Daftar Peristiwa</div>
+			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Peristiwa -</div>
 				{!! Form::model($event, [
 					'method' => 'POST',
 					'route' => 'events.store',
