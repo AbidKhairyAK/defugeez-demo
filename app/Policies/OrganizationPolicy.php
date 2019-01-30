@@ -19,7 +19,7 @@ class OrganizationPolicy
      */
     public function view(User $user, Organization $organization)
     {
-        //
+        return $user->organization_id == $organization->id;
     }
 
     /**
@@ -42,7 +42,7 @@ class OrganizationPolicy
      */
     public function update(User $user, Organization $organization)
     {
-        return $user->role <= 2;
+        return ($user->role <= 2) && ($user->organization_id == $organization->id);
     }
 
     /**
@@ -54,6 +54,7 @@ class OrganizationPolicy
      */
     public function delete(User $user, Organization $organization)
     {
+        return $user->role <= 2;
         return $user->role <= 1;
     }
 

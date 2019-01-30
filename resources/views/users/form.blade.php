@@ -63,6 +63,7 @@
 
 @endphp
 
+@can('users.activate', $user)
 <div class="form-group {{ !$user->exists ? 'd-none' : '' }}">
 	{!! Form::label('status', 'Status :', ['class' => 'label mr-4 font-weight-bold']) !!}
 	<div class="custom-control custom-radio custom-control-inline">
@@ -75,6 +76,7 @@
 	</div>
 	{!! $status['feedback'] !!}
 </div>
+@endcan
 
 <div class="form-group">
 	{!! Form::label('name', 'Nama Lengkap', ['class' => 'font-weight-bold']) !!}

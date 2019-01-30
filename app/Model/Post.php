@@ -22,7 +22,12 @@ class Post extends Model
 
     public function refugees()
     {
-    	return $this->hasMany(Refugee::class);
+        return $this->hasMany(Refugee::class);
+    }
+
+    public function demands()
+    {
+        return $this->hasMany(Demand::class);
     }
 
     public function province()

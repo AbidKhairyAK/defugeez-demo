@@ -22,8 +22,14 @@ class OrganizationsController extends Controller
     public function page()
     {
         $organizations = Organization::orderBy('created_at', 'asc')->get();
+        $my_organization = clone $organizations;
 
-        return view('organizations.index', compact('organizations'));
+        if(auth()->check()) {
+            $organizations = $organizations->whereNotIn('id', [session('organization_id')] );
+            $my_organization = $my_organization->where('id', session('organization_id'))->first();
+        }
+
+        return view('organizations.index', compact('organizations', 'my_organization'));
     }
 
     /**
@@ -137,9 +143,13 @@ class OrganizationsController extends Controller
 
         $this->authorize('organizations.delete', $organization);
 
-        unlink(public_path('/img/logo/'.$organization->logo));
-
+        $organization->users()->update(['organization_id' => 1]);
         $organization->delete();
+
+        session(['organization_id' => 1]);
+        session(['organization' => 'Tanpa Organisasi']);
+        
+        unlink(public_path('/img/logo/'.$organization->logo));
 
         Toastr::success('Data Organisasi Berhasil Dihapus!', 'Hapus Data Organisasi');
 

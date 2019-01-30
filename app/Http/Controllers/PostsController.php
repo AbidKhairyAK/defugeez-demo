@@ -167,6 +167,8 @@ class PostsController extends Controller
 
         $this->authorize('posts.update', $post);
 
+        $post->demands()->delete();
+        $post->refugees()->delete();
         $post->delete();
 
         Toastr::success('Data Posko Berhasil Dihapus!', 'Hapus Data Posko');

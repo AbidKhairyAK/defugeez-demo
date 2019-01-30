@@ -8,6 +8,7 @@ use App\Model\Organization;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -140,9 +141,28 @@ class UsersController extends Controller
 
         $this->authorize('users.delete', $user);
 
+        $check_user = $user->id == session('user_id');
+
+        if ($check_user) {
+            session(['user_id' => false]);
+            session(['organization_id' => false]);
+            session(['username' => false]);
+            session(['organization' => false]);
+
+            Auth::logout();
+        }
+
+        $user->events()->update(['user_id' => 1]);
+        $user->posts()->update(['user_id' => 1]);
+        $user->refugees()->update(['user_id' => 1]);
+        $user->demands()->update(['user_id' => 1]);
         $user->delete();
 
-        Toastr::success('Data Relawan Berhasil Dihapus!', 'Hapus Data Relawan');
+        Toastr::success('Data Akun Relawan Berhasil Dihapus!', 'Hapus Data Relawan');
+
+        if ($check_user) {
+            return redirect('login');    
+        }
 
         return redirect('page/users/'.session('organization_id'));
     }

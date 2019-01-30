@@ -11,9 +11,9 @@ $name = [
   'invalid' => $errors->has('name') ? 'is-invalid' : '',
   'feedback' => $errors->has('name') ? '<span class="invalid-feedback">'.$errors->first('name').'</span>' : ''
 ];
-$status = [
-  'invalid' => $errors->has('status') ? 'is-invalid' : '',
-  'feedback' => $errors->has('status') ? '<span class="invalid-feedback">'.$errors->first('status').'</span>' : ''
+$type = [
+  'invalid' => $errors->has('type') ? 'is-invalid' : '',
+  'feedback' => $errors->has('type') ? '<span class="invalid-feedback">'.$errors->first('type').'</span>' : ''
 ];
 $email = [
   'invalid' => $errors->has('email') ? 'is-invalid' : '',
@@ -72,6 +72,19 @@ $current_village = old('village_id');
 ]) !!}
 
 <div class="form-group">
+  {!! Form::label('type', 'Tipe :', ['class' => 'label mr-4 font-weight-bold']) !!}
+  <div class="custom-control custom-radio custom-control-inline">
+    {!! Form::radio('type', '0', true, ['class' => 'custom-control-input type '.$type['invalid'], 'id' => '0', 'required']) !!}
+    {!! Form::label('0', 'Akun Biasa', ['class' => 'custom-control-label']) !!}
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    {!! Form::radio('type', '1', null, ['class' => 'custom-control-input type ', 'id' => '1', 'required']) !!}
+    {!! Form::label('1', 'Relawan', ['class' => 'custom-control-label']) !!}
+  </div>
+  {!! $type['feedback'] !!}
+</div>
+
+<div class="form-group volunteers-input">
   {!! Form::label('organization_id', 'Organisasi', ['class' => 'font-weight-bold']) !!}
   {!! Form::select('organization_id', [
     '' => '', 
@@ -87,7 +100,7 @@ $current_village = old('village_id');
   {!! $name['feedback'] !!}
 </div>
 
-<div class="form-group">
+<div class="form-group volunteers-input">
   {!! Form::label('nik', 'NIK / Nomor KTP', ['class' => 'font-weight-bold']) !!}
   {!! Form::text('nik', null, ['class' => 'form-control number '.$nik['invalid'], 'id' => 'nik', 'required']) !!}
   {!! $nik['feedback'] !!}
@@ -113,7 +126,7 @@ $current_village = old('village_id');
   </div>
 </div>
 
-<div class="form-group">
+<div class="form-group volunteers-input">
   {!! Form::label('address', 'Alamat', ['class' => 'font-weight-bold']) !!}
   {!! Form::text('address', null, ['class' => 'form-control '.$address['invalid'], 'id' => 'address', 'required']) !!}
   {!! $address['feedback'] !!}
@@ -130,7 +143,7 @@ $current_village = old('village_id');
     regency_id="{{ $current_regency }}"
     district_id="{{ $current_district }}"
     village_id="{{ $current_village }}"
-    grid="col-md-6"
+    grid="col-md-6 volunteers-input"
   ></location-form>
 </div>
 
@@ -153,5 +166,30 @@ $current_village = old('village_id');
 @section('script')
 <script type="text/javascript">
   $('#organization_id').select2();
+
+  function type_change(val = null) {
+    switch(val){
+      case '0':
+        $('.volunteers-input').slideUp('fast');
+        $('.volunteers-input input, .volunteers-input select').slideUp('fast');
+        break;
+      case '1':
+        $('.volunteers-input').slideDown('fast');
+        $('.volunteers-input input, .volunteers-input select').slideDown('fast');
+        break;
+      default:
+        $('.volunteers-input').hide(false);
+        $('.volunteers-input input, .volunteers-input select').hide(false);
+        break;
+    }
+  }
+
+  $(document).ready(function(){
+    type_change();
+
+    $('.type').change(function(){
+      type_change($(this).val());
+    });
+  });
 </script>
 @endsection

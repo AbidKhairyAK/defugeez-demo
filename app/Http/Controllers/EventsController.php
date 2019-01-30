@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Event;
+use App\Model\Post;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
 
@@ -123,9 +124,16 @@ class EventsController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
+        $posts = Post::where('event_id', $id)->get();
 
         $this->authorize('events.delete', $event);
         
+        foreach ($posts as $post) {
+            $post->demands()->delete();
+            $post->refugees()->delete();
+            $post->delete();
+        }
+
         $event->delete();
 
         Toastr::success('Data Peristiwa Berhasil Dihapus!', 'Hapus Data Peristiwa');

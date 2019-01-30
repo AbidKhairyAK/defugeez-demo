@@ -71,7 +71,7 @@
             <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
-              <button class="btn btn-sm btn-danger" type="submit">
+              <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
                 <i class="fa fa-trash"></i>
               </button>
             </form>
@@ -106,7 +106,7 @@
             <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
-              <button class="btn btn-sm btn-danger" type="submit">
+              <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
                 <i class="fa fa-trash"></i> Hapus
               </button>
             </form>

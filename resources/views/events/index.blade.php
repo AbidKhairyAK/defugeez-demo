@@ -5,6 +5,165 @@
 @section('content')
   <div class="container">
 
+    <div class="centered mb-3 mt-4">
+      <h3 class="text-center">- Daftar Donasi -</h3>
+    </div>
+
+    <div class="owl-carousel owl-theme">
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Pembangunan Sekolah untuk Palu</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 21.590.834</div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 8.750.322</div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 87.983.992 </div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 87.983.992 </div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Pembangunan Sekolah untuk Palu</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 21.590.834</div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 8.750.322</div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 87.983.992 </div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top">
+            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
+            <hr>
+            <div class="progress" style="height: 20px;">
+              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
+            </div>
+            <div class="small">Terkumpul</div>
+            <div>Rp. 87.983.992 </div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="centered my-3">
       <h3 class="text-center">- Titik Bencana -</h3>
     </div>
@@ -44,7 +203,7 @@
               <form action="{{ route('events.destroy', $event->id) }}" method="post">
                 @csrf
                 {{ method_field("DELETE") }}
-                <button class="dropdown-item btn" type="submit">Delete</button>
+                <button class="dropdown-item btn" onclick="return confirm('Apakah anda yakin?')" type="submit">Delete</button>
               </form>
               @endcan
 
@@ -73,78 +232,42 @@
     </div>
 
     <h5 class="text-right text-info mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
-
-    <div class="centered mb-3 mt-4">
-      <h3 class="text-center">- Daftar Donasi -</h3>
-    </div>
-
-    <div class="row mb-5">
-      <div class="col-md-4 mb-3">
-        <div class="card rounded overflow-hidden shadow">
-            <div class="card-img-top">
-              <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
-            </div>
-          <div class="card-body">
-            <h4 class="card-title">Pembangunan Sekolah untuk Palu</h4>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 21.590.834</div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card rounded overflow-hidden shadow">
-            <div class="card-img-top">
-              <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
-            </div>
-          <div class="card-body">
-            <h4 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h4>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 8.750.322</div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 mb-3">
-        <div class="card rounded overflow-hidden shadow">
-            <div class="card-img-top">
-              <img src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-            </div>
-          <div class="card-body">
-            <h4 class="card-title">Donasi Korban Gempa Palu & Donggala</h4>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 87.983.992 </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-    </div>
   
   </div>
 
 @endsection
 
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <script src="/js/markers.js"></script>
 <script type="text/javascript">
+
+  $('.owl-carousel').owlCarousel({
+      loop:true,
+      margin:10,
+      nav:true,
+      lazyLoad:true,
+      autoplay:true,
+      autoplayTimeout:3000,
+      autoplayHoverPause:true,
+      navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+      responsive:{
+          0:{
+              items:1
+          },
+          400:{
+              items:2
+          },
+          600:{
+              items:3
+          },
+          1000:{
+              items:4
+          }
+      }
+  });
+
+
   var mymap = L.map('mapid', {
       center: [-1.0878905, 117.7075195],
       zoom: 5,
@@ -191,4 +314,9 @@
   //     .openPopup();
   // });
 </script>
+@endsection
+
+@section('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 @endsection

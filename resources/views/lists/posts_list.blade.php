@@ -53,7 +53,7 @@
 		        <form action="{{ route('posts.destroy', $post->id) }}" method="post">
 		          @csrf
 		          {{ method_field("DELETE") }}
-		          <button class="dropdown-item btn" type="submit">Delete</button>
+		          <button class="dropdown-item btn" type="submit" onclick="return confirm('Apakah anda yakin?')">Delete</button>
 		        </form>
 		        @endcan
 

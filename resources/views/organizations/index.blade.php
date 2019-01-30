@@ -5,6 +5,87 @@
 @section('content')
   <div class="container">
 
+    @can('organizations.view', $my_organization)
+    <div class="centered my-3">
+      <h3 class="text-center">- Organisasi Saya -</h3>
+    </div>
+
+    <div class="text-center">
+      <a href="{{ route('users.page', $my_organization->id) }}" class="btn btn-sm btn-info mb-3 px-5 shadow-sm">Info lebih lanjut &raquo;</a>
+    </div>
+
+    <div class="bg-light p-3 rounded shadow">
+
+      <div class="d-flex justify-content-between">
+        <h4 class="border-bottom-0 mb-3"><b>{{ $my_organization->name }}</b></h4>
+        <a href="{{ route('organizations.edit', $my_organization->id) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <table class="table table-hover">
+            <tr>
+              <th width="170">Alamat Kantor</th>
+              <td class="text-right">{{ $my_organization->present()->fullAddress }}</td>
+            </tr>
+            <tr>
+              <th>Ketua Organisasi</th>
+              <td class="text-right">{{ $my_organization->chairman }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td class="text-right">{{ $my_organization->email }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-6">
+          <table class="table table-hover">
+            <tr>
+              <th>Anggota Terdaftar</th>
+              <td class="text-right">{{ $my_organization->users->count() }} Relawan</td>
+            </tr>
+            <tr>
+              <th>Nomor HP / WA</th>
+              <td class="text-right">{{ $my_organization->phone }}</td>
+            </tr>
+            <tr>
+              <th>Nomor Rekening</th>
+              <td class="text-right">{{ $my_organization->account_number }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-3">
+          <table class="table table-hover">
+            <tr>
+              <th>Logo</th>
+            </tr>
+            <tr>
+              <td class="border-top-0 text-center">
+                <img class="w-75" src="/img/logo/{{ $my_organization->logo }}">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="col-lg-9">
+          <table class="table table-hover">
+            <tr>
+              <th>Profil Singkat</th>
+            </tr>
+            <tr>
+              <td class="border-top-0">
+                <p style="line-height: 1.75">{{ $my_organization->profile ?: '-' }}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    @endcan
+
     <div class="centered mb-3 mt-5">
       <h3 class="text-center">- Daftar Organisasi -</h3>
     </div>

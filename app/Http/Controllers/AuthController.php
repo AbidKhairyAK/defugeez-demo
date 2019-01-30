@@ -30,11 +30,17 @@ class AuthController extends Controller
         $check_users = Organization::find($request->organization_id)->users->count();
 
         if (!$check_users) {
-        	$request->merge([
+        	$merge = [
         		'status' => 1,
         		'role' => 2,
-        	]);
+        	];
+        } else if ($request->type) {
+            $merge = [ 'role' => 3 ];
+        } else {
+            $merge = [ 'role' => 4 ];
         }
+
+        $request->merge($merge);
 
         User::create($request->all());
 
@@ -84,6 +90,8 @@ class AuthController extends Controller
         	session(['organization' => Auth::user()->organization->name]);
             return redirect()->intended('/');
         }
+
+        return redirect()->back()->with('invalid', 'Email atau Password anda salah!');
     }
 
     public function logout()

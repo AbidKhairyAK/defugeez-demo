@@ -62,7 +62,7 @@
           </div>
 	      </div>
 
-	      <input type="text" name="keyword" class="form-control search-input">
+	      <input type="text" name="keyword" class="form-control search-input" required>
 	      <input type="hidden" name="filter" value="{{ isset($filter) ? $filter : 'pengungsi' }}">
 	    
 	      <div class="input-group-append">

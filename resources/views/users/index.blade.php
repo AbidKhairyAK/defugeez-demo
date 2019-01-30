@@ -11,7 +11,10 @@
 
     <div class="bg-light p-3 rounded shadow">
 
-      <h4 class="border-bottom-0 mb-3"><b>{{ $organization->name }}</b></h4>
+      <div class="d-flex justify-content-between">
+        <h4 class="border-bottom-0 mb-3"><b>{{ $organization->name }}</b></h4>
+        <a href="{{ route('organizations.edit', $organization->id) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+      </div>
 
       <div class="row">
         <div class="col-lg-6">
@@ -118,7 +121,7 @@
               <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger" type="submit">
+                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
                   <i class="fa fa-trash"></i>
                 </button>
               </form>
@@ -147,7 +150,7 @@
               <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger" type="submit">
+                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
                   <i class="fa fa-trash"></i> Hapus
                 </button>
               </form>

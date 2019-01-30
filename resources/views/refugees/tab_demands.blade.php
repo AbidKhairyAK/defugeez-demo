@@ -40,7 +40,7 @@
                   @endcan
 
                   @can('demands.delete', $demand)
-                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i></button>
                   @else
                   <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
                   @endcan
@@ -84,7 +84,7 @@
                   @endcan
 
                   @can('demands.delete', $demand)
-                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i></button>
                   @else
                   <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
                   @endcan

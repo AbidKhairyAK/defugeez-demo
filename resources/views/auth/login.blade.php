@@ -11,6 +11,14 @@ $password = [
   'invalid' => $errors->has('password') ? 'is-invalid' : '',
   'feedback' => $errors->has('password') ? '<span class="invalid-feedback">'.$errors->first('password').'</span>' : ''
 ];
+
+$invalid_message = '';
+
+if (session('invalid')) {
+  $invalid_message = "<div class='alert alert-danger'>".session('invalid')."</div>";
+  $email['invalid'] = 'is-invalid';
+  $password['invalid'] = 'is-invalid';
+}
 @endphp
 
 @section('content')
@@ -19,6 +27,8 @@ $password = [
   'route' => 'login',
   'id' => 'login-form'
 ]) !!}
+
+{!! $invalid_message !!}
 
 <div class="form-group">
   {!! Form::label('email', 'Email', ['class' => 'font-weight-bold']) !!}
