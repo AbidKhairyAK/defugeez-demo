@@ -10,6 +10,11 @@ class Post extends Model
     	'user_id', 'organization_id', 'event_id', 'name', 'pic', 'address', 'province_id', 'regency_id', 'district_id', 'village_id', 'capacity', 'barracks', 'description', 'status', 'latitude', 'longitude'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

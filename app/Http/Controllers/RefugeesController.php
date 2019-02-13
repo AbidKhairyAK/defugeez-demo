@@ -7,34 +7,32 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
-use App\Model\Post;
-use App\Model\Refugee;
-use App\Model\Demand;
 use App\Imports\RefugeesImport;
 use App\Exports\RefugeesExport;
 use App\Exports\FormatFileExport;
+use App\Model\Event;
+use App\Model\Post;
+use App\Model\Refugee;
+use App\Model\Demand;
 
 class RefugeesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'export', 'format');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $event, Post $post)
     {
-        $refugees = Refugee::all();
-
-        return view('test.refugees.index', compact('refugees'));
-    }
-
-    public function page($id)
-    {
-        $post = Post::findOrFail($id);
-        $data = Refugee::where('post_id', $id)->orderBy('created_at', 'desc');
+        $data = Refugee::where('post_id', $post->id)->orderBy('created_at', 'desc');
 
         // Summary
-        $healths = Refugee::where('post_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
+        $healths = Refugee::where('post_id', $post->id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
 
         $ageParam = Carbon::now()->subYears(17)->toDateString();
 
@@ -62,20 +60,18 @@ class RefugeesController extends Controller
 
         // Demands
         $requested_demands = Demand::where([
-            ['post_id', '=', $id],
+            ['post_id', '=', $post->id],
             ['type', '=', 0],
         ])->orderBy('created_at', 'desc')->get();
 
         $received_demands = Demand::where([
-            ['post_id', '=', $id],
+            ['post_id', '=', $post->id],
             ['type', '=', 1],
         ])->orderBy('created_at', 'desc')->get();
 
         $refugees = $data->get();
 
-        session(['post_id' => $id]);
-
-        return view('refugees.index', compact('post', 'refugees', 'healths', 'agesCount', 'requested_demands', 'received_demands'));
+        return view('refugees.index', compact('event', 'post', 'refugees', 'healths', 'agesCount', 'requested_demands', 'received_demands'));
     }
 
     /**
@@ -83,14 +79,11 @@ class RefugeesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event, Post $post, Refugee $refugee)
     {
-        $refugee = new refugee();
-        $post = Post::findOrFail(session('post_id'));
-
         $this->authorize('refugees.create');
 
-        return view('refugees.create', compact('refugee', 'post'));
+        return view('refugees.create', compact('refugee', 'post', 'event'));
     }
 
     /**
@@ -99,15 +92,15 @@ class RefugeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\RefugeesStoreRequest $request)
+    public function store(Requests\RefugeesStoreRequest $request, Event $event, Post $post)
     {
-        $request->merge([
-            'user_id' => session('user_id'),
-            'post_id' => session('post_id'),
-            'event_id' => session('event_id'),
-        ]);
-
         $this->authorize('refugees.create');
+
+        $request->merge([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+            'event_id' => $event->id,
+        ]);
 
         Refugee::create($request->all());
 
@@ -115,7 +108,7 @@ class RefugeesController extends Controller
 
         $request->session()->flash('refugees_tab', 'refugees');
 
-        return redirect('page/refugees/'.session('post_id'));
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
     /**
@@ -135,14 +128,11 @@ class RefugeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event, Post $post, Refugee $refugee)
     {
-        $refugee = Refugee::findOrFail($id);
-        $post = Post::findOrFail(session('post_id'));
-
         $this->authorize('refugees.update', $refugee);
 
-        return view('refugees.edit', compact('refugee', 'post'));
+        return view('refugees.edit', compact('refugee', 'post', 'event'));
     }
 
     /**
@@ -152,23 +142,22 @@ class RefugeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\RefugeesUpdateRequest $request, $id)
-    {
-        $request->merge([
-            'user_id' => session('user_id'),
-        ]);
-
-        $refugee = Refugee::findOrFail($id);
+    public function update(Requests\RefugeesUpdateRequest $request, Event $event, Post $post, Refugee $refugee)
+    {  
 
         $this->authorize('refugees.update', $refugee);
 
+        $request->merge([
+            'user_id' => auth()->user()->id,
+        ]);
+        
         $refugee->update($request->all());
-
-        $request->session()->flash('refugees_tab', 'refugees');
 
         Toastr::success('Data Pengungsi Berhasil Diedit!', 'Edit Data Pengungsi');
 
-        return redirect('page/refugees/'.session('post_id'));
+        $request->session()->flash('refugees_tab', 'refugees');
+
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
     /**
@@ -177,10 +166,8 @@ class RefugeesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Event $event, Post $post, Refugee $refugee)
     {
-        $refugee = Refugee::findOrFail($id);
-
         $this->authorize('refugees.delete', $refugee);
 
         $refugee->delete();
@@ -189,37 +176,30 @@ class RefugeesController extends Controller
 
         $request->session()->flash('refugees_tab', 'refugees');
 
-        return redirect('page/refugees/'.session('post_id'));
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
-    public function export($post_id)
+    public function export(Event $event, Post $post)
     {
-        $post = Post::find($post_id);
-        $file_name = "deFugeez - Daftar Pengungsi ".$post->name." - ".$post->event->name.".xlsx";
+        $file_name = "deFugeez - Daftar Pengungsi ".$post->name." - ".$event->name.".xlsx";
 
-        return (new RefugeesExport($post_id))->download($file_name);
+        return (new RefugeesExport($post->id))->download($file_name);
     }
 
-    public function import(Request $request, $post_id)
+    public function import(Request $request, Event $event, Post $post)
     {
-        $post = Post::find($post_id);
-        $post_id= $post_id;
-        $event_id = $post->event->id;
-        $user_id = auth()->user()->id;
-
-        (new RefugeesImport($event_id, $post_id, $user_id))->import($request->file('import'));
+        (new RefugeesImport($event->id, $post->id, auth()->user()->id))->import($request->file('import'));
 
         Toastr::success('File Excel berhasil di-import!', 'Import Excel');
 
         $request->session()->flash('refugees_tab', 'refugees');
 
-        return redirect('page/refugees/'.session('post_id'));
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
-    public function format($post_id)
+    public function format(Event $event, Post $post)
     {
-        $post = Post::find($post_id);
-        $file_name = "deFugeez - Import Pengungsi ".$post->name." - ".$post->event->name.".xlsx";
+        $file_name = "deFugeez - Import Pengungsi ".$post->name." - ".$event->name.".xlsx";
 
         return (new FormatFileExport)->download($file_name);
     }

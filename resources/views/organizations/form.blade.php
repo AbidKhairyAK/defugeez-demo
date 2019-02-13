@@ -118,7 +118,7 @@
 	  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
 	  <div>
 	    <span class="btn btn-outline-info btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span>
-				{!! Form::file('logo_image', null, ['class' => 'form-control '.$logo_image['invalid'], 'id' => 'logo', 'required']) !!}
+				{!! Form::file('logo_image', null, ['class' => 'form-control '.$logo_image['invalid'], 'id' => 'logo', 'accept' => 'image/*', 'required']) !!}
 	  	</span>
 	    <a href="#" class="btn btn-outline-secondary fileinput-exists" data-dismiss="fileinput">Remove</a>
 	  </div>
@@ -129,7 +129,7 @@
 
 <div class="d-flex justify-content-center">
 	<div>
-		<a href="{{ route('organizations.page') }}" class="btn btn-secondary"> Cancel </a>
+		<a href="{{ route('organizations.index') }}" class="btn btn-secondary"> Cancel </a>
 		<button type="submit" class="btn btn-info">Submit</button>
 	</div>
 </div>

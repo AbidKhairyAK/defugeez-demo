@@ -14,7 +14,7 @@ class UserPresenter extends Presenter
 
 	public function roleFormatted()
 	{
-		$status = [1 => 'Developer', 'Admin', 'Relawan'];
+		$status = [1 => 'Developer', 'Admin', 'Relawan', 'Akun Biasa'];
 		return $status[$this->role];
 	}
 
@@ -29,7 +29,7 @@ class UserPresenter extends Presenter
 
 	public function fullAddress()
 	{
-		$address = $this->address.', '.$this->village->name.', '.$this->district->name.', '.$this->regency->name.', '.$this->province->name;
+		$address = $this->address ? $this->address.', '.$this->village->name.', '.$this->district->name.', '.$this->regency->name.', '.$this->province->name : '-';
 
 		return $address;
 	}

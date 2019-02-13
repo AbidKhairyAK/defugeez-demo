@@ -8,6 +8,7 @@ use App\Model\Post;
 use App\Model\Refugee;
 use App\Model\Organization;
 use App\Model\User;
+use App\Model\Donation;
 
 class ListsController extends Controller
 {
@@ -33,9 +34,13 @@ class ListsController extends Controller
     			return $this->usersList($keyword, $filter);
     			break;
     		
-    		case 'organisasi':
-    			return $this->organizationsList($keyword, $filter);
-    			break;
+            case 'organisasi':
+                return $this->organizationsList($keyword, $filter);
+                break;
+
+            case 'donasi':
+                return $this->donationsList($keyword, $filter);
+                break;
 
     		default:
     			return "filter pencarian salah";
@@ -56,14 +61,14 @@ class ListsController extends Controller
     	return view('lists.events_list', compact('events', 'keyword', 'filter'));
     }
 
-    public function postsList($id = null, $keyword = null, $filter = null)
+    public function postsList($event_id = null, $keyword = null, $filter = null)
     {
     	$posts = new Post();
 
     	if ($keyword) {
     		$posts = $posts->where('name', 'like', '%'.$keyword.'%');
-    	} else if ($id) {
-    		$posts = $posts->where('event_id', $id);
+    	} else if ($event_id) {
+    		$posts = $posts->where('event_id', $event_id);
     	}
 
     	$posts = $posts->orderBy('status', 'desc')->orderBy('created_at', 'desc')->paginate(10)->onEachSide(1);
@@ -77,8 +82,6 @@ class ListsController extends Controller
 
     	if ($keyword) {
     		$refugees = $refugees->where('name', 'like', '%'.$keyword.'%');
-    	} else if ($id) {
-    		$refugees = $refugees->where('post_id', $id);
     	}
 
     	$refugees = $refugees->orderBy('name', 'asc')->paginate(10)->onEachSide(1);
@@ -92,8 +95,6 @@ class ListsController extends Controller
 
         if ($keyword) {
             $users = $users->where('name', 'like', '%'.$keyword.'%');
-        } else if ($id) {
-            $users = $users->where('organizations_id', $id);
         }
 
         $users = $users->orderBy('name', 'asc')->paginate(10)->onEachSide(1);
@@ -102,7 +103,7 @@ class ListsController extends Controller
     }
 
     public function organizationsList($keyword = null, $filter = null)
-    {	
+    {   
         $organizations = new Organization();
 
         if ($keyword) {
@@ -112,5 +113,18 @@ class ListsController extends Controller
         $organizations = $organizations->orderBy('name', 'asc')->paginate(10)->onEachSide(1);
         
         return view('lists.organizations_list', compact('organizations', 'keyword', 'filter'));
+    }
+
+    public function donationsList($keyword = null, $filter = null)
+    {   
+        $donations = new Donation();
+
+        if ($keyword) {
+            $donations = $donations->where('name', 'like', '%'.$keyword.'%');
+        }
+
+        $donations = $donations->orderBy('name', 'asc')->paginate(12)->onEachSide(1);
+        
+        return view('lists.donations_list', compact('donations', 'keyword', 'filter'));
     }
 }

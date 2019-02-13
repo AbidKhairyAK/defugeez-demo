@@ -58,7 +58,7 @@
             </a>
 
             @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$refugee->post->event->slug, $refugee->post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i>
             </a>
             @else
@@ -68,7 +68,7 @@
             @endcan
 
             @can('refugees.delete', $refugee)
-            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+            <form class="d-inline" action="{{ route('refugees.destroy', [$refugee->post->event->slug, $refugee->post->slug, $refugee->slug]) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
@@ -93,7 +93,7 @@
             </a>
 
             @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$refugee->post->event->slug, $refugee->post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i> Edit
             </a>
             @else
@@ -103,7 +103,7 @@
             @endcan
             
             @can('refugees.delete', $refugee)
-            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+            <form class="d-inline" action="{{ route('refugees.destroy', [$refugee->post->event->slug, $refugee->post->slug, $refugee->slug]) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">

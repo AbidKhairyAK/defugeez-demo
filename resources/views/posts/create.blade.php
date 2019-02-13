@@ -15,7 +15,7 @@
 			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Posko -</div>
 				{!! Form::model($post, [
 					'method' => 'POST',
-					'route' => 'posts.store',
+					'route' => ['posts.store', $event->slug],
 					'id' => 'post-form'
 				]) !!}
 

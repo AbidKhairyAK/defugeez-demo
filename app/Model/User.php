@@ -33,6 +33,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -51,6 +56,21 @@ class User extends Authenticatable
     public function demands()
     {
         return $this->hasMany(Demand::class);
+    }
+
+    public function donations()
+    {
+        return $this->hasMany(Donation::class);
+    }
+
+    public function transfers()
+    {
+        return $this->hasMany(Transfer::class);
+    }
+
+    public function proof()
+    {
+        return $this->hasOne(Proof::class);
     }
 
     public function organization()
@@ -95,7 +115,8 @@ class User extends Authenticatable
         $role = [
             1 => 'Developer',
             2 => 'Admin',
-            3 => 'Volunteer',
+            3 => 'Relawan',
+            4 => 'Akun Biasa',
         ];
 
         return $role[$this->role];

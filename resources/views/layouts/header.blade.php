@@ -5,32 +5,35 @@
 
 		  <ul class="navbar-nav justify-content-end pt-3" id="nav-links">
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <span class="d-none d-md-inline-block"><b>Beranda</b></span></a>
+		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Beranda"><b>Beranda</b></span></a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link text-white pr-3" href="{{ route('organizations.page') }}"><i class="fa fa-user"></i> <span class="d-none d-md-inline-block"><b>Organisasi</b></span></a>
+		      <a class="nav-link text-white pr-3" href="{{ route('transfers.index') }}"><i class="fa fa-credit-card-alt"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Transfer"><b>Transfer</b></span></a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link text-white pr-3" href="{{ route('organizations.index') }}"><i class="fa fa-user"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Organisasi"><b>Organisasi</b></span></a>
 		    </li>
 		    @if(!auth()->user())
 		    <li class="nav-item">
-		      <a class="nav-link text-white" href="{{ route('login') }}"><i class="fa fa-sign-in"></i> <b>Login<span class="d-none d-md-inline-block"> / Register</span></b></a>
+		      <a class="nav-link text-white" href="{{ route('login') }}" data-toggle="tooltip" title="Login / Register"><i class="fa fa-sign-in"></i> <b>Login<span class="d-none d-md-inline-block"> / Register</span></b></a>
 		    </li>
 		    @else
 		    <li class="nav-item">
 		    	<div class="dropdown">
 
 		    		<button class="btn btn-sm btn-outline-info" data-toggle="dropdown">
-		    			<img src="{{ Avatar::create(session('username'))->toBase64() }}" style="width: 40px; margin-top: -8px;">
+		    			<img src="{{ Avatar::create(auth()->user()->name)->toBase64() }}" style="width: 40px; margin-top: -8px;">
 		    		</button>
 
 		    		<div class="dropdown-menu dropdown-menu-right shadow">
 		    			<div class="dropdown-item text-center">
-		    				<img src="{{ Avatar::create(session('username'))->toBase64() }}">
-		    				<p class="mt-3 mb-1"><b>{{ session('username') }}</b></p>
-		    				<p class="mt-0">{{ session('organization') }}</p>
+		    				<img src="{{ Avatar::create(auth()->user()->name)->toBase64() }}">
+		    				<p class="mt-3 mb-1"><b>{{ auth()->user()->name }}</b></p>
+		    				<p class="mt-0">{{ auth()->user()->organization->name }}</p>
 		    				<hr>
 		    			</div>
 		    			<div class="dropdown-item d-flex justify-content-between">
-		    				<a class="btn btn-info" href="{{ route('users.edit', session('user_id')) }}">Profil</a>
+		    				<a class="btn btn-info" href="{{ route('users.edit', [auth()->user()->organization->slug, auth()->user()->slug]) }}">Profil</a>
 					    	<form class="d-inline-block" action="{{ route('logout') }}" method="post">
 					    		@csrf
 					      	<button class="btn btn-info">Logout</button>
@@ -59,6 +62,7 @@
             <a class="dropdown-item" style="cursor: pointer;">Nama Pengungsi</a>
             <a class="dropdown-item" style="cursor: pointer;">Nama Relawan</a>
             <a class="dropdown-item" style="cursor: pointer;">Nama Organisasi</a>
+            <a class="dropdown-item" style="cursor: pointer;">Nama Donasi</a>
           </div>
 	      </div>
 

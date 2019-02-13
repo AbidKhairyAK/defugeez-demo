@@ -3,12 +3,18 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Refugee extends Model
 {
     protected $fillable = [
     	'user_id', 'post_id', 'event_id', 'name', 'gender', 'origin', 'birthdate', 'health', 'status', 'blood_type', 'barrack', 'description'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function user()
     {
@@ -23,6 +29,19 @@ class Refugee extends Model
     public function event()
     {
     	return $this->belongsTo(Event::class);
+    }
+
+    public function setBirthdateAttribute($value)
+    {
+        $dates = explode('-', $value);
+        $formatted_date = Carbon::create($dates[2], $dates[1], $dates[0], '00', '00', '00')->toDateString();
+
+        $this->attributes['birthdate'] = $formatted_date;
+    }
+
+    public function getBirthdateAttribute($value)
+    {
+        return date('d-m-Y', strtotime($value));
     }
 
     public function statusLabel()

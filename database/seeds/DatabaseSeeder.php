@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PostsTableSeeder::class);
         $this->call(RefugeesTableSeeder::class);
         $this->call(DemandsTableSeeder::class);
+        $this->call(DonationsTableSeeder::class);
+        $this->call(TransfersTableSeeder::class);
+        $this->call(ProofsTableSeeder::class);
     }
 }

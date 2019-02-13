@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'organizationRegisterForm', 'organizationRegister');
     }
 
     public function registerForm()
@@ -23,11 +23,12 @@ class AuthController extends Controller
         return view('auth.register', compact('user', 'organizations'));
     }
 
-    public function register(Requests\UsersStoreRequest $request)
+    public function register(Requests\UsersRegisterRequest $request)
     {
         // $this->message($request->name, $request->phone);
 
-        $check_users = Organization::find($request->organization_id)->users->count();
+        $id = $request->organization_id ?: 1;
+        $check_users = Organization::where('id', $id)->first()->users()->count();
 
         if (!$check_users) {
         	$merge = [
@@ -37,7 +38,10 @@ class AuthController extends Controller
         } else if ($request->type) {
             $merge = [ 'role' => 3 ];
         } else {
-            $merge = [ 'role' => 4 ];
+            $merge = [ 
+                'role' => 4,
+                'organization_id' => 1,
+            ];
         }
 
         $request->merge($merge);
@@ -70,6 +74,10 @@ class AuthController extends Controller
 
         Toastr::success('Organisasi '.title_case($request->name).' berhasil terdaftar di aplikasi deFugeez. Silahkan daftarkan diri anda', 'Registrasi Organisasi');
 
+        if (auth()->check()) {
+            return redirect('/organizations');
+        }
+
         return redirect('/register');
     }
 
@@ -82,12 +90,8 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, true)) {
             // Authentication passed...
-            session(['user_id' => Auth::user()->id]);
-            session(['organization_id' => Auth::user()->organization->id]);
-            session(['username' => Auth::user()->name]);
-        	session(['organization' => Auth::user()->organization->name]);
             return redirect()->intended('/');
         }
 
@@ -96,11 +100,6 @@ class AuthController extends Controller
 
     public function logout()
     {
-        session(['user_id' => false]);
-        session(['organization_id' => false]);
-        session(['username' => false]);
-        session(['organization' => false]);
-
         Auth::logout();
 
         return redirect('/');

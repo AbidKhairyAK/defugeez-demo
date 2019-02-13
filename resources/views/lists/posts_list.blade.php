@@ -46,11 +46,11 @@
 		        <a href="#" class="dropdown-item">Laporkan</a>
 
             @can('posts.update', $post)
-		        <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a>
+		        <a href="{{ route('posts.edit', [$post->event->slug, $post->slug]) }}" class="dropdown-item">Edit</a>
 		        @endcan
 
 		        @can('posts.delete', $post)
-		        <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+		        <form action="{{ route('posts.destroy', [$post->event->slug, $post->slug]) }}" method="post">
 		          @csrf
 		          {{ method_field("DELETE") }}
 		          <button class="dropdown-item btn" type="submit" onclick="return confirm('Apakah anda yakin?')">Delete</button>
@@ -74,7 +74,7 @@
 		    </div>
 		  </div>
 		  <div class="bg-primary text-center p-2">
-		    <a href="{{ route('refugees.page', $post->id) }}" class="text-white h6">Info Lebih Lanjut</a>
+		    <a href="{{ route('refugees.index', [$post->event->slug, $post->slug]) }}" class="text-white h6">Info Lebih Lanjut</a>
 		  </div>
 		</div>
    

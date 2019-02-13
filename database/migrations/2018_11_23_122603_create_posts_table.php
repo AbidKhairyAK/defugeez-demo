@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->unsignedInteger('organization_id');
             $table->unsignedInteger('event_id');
             $table->string('name');
+            $table->string('slug');
             $table->string('pic');
             $table->string('address');
             $table->char('province_id', 2);
@@ -29,6 +30,8 @@ class CreatePostsTable extends Migration
             $table->integer('barracks');
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->timestamps();
         });
     }

@@ -3,38 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use App\Model\Event;
 use App\Model\Post;
 use App\Model\Refugee;
-use App\Http\Requests;
-use Brian2694\Toastr\Facades\Toastr;
-use Carbon\Carbon;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
 	/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $event)
     {
-        $posts = Post::all();
-
-        return view('test.posts.index', compact('posts'));
-    }
-
-    public function page($id)
-    {
-        $event = Event::findOrFail($id);
-        $posts = Post::where('event_id', $id)->orderBy('created_at', 'desc')->limit(4)->get();
-        $post_markers = Post::where('event_id', $id)->get();
+        $posts = Post::where('event_id', $event->id)->orderBy('created_at', 'desc')->limit(4)->get();
+        $post_markers = Post::where('event_id', $event->id)->get();
         
-        $data = Refugee::where('event_id', $id)->orderBy('created_at', 'desc');
+        $data = Refugee::where('event_id', $event->id)->orderBy('created_at', 'desc');
 
         // Summary
-        $healths = Refugee::where('event_id', $id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
+        $healths = Refugee::where('event_id', $event->id)->groupBy('health')->select('health', DB::raw('count(*) as total'))->get();
 
         $ageParam = Carbon::now()->subYears(17)->toDateString();
 
@@ -60,8 +57,6 @@ class PostsController extends Controller
             ])->count(),
         ];
 
-        session(['event_id' => $id]);
-
         return view('posts.index', compact('event', 'posts', 'post_markers', 'healths', 'agesCount'));
     }
 
@@ -70,11 +65,8 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event, Post $post)
     {
-        $post = new Post();
-        $event = Event::findOrFail(session('event_id'));
-
         $this->authorize('posts.create');
 
         return view('posts.create', compact('post', 'event'));
@@ -86,21 +78,21 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\PostsStoreRequest $request)
+    public function store(Requests\PostsStoreRequest $request, Event $event)
     {
-        $request->merge([
-            'user_id' => session('user_id'),
-            'organization_id' => session('organization_id'),
-            'event_id' => session('event_id'),
-        ]);
-
         $this->authorize('posts.create');
+
+        $request->merge([
+            'user_id' => auth()->user()->id,
+            'organization_id' => auth()->user()->organization->id,
+            'event_id' => $event->id,
+        ]);
 
         Post::create($request->all());
 
         Toastr::success('Data Posko Berhasil Ditambahkan!', 'Tambah Data Posko');
 
-        return redirect('page/posts/'.session('event_id'));
+        return redirect('events/'.$event->id.'/posts');
     }
 
     /**
@@ -120,11 +112,8 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event, Post $post)
     {
-        $post = Post::findOrFail($id);
-        $event = Event::findOrFail(session('event_id'));
-
         $this->authorize('posts.update', $post);
 
         return view('posts.edit', compact('post', 'event'));
@@ -137,14 +126,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\PostsUpdateRequest $request, $id)
+    public function update(Requests\PostsUpdateRequest $request, Event $event, Post $post)
     {
         $request->merge([
-            'user_id' => session('user_id'),
-            'organization_id' => session('organization_id'),
+            'user_id' => auth()->user()->id,
+            'organization_id' => auth()->user()->organization->id,
         ]);
-        
-        $post = Post::findOrFail($id);
 
         $this->authorize('posts.update', $post);
 
@@ -152,7 +139,7 @@ class PostsController extends Controller
 
         Toastr::success('Data Posko Berhasil Diedit!', 'Edit Data Posko');
 
-        return redirect('page/posts/'.session('event_id'));
+        return redirect('events/'.$event->id.'/posts');
     }
 
     /**
@@ -161,10 +148,8 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event, Post $post)
     {
-        $post = Post::findOrFail($id);
-
         $this->authorize('posts.update', $post);
 
         $post->demands()->delete();
@@ -173,6 +158,6 @@ class PostsController extends Controller
 
         Toastr::success('Data Posko Berhasil Dihapus!', 'Hapus Data Posko');
 
-        return redirect('page/posts/'.session('event_id'));
+        return redirect('events/'.$event->id.'/posts');
     }
 }

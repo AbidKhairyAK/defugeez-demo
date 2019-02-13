@@ -16,9 +16,8 @@
 					<div class="h4 font-weight-bold text-primary mb-4">Edit Organisasi</div>
 
 					 @can('organizations.delete', $organization)
-					<form class="d-block" action="{{ route('organizations.destroy', $organization->id) }}" method="post">
-						@csrf
-						{{ method_field('DELETE') }}
+					<form class="d-block" action="{{ route('organizations.destroy', $organization->slug) }}" method="post">
+						@csrf @method('DELETE')
 						<button class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin?')">Hapus Organisasi</button>
 					</form>
 					@endcan
@@ -26,7 +25,7 @@
 
 				{!! Form::model($organization, [
 					'method' => 'PUT',
-					'route' => ['organizations.update', $organization->id],
+					'route' => ['organizations.update', $organization->slug],
 					'files' => true,
 					'id' => 'organization-form'
 				]) !!}

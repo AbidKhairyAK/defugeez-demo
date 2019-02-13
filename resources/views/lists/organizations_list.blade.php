@@ -52,7 +52,7 @@
 	      </div>
 	    </div>
 	    <div class="bg-info text-center p-2">
-	      <a href="{{ route('users.page', $organization->id) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
+	      <a href="{{ route('users.index', $organization->slug) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
 	    </div>
 	  </div>
    

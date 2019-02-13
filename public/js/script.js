@@ -13,3 +13,5 @@ $('.search-container .dropdown-item').click(function(){
 	$('input[name=filter]').val(filter.toLowerCase());
 	$('.search-input').focus();
 });
+
+$('[data-toggle="tooltip"]').tooltip(); 

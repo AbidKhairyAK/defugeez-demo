@@ -16,6 +16,11 @@ class Organization extends Model
         'name', 'chairman', 'address', 'village_id', 'district_id', 'regency_id', 'province_id', 'email', 'phone', 'account_number', 'profile', 'logo'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function users()
     {
     	return $this->hasMany(User::class);

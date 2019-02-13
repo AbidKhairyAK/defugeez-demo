@@ -14,7 +14,7 @@
 		<div class="h4 font-weight-bold text-primary mb-4">- Edit Peristiwa -</div>
 			{!! Form::model($event, [
 				'method' => 'PUT',
-				'route' => ['events.update', $event->id ],
+				'route' => ['events.update', $event->slug ],
 				'id' => 'event-form'
 			]) !!}
 

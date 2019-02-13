@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Model\Donation;
 use App\Model\Event;
 use App\Model\Post;
 use App\Http\Requests;
@@ -10,6 +11,11 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class EventsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,17 +23,13 @@ class EventsController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    public function page()
-    {
+        $donations = Donation::where('status', 1)->orderBy('created_at', 'desc')->limit(8)->get();
         $events = Event::orderBy('status', 'desc')->orderBy('created_at', 'desc')->limit(6)->get();
         $event_markers = Event::where('status', 1)->get();
 
         // Toastr::success('Selamat datang di aplikasi <b>deFugeez</b>', 'Hello!');
 
-        return view('events.index', compact('events', 'event_markers'));
+        return view('events.index', compact('events', 'event_markers', 'donations')); 
     }
 
     /**
@@ -35,10 +37,8 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event)
     {
-        $event = new Event();
-
         $this->authorize('events.create');
 
         return view('events.create', compact('event'));
@@ -53,7 +53,7 @@ class EventsController extends Controller
     public function store(Requests\EventsStoreRequest $request)
     {
         $request->merge([
-            'user_id' => session('user_id'),
+            'user_id' => auth()->user()->id,
         ]);
 
         $this->authorize('events.create');
@@ -62,7 +62,7 @@ class EventsController extends Controller
 
         Toastr::success('Data Peristiwa Berhasil Ditambahkan!', 'Tambah Data Peristiwa');
 
-        return redirect('page/events');
+        return redirect('/events');
     }
 
     /**
@@ -82,10 +82,8 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        $event = Event::findOrFail($id);
-
         $this->authorize('events.update', $event);
 
         return view('events.edit', compact('event'));
@@ -98,21 +96,19 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\EventsUpdateRequest $request, $id)
+    public function update(Requests\EventsUpdateRequest $request, Event $event)
     {
-        $request->merge([
-            'user_id' => session('user_id'),
-        ]);
-        
-        $event = Event::findOrFail($id);
-
         $this->authorize('events.update', $event);
+        
+        $request->merge([
+            'user_id' => auth()->user()->id,
+        ]);
 
         $event->update($request->all());
 
         Toastr::success('Data Peristiwa Berhasil Diedit!', 'Edit Data Peristiwa');
 
-        return redirect('page/events');
+        return redirect('events');
     }
 
     /**
@@ -121,14 +117,11 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Event $event)
     {
-        $event = Event::findOrFail($id);
-        $posts = Post::where('event_id', $id)->get();
-
         $this->authorize('events.delete', $event);
         
-        foreach ($posts as $post) {
+        foreach ($event->posts() as $post) {
             $post->demands()->delete();
             $post->refugees()->delete();
             $post->delete();
@@ -138,6 +131,6 @@ class EventsController extends Controller
 
         Toastr::success('Data Peristiwa Berhasil Dihapus!', 'Hapus Data Peristiwa');
 
-        return redirect('page/events');
+        return redirect('events');
     }
 }

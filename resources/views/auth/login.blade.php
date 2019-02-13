@@ -52,7 +52,7 @@ if (session('invalid')) {
     <a href="{{ route('organization-register') }}" class="btn btn-block btn-outline-info">Register Organisasi</a>
   </div>
   <div class="col-md-6 mb-3">
-    <a href="{{ route('register') }}" class="btn btn-block btn-outline-info">Register Relawan</a>
+    <a href="{{ route('register') }}" class="btn btn-block btn-outline-info">Register Akun</a>
   </div>
 </div>
 

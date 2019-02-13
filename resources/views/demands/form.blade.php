@@ -47,7 +47,7 @@
 
 	<div class="d-flex justify-content-center">
 		<div>
-			<a href="{{ route('refugees.page', session('post_id')) }}" class="btn btn-secondary"> Cancel </a>
+			<a href="{{ route('refugees.index', [$event->slug, $post->slug]) }}" class="btn btn-secondary"> Cancel </a>
 			<button type="submit" class="btn btn-info">Submit</button>
 		</div>
 	</div>

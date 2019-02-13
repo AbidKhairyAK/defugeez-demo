@@ -5,164 +5,108 @@
 @section('content')
   <div class="container">
 
+    @if(auth()->check())
+    @if(auth()->user()->transfers()->count())
     <div class="centered mb-3 mt-4">
-      <h3 class="text-center">- Daftar Donasi -</h3>
+      <h3 class="text-center">- Donasi Anda -</h3>
+    </div>
+
+    <div class="bg-light rounded shadow p-3 mb-4">
+
+      @foreach(auth()->user()->transfers()->get() as $transfer)
+      <div class="row" style="position: relative;">
+        <div class="col-md-3">
+          <img src="/img/donation/{{ $transfer->donation->image }}" class="mb-2 w-100">
+        </div>
+        <div class="col-md-9">
+          <h5 class="text-black w-75">{{ $transfer->donation->name }}</h5>
+          <small class="mt-3">Jumlah Donasi:</small>
+          <h3 class="text-black"><b>{{ $transfer->present()->amount_real }}</b></h3>
+
+          @if($transfer->present()->curr_status['status'] == 'not')
+            <small>Batas Transfer:</small><b> {{ $transfer->present()->due_date }}</b>
+          @elseif($transfer->present()->curr_status['status'] == 'wait')
+            <small>Silahkan tunggu, transfer anda sedang diperiksa</small>
+          @elseif($transfer->present()->curr_status['status'] == 'approved')
+            <small>transfer anda telah terbukti, silahkan klik tombol hapus untuk menghapus riwayat transfer</small>
+          @endif
+
+          @php
+            $transfer_params = [$transfer->donation->slug, $transfer->slug];
+          @endphp
+
+          @if($transfer->present()->curr_status['status'] == 'not')
+            <form action="{{ route('transfers.destroy', $transfer_params) }}" method="post" class="donation-button">
+              @csrf @method('DELETE')
+              <a href="{{ route('transfers.show', $transfer_params) }}" class="btn btn-sm btn-info mt-2">
+                Detail Transfer
+              </a>
+              <a href="{{ route('proofs.create', $transfer_params) }}" class="btn btn-sm btn-success mt-2">
+                Kirim Bukti Transfer
+              </a>
+              <button class="btn btn-sm btn-danger mt-2" onclick="return confirm('Apakah anda yakin?')">
+                Batalkan Donasi
+              </button>
+            </form>
+          @elseif($transfer->present()->curr_status['status'] == 'wait')
+            <div>
+              <a href="{{ route('transfers.show', $transfer_params) }}" class="btn btn-sm btn-info mt-2">Detail Transfer</a>
+            </div>
+          @elseif($transfer->present()->curr_status['status'] == 'approved')
+            <form action="{{ route('transfers.delete', $transfer_params) }}" method="post" class="donation-button">
+              @csrf @method('DELETE')
+              <a href="{{ route('transfers.show', $transfer_params) }}" class="btn btn-sm btn-info mt-2">Detail Transfer</a>
+              <button class="btn btn-sm btn-danger mt-2" data-toggle="tooltip" title="Hanya menghapus dari tampilan. Data transfer tetap tersimpan di sistem">Hapus Riwayat Donasi</button>
+            </form>
+          @endif
+
+        </div>
+        <span class="donation-status px-2 py-1 bg-{{ $transfer->present()->curr_status['color'] }} text-white"><small>Status: <b>{{ $transfer->present()->curr_status['text'] }}</b></small></span>
+      </div>
+      <hr>
+      @endforeach
+
+    </div>
+    @endif
+    @endif
+
+    <div class="centered mb-3 mt-4">
+      <h3 class="text-center">- Daftar Penggalangan Dana -</h3>
+    </div>
+
+    <div class="text-center">
+      <a href="{{ route('donations.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Buat Pengalangan Dana</a>
     </div>
 
     <div class="owl-carousel owl-theme">
+      @foreach($donations as $donation)
       <div class="item">
         <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
+          <div class="card-img-top" style="height: 150px; overflow: hidden;">
+            <img class="owl-lazy" data-src="/img/donation/{{ $donation->image }}" style="width: 100%;">
           </div>
-          <div class="card-body">
-            <h6 class="card-title">Pembangunan Sekolah untuk Palu</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
+          <div class="card-body" style="min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h6 class="card-title">{{ $donation->name }}</h6>
             </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 21.590.834</div>
+            <div>
+              <hr>
+              <div class="progress" style="height: 20px;">
+                <div class="progress-bar bg-info" style="height: 20px;width:{{ $donation->present()->percentage }}%"></div>
+              </div>
+              <div class="small">Terkumpul</div>
+              <div>{{ $donation->present()->collected }}</div>
+            </div>
           </div>
           <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
+            <a href="{{ route('donations.show', $donation->slug) }}" class="text-white h6">Info Lebih Lanjut</a>
           </div>
         </div>
       </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 8.750.322</div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 87.983.992 </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 87.983.992 </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/4633/production/_103917971_rumahsementarapalu.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Pembangunan Sekolah untuk Palu</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:48%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 21.590.834</div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://ichef.bbci.co.uk/news/976/cpsprodpb/006F/production/_103911100_masjiddantukang.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Bangun Masjid Rusak di Palu karena Gempa</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 8.750.322</div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 87.983.992 </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top">
-            <img class="owl-lazy" data-src="https://statik.tempo.co/data/2018/10/17/id_743039/743039_720.jpg" style="width: 100%;">
-          </div>
-          <div class="card-body">
-            <h6 class="card-title">Donasi Korban Gempa Palu & Donggala</h6>
-            <hr>
-            <div class="progress" style="height: 20px;">
-              <div class="progress-bar bg-info" style="height: 20px;width:60%"></div>
-            </div>
-            <div class="small">Terkumpul</div>
-            <div>Rp. 87.983.992 </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations') }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
+
+    <h5 class="text-right text-info mb-5"><a href="{{ route('donations.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
 
     <div class="centered my-3">
       <h3 class="text-center">- Titik Bencana -</h3>
@@ -196,13 +140,12 @@
               <a href="#" class="dropdown-item">Laporkan</a>
 
               @can('events.update', $event)
-              <a href="{{ route('events.edit', $event->id) }}" class="dropdown-item">Edit</a>
+              <a href="{{ route('events.edit', $event->slug) }}" class="dropdown-item">Edit</a>
               @endcan
               
               @can('events.delete', $event)
-              <form action="{{ route('events.destroy', $event->id) }}" method="post">
-                @csrf
-                {{ method_field("DELETE") }}
+              <form action="{{ route('events.destroy', $event->slug) }}" method="post">
+                @csrf @method("DELETE")
                 <button class="dropdown-item btn" onclick="return confirm('Apakah anda yakin?')" type="submit">Delete</button>
               </form>
               @endcan
@@ -224,7 +167,7 @@
           </div>
         </div>
         <div class="bg-info text-center p-2">
-          <a href="{{ route('posts.page', $event->id) }}" class="h6 text-white">Info Lebih Lanjut &raquo;</a>
+          <a href="{{ route('posts.index', $event->slug) }}" class="h6 text-white">Info Lebih Lanjut &raquo;</a>
         </div>
       </div>
       @endforeach
@@ -247,9 +190,9 @@
       margin:10,
       nav:true,
       lazyLoad:true,
-      autoplay:true,
-      autoplayTimeout:3000,
-      autoplayHoverPause:true,
+      autoplay: true,
+      autoplayHoverPause: true,
+      autoplayTimeout: 3000,
       navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
       responsive:{
           0:{
@@ -293,7 +236,7 @@
       case 4: icon = greenIcon; break;
     }
 
-    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $event->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $event->regency->name }}</div><div class="my-2"><span><i class="fa fa-bolt"></i></span> {{ $event->damageName() }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $event->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('posts.page', $event->id) }}">info lebih lanjut &raquo;</a></div';
+    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $event->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $event->regency->name }}</div><div class="my-2"><span><i class="fa fa-bolt"></i></span> {{ $event->damageName() }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $event->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('posts.index', $event->slug) }}">info lebih lanjut &raquo;</a></div';
 
     L.marker(['{{ $event->latitude }}', '{{ $event->longitude }}'], {icon: icon}).addTo(mymap).bindPopup(popupText);
   @endforeach

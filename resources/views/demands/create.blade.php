@@ -6,7 +6,7 @@
 <div id="main" class="container">
 	<div>
 		<div class="text-center h3 my-3">
-			<div > Form Kebutuhan</div>
+			<div>- Form Kebutuhan -</div>
 		</div>
 
 		<div class="rounded bg-light shadow">
@@ -15,7 +15,7 @@
 			<div class="h4 font-weight-bold text-primary mb-4">Tambah Daftar Kebutuhan</div>
 				{!! Form::model($demand, [
 					'method' => 'POST',
-					'route' => 'demands.store',
+					'route' => ['demands.store', $event->slug, $post->slug],
 					'id' => 'demand-form'
 				]) !!}
 

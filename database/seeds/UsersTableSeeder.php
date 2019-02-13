@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
 
         $data[0] = [
             'name' => 'Default User',
+            'slug' => str_slug('Default User').time(),
             'email' => 'user@default.com',
             'password' => bcrypt('asdqwe123'),
             'organization_id' => 1,
@@ -36,6 +37,8 @@ class UsersTableSeeder extends Seeder
         ];
 
         for ($i=1; $i < 100; $i++) { 
+
+            $name = $faker->name;
             $organization = $faker->randomElement(DB::table('organizations')->pluck('id'));
             $province = $faker->randomElement(DB::table('provinces')->pluck('id'));
             $regency = $faker->randomElement(DB::table('regencies')->where('province_id', $province)->pluck('id'));
@@ -45,7 +48,8 @@ class UsersTableSeeder extends Seeder
             $status = $faker->boolean(80);
 
             $data[$i] = [
-                'name' => $faker->name,
+                'name' => $name,
+                'slug' => str_slug($name).strtotime($date_at),
                 'email' => $faker->unique()->freeEmail,
                 'password' => bcrypt('asdqwe123'),
                 'organization_id' => $organization,

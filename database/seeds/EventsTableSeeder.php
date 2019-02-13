@@ -102,6 +102,7 @@ class EventsTableSeeder extends Seeder
             $data[$i] = [
                 'user_id' => $id_user,
                 'name' => $event, 
+                'slug' => str_slug($event).strtotime($date_at),
                 'province_id' => $province, 
                 'regency_id' => $regency,
                 'damage' => rand(1,4),

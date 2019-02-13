@@ -45,6 +45,7 @@ class PostsTableSeeder extends Seeder
 		    	'organization_id' => '1',
 		    	'event_id' => $event_id,
 		    	'name' => $name,
+                'slug' => str_slug($name).strtotime($date_at),
 		    	'pic' => 'Bapak '.$faker->name,
 		    	'address' => 'Jl. '.$faker->unique()->streetName, 
 		    	'province_id' => $province, 

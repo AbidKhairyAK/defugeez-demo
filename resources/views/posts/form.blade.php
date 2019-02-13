@@ -140,7 +140,7 @@
 </div>
 <div class="d-flex justify-content-center">
 	<div>
-		<a href="{{ route('posts.page', session('event_id')) }}" class="btn btn-secondary"> Cancel </a>
+		<a href="{{ route('posts.index', $event->slug) }}" class="btn btn-secondary"> Cancel </a>
 		<button type="submit" class="btn btn-info">Submit</button>
 	</div>
 </div>

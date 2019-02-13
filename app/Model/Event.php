@@ -10,6 +10,11 @@ class Event extends Model
     	'user_id', 'name', 'province_id', 'regency_id', 'damage', 'description', 'status', 'latitude', 'longitude'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function user()
     {
     	return $this->belongsTo(User::class);

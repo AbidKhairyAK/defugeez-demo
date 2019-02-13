@@ -15,4 +15,9 @@ class Demand extends Model
     protected $fillable = [
     	'user_id', 'post_id', 'name', 'type', 'status'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

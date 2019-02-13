@@ -96,7 +96,9 @@
 	{!! $email['feedback'] !!}
 </div>
 
-<div class="row">
+<a href="javascript:void(0)" id="password-trigger" class="btn btn-sm btn-info mb-3">Ubah Password</a>
+
+<div id="password-input" class="row">
 	<div class="form-group {{ !$user->exists ? 'd-none col-md-6' : 'col-md-4' }}">
 		{!! Form::label('password_old', 'Password Lama', ['class' => 'font-weight-bold']) !!}
 		{!! Form::password('password_old', ['class' => 'form-control '.$password_old['invalid'], 'id' => 'password_old']) !!}
@@ -152,17 +154,13 @@
 
 <div class="form-group">
 	{!! Form::label('role', 'Role / Peran', ['class' => 'font-weight-bold']) !!}
-	{!! Form::select('role', [
-		'' => '', 
-		2 => 'Admin',
-		3 => 'Relawan'
-	], null, ['class' => 'form-control '.$role['invalid'], 'id' => 'role', 'required']) !!}
+	{!! Form::select('role', $roles, null, ['class' => 'form-control '.$role['invalid'], 'id' => 'role', 'required']) !!}
 	{!! $role['feedback'] !!}
 </div>
 
 <div class="d-flex justify-content-center">
 	<div>
-		<a href="{{ route('users.page', session('organization_id')) }}" class="btn btn-secondary"> Cancel </a>
+		<a href="{{ route('users.index', auth()->user()->organization->slug) }}" class="btn btn-secondary"> Cancel </a>
 		<button type="submit" class="btn btn-info">Submit</button>
 	</div>
 </div>
@@ -170,4 +168,12 @@
 @section('script')
 <script src="/js/app.js"></script>
 <script src="/js/textnumber.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#password-input').hide(false);
+		$('#password-trigger').click(function() {
+			$('#password-input').slideToggle();
+		});
+	});
+</script>
 @endsection

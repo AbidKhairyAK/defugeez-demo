@@ -11,14 +11,14 @@
     </div>
 
     <div class="text-center">
-      <a href="{{ route('users.page', $my_organization->id) }}" class="btn btn-sm btn-info mb-3 px-5 shadow-sm">Info lebih lanjut &raquo;</a>
+      <a href="{{ route('users.index', $my_organization->slug) }}" class="btn btn-sm btn-info mb-3 px-5 shadow-sm">Info lebih lanjut &raquo;</a>
     </div>
 
     <div class="bg-light p-3 rounded shadow">
 
       <div class="d-flex justify-content-between">
         <h4 class="border-bottom-0 mb-3"><b>{{ $my_organization->name }}</b></h4>
-        <a href="{{ route('organizations.edit', $my_organization->id) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+        <a href="{{ route('organizations.edit', $my_organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
       </div>
 
       <div class="row">
@@ -114,7 +114,7 @@
           </div>
         </div>
         <div class="bg-info text-center p-2">
-          <a href="{{ route('users.page', $organization->id) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
+          <a href="{{ route('users.index', $organization->slug) }}" class="text-white h6">Info Lebih Lanjut &raquo;</a>
         </div>
       </div>
       @endforeach

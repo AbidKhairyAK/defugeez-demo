@@ -25,21 +25,23 @@ class RefugeesTableSeeder extends Seeder
 
     	for ($i=0; $i < 4000; $i++) { 
 
-    		$user_id = $faker->randomElement($users);
-    		$event_id = $faker->randomElement($events);
-    		$post_id = $faker->randomElement(DB::table('posts')->where('event_id', $event_id)->pluck('id'));
-    		$post = DB::table('posts')->find($post_id);
-    		$origin = 'Jl. ' . $faker->address;
+            $user_id = $faker->randomElement($users);
+            $event_id = $faker->randomElement($events);
+            $post_id = $faker->randomElement(DB::table('posts')->where('event_id', $event_id)->pluck('id'));
+            $post = DB::table('posts')->find($post_id);
+            $origin = 'Jl. ' . $faker->address;
             $date_at = $carbon->subDay()->toDateString();
             $birth_date = $birth->subDay()->toDateString();
             $randHealth = $faker->boolean(90);
             $gender = $faker->randomElement($genders);
+            $name = $faker->name($gender == 'L' ? 'male' : 'female');
 
     		$data[$i] = [
 		    	'event_id' => $event_id,
 		    	'post_id' => $post_id,
 		    	'user_id' => $user_id,
-		    	'name' => $faker->name($gender == 'L' ? 'male' : 'female'),
+		    	'name' => $name,
+                'slug' => str_slug($name).strtotime($date_at),
 		    	'gender' => $gender,
 		    	'origin' => $origin,
 		    	'birthdate' => $birth_date,

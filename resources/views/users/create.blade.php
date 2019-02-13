@@ -15,7 +15,7 @@
 			<div class="h4 font-weight-bold text-primary mb-4">- Tambah Relawan -</div>
 				{!! Form::model($user, [
 					'method' => 'POST',
-					'route' => 'users.store',
+					'route' => ['users.store', $organization->slug],
 					'id' => 'user-form'
 				]) !!}
 

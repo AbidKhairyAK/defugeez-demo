@@ -9,7 +9,6 @@
       <h3 class="text-center">- Info Bencana -</h3>
     </div>
 
-
     <div class="bg-light p-3 rounded shadow">
 
       <h4 class="border-bottom-0 mb-3"><b>{{ $event->name }}</b></h4>
@@ -74,7 +73,7 @@
 
     <div class="text-center">
       @can('posts.create')
-      <a href="{{ route('posts.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
+      <a href="{{ route('posts.create', $event->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
       @else
       <a href="{{ route('login') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
       @endcan
@@ -94,11 +93,11 @@
               <a href="#" class="dropdown-item">Laporkan</a>
 
               @can('posts.update', $post)
-              <a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a>
+              <a href="{{ route('posts.edit', [$event->slug, $post->slug]) }}" class="dropdown-item">Edit</a>
               @endcan
 
               @can('posts.delete', $post)
-              <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+              <form action="{{ route('posts.destroy', [$event->slug, $post->slug]) }}" method="post">
                 @csrf
                 {{ method_field("DELETE") }}
                 <button class="dropdown-item btn" type="submit" onclick="return confirm('Apakah anda yakin?')">Delete</button>
@@ -121,7 +120,7 @@
           </div>
         </div>
         <div class="bg-info text-center p-2">
-          <a href="{{ route('refugees.page', $post->id) }}" class="text-white h6">Info Lebih Lanjut</a>
+          <a href="{{ route('refugees.index', [$event->slug, $post->slug]) }}" class="text-white h6">Info Lebih Lanjut</a>
         </div>
       </div>
       @endforeach
@@ -240,7 +239,7 @@
   }).addTo(mymap);
 
   @foreach($post_markers as $post)
-    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $post->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $post->village->name }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $post->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('refugees.page', $post->id) }}">info lebih lanjut &raquo;</a></div';
+    popupText = '<div class="my-2"><span><i class="fa fa-fire"></i></span> {{ $post->name }}</div><div class="my-2"><span><i class="fa fa-map-marker"></i></span> {{ $post->village->name }}</div><div class="my-2"><span><i class="fa fa-pie-chart"></i></span> {{ $post->refugees->count() }} pengungsi</div><div class="my-2 text-center"><a href="{{ route('refugees.index', [$event->slug, $post->slug]) }}">info lebih lanjut &raquo;</a></div';
 
     L.marker(['{{ $post->latitude }}', '{{ $post->longitude }}']).addTo(mymap).bindPopup(popupText);
   @endforeach

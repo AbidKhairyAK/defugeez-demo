@@ -19,6 +19,7 @@ class CreateRefugeesTable extends Migration
             $table->unsignedInteger('post_id');
             $table->unsignedInteger('event_id');
             $table->string('name');
+            $table->string('slug');
             $table->enum('gender', ['L', 'P']);
             $table->string('origin')->nullable();
             $table->date('birthdate')->nullable();

@@ -17,11 +17,14 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('name');
+            $table->string('slug');
             $table->char('province_id', 2);
             $table->char('regency_id', 4);
             $table->enum('damage', [1,2,3,4]);
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@
 
       <div class="d-flex justify-content-between">
         <h4 class="border-bottom-0 mb-3"><b>{{ $organization->name }}</b></h4>
-        <a href="{{ route('organizations.edit', $organization->id) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+        <a href="{{ route('organizations.edit', $organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
       </div>
 
       <div class="row">
@@ -85,7 +85,7 @@
     </div>
 
     <div class="text-center">
-      <a href="{{ route('users.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
+      <a href="{{ route('users.create', $organization->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
     </div>
 
     <div id="users-section" class="rounded shadow p-3 mb-5 bg-light col-sm-12">
@@ -112,13 +112,13 @@
               @endcan
 
               @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i>
               </a>
               @endcan
 
               @can('users.delete', $user)
-              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+              <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
@@ -141,13 +141,13 @@
               @endcan
 
               @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i> Edit
               </a>
               @endcan
 
               @can('users.delete', $user)
-              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+              <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">

@@ -3,31 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\User;
-use App\Model\Organization;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Model\User;
+use App\Model\Organization;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Organization $organization)
     {
-        
-    }
-
-    public function page($id)
-    {
-        $organization = Organization::find($id);
-        $users = User::where('organization_id', $id)->orderBy('status', 'asc')->orderBy('name', 'asc')->get();
-
-        session(['organization_id' => $id]);
+        $users = User::where('organization_id', $organization->id)->orderBy('status', 'asc')->orderBy('name', 'asc')->get();
 
         return view('users.index', compact('organization', 'users'));
     }
@@ -37,13 +34,25 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Organization $organization, User $user)
     {
-        $user = new User();
-
         $this->authorize('users.create');
 
-        return view('users.create', compact('user'));
+        $roles = [
+            '' => '', 
+            3 => 'Relawan',
+            4 => 'Akun Biasa',
+        ];
+
+        if (auth()->user()->role == 1) {
+            $roles[1] = 'Developer';
+        }
+
+        if (auth()->user()->role <= 2) {
+            $roles[2] = 'Admin';
+        }
+
+        return view('users.create', compact('user', 'organization', 'roles'));
     }
 
     /**
@@ -52,19 +61,19 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\UsersStoreRequest $request)
+    public function store(Requests\UsersStoreRequest $request, Organization $organization, User $user)
     {
-        $request->merge([
-            'organization_id' => session('organization_id'),
-        ]);
-
         $this->authorize('users.create');
+
+        $request->merge([
+            'organization_id' => $organization->id,
+        ]);
 
         User::create($request->all());
 
         Toastr::success('Data Relawan Berhasil Ditambahkan!', 'Tambah Data Relawan');
 
-        return redirect('page/users/'.session('organization_id'));
+        return redirect("organizations/{$organization->id}/users");
     }
 
     /**
@@ -84,13 +93,25 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Organization $organization, User $user)
     {
-        $user = User::findOrFail($id);
-
         $this->authorize('users.update', $user);
 
-        return view('users.edit', compact('user'));
+        $roles = [
+            '' => '', 
+            3 => 'Relawan',
+            4 => 'Akun Biasa',
+        ];
+
+        if (auth()->user()->role == 1) {
+            $roles[1] = 'Developer';
+        }
+
+        if (auth()->user()->role <= 2) {
+            $roles[2] = 'Admin';
+        }
+
+        return view('users.edit', compact('user', 'organization', 'roles'));
     }
 
     /**
@@ -100,9 +121,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\UsersUpdateRequest $request, $id)
+    public function update(Requests\UsersUpdateRequest $request, Organization $organization, $slug)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($slug);
 
         $this->authorize('users.update', $user);
 
@@ -119,14 +140,9 @@ class UsersController extends Controller
 
         $user->update($request->all());
 
-        session(['user_id' => auth()->user()->id]);
-        session(['organization_id' => auth()->user()->organization->id]);
-        session(['username' => auth()->user()->name]);
-        session(['organization' => auth()->user()->organization->name]);
-
         Toastr::success('Data Relawan Berhasil Diedit!', 'Edit Data Relawan');
 
-        return redirect('page/users/'.session('organization_id'));
+        return redirect("organizations/{$organization->id}/users");
     }
 
     /**
@@ -135,23 +151,19 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Organization $organization, User $user)
     {
-        $user = User::findOrFail($id);
-
         $this->authorize('users.delete', $user);
 
-        $check_user = $user->id == session('user_id');
+        $check_user = $user->id == auth()->user()->id;
 
         if ($check_user) {
-            session(['user_id' => false]);
-            session(['organization_id' => false]);
-            session(['username' => false]);
-            session(['organization' => false]);
-
             Auth::logout();
         }
 
+        $user->proof()->delete();
+        $user->transfers()->forceDelete();
+        $user->donations()->update(['user_id' => 1]);
         $user->events()->update(['user_id' => 1]);
         $user->posts()->update(['user_id' => 1]);
         $user->refugees()->update(['user_id' => 1]);
@@ -164,6 +176,6 @@ class UsersController extends Controller
             return redirect('login');    
         }
 
-        return redirect('page/users/'.session('organization_id'));
+        return redirect("organizations/{$organization->id}/users");
     }
 }

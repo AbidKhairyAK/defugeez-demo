@@ -6,7 +6,7 @@
 
   <div class="text-center mb-3">
     @can('refugees.create')
-    <a href="{{ route('refugees.create') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
+    <a href="{{ route('refugees.create', [$event->slug, $post->slug]) }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
     @else
     <a href="{{ route('login') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
     @endcan
@@ -38,11 +38,11 @@
           </ul>
           <div class="row">
             <div class="col-sm-6">
-              <a href="{{ route('refugees.format', $post->id) }}" class="btn btn-block btn-secondary" data-toggle="tooltip" title="Download file format excel sebelum meng-import data pengungsi">Download Format File</a>
+              <a href="{{ route('refugees.format', [$event->slug, $post->slug]) }}" class="btn btn-block btn-secondary" data-toggle="tooltip" title="Download file format excel sebelum meng-import data pengungsi">Download Format File</a>
             </div>
             <div class="col-sm-6">
               @can('refugees.create')
-              <form id="import-form" accept="application/vnd.ms-excel" method="post" action="{{ route('refugees.import', $post->id) }}" enctype="multipart/form-data" class="d-block">
+              <form id="import-form" accept="application/vnd.ms-excel" method="post" action="{{ route('refugees.import', [$event->slug, $post->slug]) }}" enctype="multipart/form-data" class="d-block">
                 @csrf
                 <label class="d-block">
                   <a class="btn btn-block btn-success text-white" data-toggle="tooltip" title="Import data pengungsi dari file excel">Import Dari Excel</a>
@@ -57,7 +57,7 @@
           <hr>
           <h5>Export Ke Excel</h5>
           <p class="small">Fitur yang berfungsi untuk mengubah dan mendownload data pengungsi ke dalam file dengan format Excel.</p>
-          <a href="{{ route('refugees.export', $post->id) }}" class="btn btn-block btn-success" data-toggle="tooltip" title="export data pengungsi ke file excel">Export Ke Excel</a>
+          <a href="{{ route('refugees.export', [$event->slug, $post->slug]) }}" class="btn btn-block btn-success" data-toggle="tooltip" title="export data pengungsi ke file excel">Export Ke Excel</a>
         </div>
 
       </div>
@@ -90,7 +90,7 @@
             </a>
 
             @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i>
             </a>
             @else
@@ -100,7 +100,7 @@
             @endcan
 
             @can('refugees.delete', $refugee)
-            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+            <form class="d-inline" action="{{ route('refugees.destroy', [$event->slug, $post->slug, $refugee->slug]) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
@@ -125,7 +125,7 @@
             </a>
 
             @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', $refugee->id) }}">
+            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i> Edit
             </a>
             @else
@@ -135,7 +135,7 @@
             @endcan
             
             @can('refugees.delete', $refugee)
-            <form class="d-inline" action="{{ route('refugees.destroy', $refugee->id) }}" method="post">
+            <form class="d-inline" action="{{ route('refugees.destroy', [$event->slug, $post->slug, $refugee->slug]) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}
               <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Faker\Factory;
 use Carbon\Carbon;
 
@@ -20,6 +21,7 @@ class DemandsTableSeeder extends Seeder
 
         for ($i=0; $i < 800; $i++) { 
 
+            $name = $faker->sentence(3);
     		$user_id = $faker->randomElement($users);
     		$post_id = $faker->randomElement($posts);
     		$date_at = $carbon->subDay()->toDateTimeString();
@@ -28,7 +30,8 @@ class DemandsTableSeeder extends Seeder
     		$data[$i] = [
     			'post_id' => $post_id,
     			'user_id' => $user_id,
-    			'name' => $faker->sentence(3),
+                'name' => $name,
+    			'slug' => str_slug($name).strtotime($date_at),
     			'type' => $type,
     			'status' => $type ?: $faker->boolean(30),
     			'created_at' => $date_at,

@@ -74,11 +74,11 @@ $current_village = old('village_id');
 <div class="form-group">
   {!! Form::label('type', 'Tipe :', ['class' => 'label mr-4 font-weight-bold']) !!}
   <div class="custom-control custom-radio custom-control-inline">
-    {!! Form::radio('type', '0', true, ['class' => 'custom-control-input type '.$type['invalid'], 'id' => '0', 'required']) !!}
+    {!! Form::radio('type', '0', true, ['class' => 'custom-control-input type '.$type['invalid'], 'id' => '0']) !!}
     {!! Form::label('0', 'Akun Biasa', ['class' => 'custom-control-label']) !!}
   </div>
   <div class="custom-control custom-radio custom-control-inline">
-    {!! Form::radio('type', '1', null, ['class' => 'custom-control-input type ', 'id' => '1', 'required']) !!}
+    {!! Form::radio('type', '1', null, ['class' => 'custom-control-input type ', 'id' => '1']) !!}
     {!! Form::label('1', 'Relawan', ['class' => 'custom-control-label']) !!}
   </div>
   {!! $type['feedback'] !!}
@@ -90,45 +90,45 @@ $current_village = old('village_id');
     '' => '', 
     'Tanpa Organisasi' => [1 => 'Menjadi relawan tanpa organisasi'], 
     'Dengan Organisasi' => $organizations
-  ], null, ['class' => 'form-control'.$organization_id['invalid'], 'id' => 'organization_id', 'required']) !!}
+  ], null, ['class' => 'form-control'.$organization_id['invalid'], 'id' => 'organization_id']) !!}
   {!! $organization_id['feedback'] !!}
 </div>
 
 <div class="form-group">
   {!! Form::label('name', 'Nama Lengkap', ['class' => 'font-weight-bold']) !!}
-  {!! Form::text('name', null, ['class' => 'form-control '.$name['invalid'], 'id' => 'name', 'required']) !!}
+  {!! Form::text('name', null, ['class' => 'form-control '.$name['invalid'], 'id' => 'name']) !!}
   {!! $name['feedback'] !!}
 </div>
 
 <div class="form-group volunteers-input">
   {!! Form::label('nik', 'NIK / Nomor KTP', ['class' => 'font-weight-bold']) !!}
-  {!! Form::text('nik', null, ['class' => 'form-control number '.$nik['invalid'], 'id' => 'nik', 'required']) !!}
+  {!! Form::text('nik', null, ['class' => 'form-control number '.$nik['invalid'], 'id' => 'nik']) !!}
   {!! $nik['feedback'] !!}
 </div>
 
 <div class="form-group">
   {!! Form::label('email', 'Email', ['class' => 'font-weight-bold']) !!}
-  {!! Form::text('email', null, ['class' => 'form-control '.$email['invalid'], 'id' => 'email', 'required']) !!}
+  {!! Form::text('email', null, ['class' => 'form-control '.$email['invalid'], 'id' => 'email']) !!}
   {!! $email['feedback'] !!}
 </div>
 
 <div class="row">
   <div class="form-group col-md-6">
     {!! Form::label('password', 'Password', ['class' => 'font-weight-bold']) !!}
-    {!! Form::password('password', ['class' => 'form-control '.$password['invalid'], 'id' => 'password', 'required']) !!}
+    {!! Form::password('password', ['class' => 'form-control '.$password['invalid'], 'id' => 'password']) !!}
     {!! $password['feedback'] !!}
   </div>
 
   <div class="form-group col-md-6">
     {!! Form::label('password_confirmation', 'Ulangi Password', ['class' => 'font-weight-bold']) !!}
-    {!! Form::password('password_confirmation', ['class' => 'form-control '.$password_confirmation['invalid'], 'id' => 'password_confirmation', 'required']) !!}
+    {!! Form::password('password_confirmation', ['class' => 'form-control '.$password_confirmation['invalid'], 'id' => 'password_confirmation']) !!}
     {!! $password_confirmation['feedback'] !!}
   </div>
 </div>
 
 <div class="form-group volunteers-input">
   {!! Form::label('address', 'Alamat', ['class' => 'font-weight-bold']) !!}
-  {!! Form::text('address', null, ['class' => 'form-control '.$address['invalid'], 'id' => 'address', 'required']) !!}
+  {!! Form::text('address', null, ['class' => 'form-control '.$address['invalid'], 'id' => 'address']) !!}
   {!! $address['feedback'] !!}
 </div>
 
@@ -149,7 +149,7 @@ $current_village = old('village_id');
 
 <div class="form-group">
   {!! Form::label('phone', 'Nomor HP / WA', ['class' => 'font-weight-bold']) !!}
-  {!! Form::text('phone', null, ['class' => 'form-control number'.$phone['invalid'], 'id' => 'phone', 'required']) !!}
+  {!! Form::text('phone', null, ['class' => 'form-control number'.$phone['invalid'], 'id' => 'phone']) !!}
   {!! $phone['feedback'] !!}
 </div>
 
@@ -185,7 +185,11 @@ $current_village = old('village_id');
   }
 
   $(document).ready(function(){
-    type_change();
+    if ({{ old('type') ?: 0}}) {
+      type_change('1');
+    } else {
+      type_change();
+    }
 
     $('.type').change(function(){
       type_change($(this).val());

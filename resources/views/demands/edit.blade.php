@@ -15,7 +15,7 @@
 			<div class="h4 font-weight-bold text-primary mb-4">Edit Kebutuhan</div>
 				{!! Form::model($demand, [
 					'method' => 'PUT',
-					'route' => ['demands.update', $demand->id ],
+					'route' => ['demands.update', $event->slug, $post->slug, $demand->slug],
 					'id' => 'demand-form'
 				]) !!}
 

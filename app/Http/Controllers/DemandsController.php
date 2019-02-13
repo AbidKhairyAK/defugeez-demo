@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Model\Event;
+use App\Model\Post;
 use App\Model\Demand;
 
 class DemandsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
 	/**
      * Display a listing of the resource.
      *
@@ -24,13 +31,11 @@ class DemandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event, Post $post, Demand $demand)
     {
-        $demand = new Demand();
-
         $this->authorize('demands.create');
 
-        return view('demands.create', compact('demand'));
+        return view('demands.create', compact('demand', 'post', 'event'));
     }
 
     /**
@@ -39,14 +44,14 @@ class DemandsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Requests\DemandsStoreRequest $request)
+    public function store(Requests\DemandsStoreRequest $request, Event $event, Post $post)
     {
-        $request->merge([
-            'user_id' => session('user_id'),
-            'post_id' => session('post_id'),
-        ]);
-
         $this->authorize('demands.create');
+
+        $request->merge([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
 
         Demand::create($request->all());
 
@@ -54,7 +59,7 @@ class DemandsController extends Controller
 
         $request->session()->flash('refugees_tab', 'demands');
 
-        return redirect('page/refugees/'.session('post_id'));
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
     /**
@@ -74,13 +79,11 @@ class DemandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event, Post $post, Demand $demand)
     {
-        $demand = Demand::findOrFail($id);
-
         $this->authorize('demands.update', $demand);
 
-        return view('demands.edit', compact('demand'));
+        return view('demands.edit', compact('demand', 'post', 'event'));
     }
 
     /**
@@ -90,24 +93,22 @@ class DemandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\DemandsUpdateRequest $request, $id)
+    public function update(Requests\DemandsUpdateRequest $request, Event $event, Post $post, Demand $demand)
     {
-        $request->merge([
-            'user_id' => 1,
-            'post_id' => session('post_id'),
-        ]);
-        
-        $demand = Demand::findOrFail($id);
-        
         $this->authorize('demands.update', $demand);
+        
+        $request->merge([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
 
         $demand->update($request->all());
 
-        $request->session()->flash('refugees_tab', 'demands');
-
         Toastr::success('Data Kebutuhan Berhasil Diedit!', 'Edit Data Kebutuhan');
 
-        return redirect('page/refugees/'.session('post_id'));
+        $request->session()->flash('refugees_tab', 'demands');
+
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 
     /**
@@ -116,18 +117,16 @@ class DemandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, Event $event, Post $post, Demand $demand)
     {
-        $demand = Demand::findOrFail($id);
-        
         $this->authorize('demands.update', $demand);
-
+        
         $demand->delete();
 
         Toastr::success('Data Kebutuhan Berhasil Dihapus!', 'Hapus Data Kebutuhan');
 
         $request->session()->flash('refugees_tab', 'demands');
 
-        return redirect('page/refugees/'.session('post_id'));
+        return redirect('events/'.$event->id.'/posts/'.$post->id.'/refugees');
     }
 }

@@ -15,7 +15,7 @@
 			<div class="h4 font-weight-bold text-primary mb-4">- Edit Posko -</div>
 				{!! Form::model($post, [
 					'method' => 'PUT',
-					'route' => ['posts.update', $post->id ],
+					'route' => ['posts.update', $event->slug, $post->slug],
 					'id' => 'post-form'
 				]) !!}
 

@@ -89,7 +89,7 @@
 	</div>
 	<div class="d-flex justify-content-center">
 		<div>
-			<a href="{{ route('events.page') }}" class="btn btn-secondary"> Cancel </a>
+			<a href="{{ route('events.index') }}" class="btn btn-secondary"> Cancel </a>
 			<button type="submit" class="btn btn-info">Submit</button>
 		</div>
 	</div>

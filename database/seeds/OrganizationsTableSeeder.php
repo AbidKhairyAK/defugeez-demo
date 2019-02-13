@@ -21,6 +21,7 @@ class OrganizationsTableSeeder extends Seeder
 
         $data[0] = [
             'name' => 'Tanpa Organisasi',
+            'slug' => str_slug('Tanpa Organisasi').time(),
             'chairman' => 'masing-masing relawan',
             'address' => '-',
             'village_id' => null,
@@ -38,6 +39,7 @@ class OrganizationsTableSeeder extends Seeder
 
         for ($i=1; $i <= 10; $i++) {
 
+            $name = $faker->randomElement($instances).' '.$fakerDK->unique()->firstName.' '.$fakerDK->unique()->lastName;
         	$provinces = $faker->randomElement(DB::table('provinces')->pluck('id'));
         	$regencies = $faker->randomElement(DB::table('regencies')->where('province_id', $provinces)->pluck('id'));
         	$districts = $faker->randomElement(DB::table('districts')->where('regency_id', $regencies)->pluck('id'));
@@ -45,7 +47,8 @@ class OrganizationsTableSeeder extends Seeder
             $date_at = $carbon->subDay()->toDateString();
 
             $data[$i] = [
-                'name' => $faker->randomElement($instances).' '.$fakerDK->unique()->firstName.' '.$fakerDK->unique()->lastName,
+                'name' => $name,
+                'slug' => str_slug($name).strtotime($date_at),
                 'chairman' => $faker->name,
                 'address' => 'Jl. '.$faker->unique()->streetName,
                 'village_id' => $villages,

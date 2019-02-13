@@ -54,13 +54,13 @@
               </a>
 
               @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$user->organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i>
               </a>
               @endcan
 
               @can('users.delete', $user)
-              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+              <form class="d-inline" action="{{ route('users.destroy', [$user->organization->slug, $user->slug]) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
@@ -80,13 +80,13 @@
               </a>
 
               @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', $user->id) }}">
+              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$user->organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i> Edit
               </a>
               @endcan
 
               @can('users.delete', $user)
-              <form class="d-inline" action="{{ route('users.destroy', $user->id) }}" method="post">
+              <form class="d-inline" action="{{ route('users.destroy', [$user->organization->slug, $user->slug]) }}" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">

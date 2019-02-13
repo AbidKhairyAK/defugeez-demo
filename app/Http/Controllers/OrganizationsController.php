@@ -9,6 +9,11 @@ use Brian2694\Toastr\Facades\Toastr;
 
 class OrganizationsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,17 +21,12 @@ class OrganizationsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    public function page()
-    {
         $organizations = Organization::orderBy('created_at', 'asc')->get();
         $my_organization = clone $organizations;
 
         if(auth()->check()) {
-            $organizations = $organizations->whereNotIn('id', [session('organization_id')] );
-            $my_organization = $my_organization->where('id', session('organization_id'))->first();
+            $organizations = $organizations->whereNotIn('id', [auth()->user()->organization->id] );
+            $my_organization = $my_organization->where('id', auth()->user()->organization->id)->first();
         }
 
         return view('organizations.index', compact('organizations', 'my_organization'));
@@ -37,10 +37,8 @@ class OrganizationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Organization $organization)
     {
-        $organization = new Organization();
-
         $this->authorize('organizations.create');
 
         return view('organizations.create', compact('organization'));
@@ -69,7 +67,7 @@ class OrganizationsController extends Controller
 
         Toastr::success('Data Organisasi Berhasil Ditambahkan!', 'Tambah Data Organisasi');
 
-        return redirect('page/organizations');
+        return redirect('organizations');
     }
 
     /**
@@ -89,10 +87,8 @@ class OrganizationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Organization $organization)
     {
-        $organization = Organization::findOrFail($id);
-
         $this->authorize('organizations.update', $organization);
 
         return view('organizations.edit', compact('organization'));
@@ -105,10 +101,8 @@ class OrganizationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Requests\OrganizationsUpdateRequest $request, $id)
+    public function update(Requests\OrganizationsUpdateRequest $request, Organization $organization)
     {
-        $organization = Organization::findOrFail($id);
-
         $this->authorize('organizations.update', $organization);
 
         if ($image = $request->file('logo_image')) {
@@ -128,7 +122,7 @@ class OrganizationsController extends Controller
 
         Toastr::success('Data Organisasi Berhasil Diedit!', 'Edit Data Organisasi');
 
-        return redirect('page/organizations');
+        return redirect('organizations');
     }
 
     /**
@@ -137,22 +131,17 @@ class OrganizationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Organization $organization)
     {
-        $organization = Organization::findOrFail($id);
-
         $this->authorize('organizations.delete', $organization);
 
         $organization->users()->update(['organization_id' => 1]);
         $organization->delete();
 
-        session(['organization_id' => 1]);
-        session(['organization' => 'Tanpa Organisasi']);
-        
         unlink(public_path('/img/logo/'.$organization->logo));
 
         Toastr::success('Data Organisasi Berhasil Dihapus!', 'Hapus Data Organisasi');
 
-        return redirect('page/organizations');
+        return redirect('organizations');
     }
 }
