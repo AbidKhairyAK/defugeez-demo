@@ -60,7 +60,8 @@ class OrganizationsController extends Controller
         $image->move($destinationPath, $name);
 
         $request->merge([
-            'logo' => $name
+            'logo' => $name,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         Organization::create($request->all());
@@ -113,10 +114,12 @@ class OrganizationsController extends Controller
             $destinationPath = public_path('/img/logo');
             $image->move($destinationPath, $name);
 
-            $request->merge([
-                'logo' => $name
-            ]);
+            $merge['logo'] = $name;
         }
+
+        $merge['slug'] = str_slug($request->name).time();
+
+        $request->merge($merge);
 
         $organization->update($request->all());
 

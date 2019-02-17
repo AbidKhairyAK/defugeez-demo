@@ -19,7 +19,7 @@ class DemandPolicy
      */
     public function view(User $user, Demand $demand)
     {
-        //
+        return $user->hasPermission('view-demand');
     }
 
     /**
@@ -30,7 +30,7 @@ class DemandPolicy
      */
     public function create(User $user)
     {
-        return auth()->check();
+        return $user->hasPermission('create-demand');
     }
 
     /**
@@ -42,7 +42,7 @@ class DemandPolicy
      */
     public function update(User $user, Demand $demand)
     {
-        return auth()->check();
+        return $user->hasPermission('update-demand');
     }
 
     /**
@@ -54,7 +54,7 @@ class DemandPolicy
      */
     public function delete(User $user, Demand $demand)
     {
-        return auth()->check();
+        return $user->hasPermission('delete-demand');
     }
 
     /**

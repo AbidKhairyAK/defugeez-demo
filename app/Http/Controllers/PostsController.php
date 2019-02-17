@@ -86,6 +86,7 @@ class PostsController extends Controller
             'user_id' => auth()->user()->id,
             'organization_id' => auth()->user()->organization->id,
             'event_id' => $event->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         Post::create($request->all());
@@ -131,6 +132,7 @@ class PostsController extends Controller
         $request->merge([
             'user_id' => auth()->user()->id,
             'organization_id' => auth()->user()->organization->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         $this->authorize('posts.update', $post);

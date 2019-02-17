@@ -72,11 +72,7 @@
     </div>
 
     <div class="text-center">
-      @can('posts.create')
-      <a href="{{ route('posts.create', $event->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
-      @else
-      <a href="{{ route('login') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Posko</a>
-      @endcan
+      <a href="{{ route('posts.create', $event->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm @cannot('posts.create') disabled @endcan">Tambah Posko</a>
     </div>
 
     <div class="row">

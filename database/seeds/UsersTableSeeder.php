@@ -17,26 +17,82 @@ class UsersTableSeeder extends Seeder
         $faker = Factory::create('id_ID');
         $carbon = Carbon::now()->addMonth();
 
-        $data[0] = [
-            'name' => 'Default User',
-            'slug' => str_slug('Default User').time(),
-            'email' => 'user@default.com',
-            'password' => bcrypt('asdqwe123'),
-            'organization_id' => 1,
-            'nik' => $faker->creditCardNumber,
-            'address' => 'jl. Raya Krapyak rt 05',
-            'province_id' => 34,
-            'regency_id' => 3404,
-            'district_id' => 3404110,
-            'village_id' => 3404110001,
-            'phone' => $faker->unique()->e164PhoneNumber,
-            'role' => 1,
-            'status' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
+        $data =[ 
+            [
+                'organization_id' => 1,
+                'role_id' => 1,
+                'name' => 'User Super',
+                'slug' => str_slug('user-super').time(),
+                'email' => 'user@super.com',
+                'password' => bcrypt('asdqwe123'),
+                'nik' => $faker->creditCardNumber,
+                'address' => 'jl. Raya Krapyak rt 05',
+                'province_id' => 34,
+                'regency_id' => 3404,
+                'district_id' => 3404110,
+                'village_id' => 3404110001,
+                'phone' => $faker->unique()->e164PhoneNumber,
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ], 
+            [
+                'organization_id' => 1,
+                'role_id' => 2,
+                'name' => 'User Admin',
+                'slug' => str_slug('user-admin').time(),
+                'email' => 'user@admin.com',
+                'password' => bcrypt('asdqwe123'),
+                'nik' => $faker->creditCardNumber,
+                'address' => 'jl. Raya Krapyak rt 05',
+                'province_id' => 34,
+                'regency_id' => 3404,
+                'district_id' => 3404110,
+                'village_id' => 3404110001,
+                'phone' => $faker->unique()->e164PhoneNumber,
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ], 
+            [
+                'organization_id' => 1,
+                'role_id' => 3,
+                'name' => 'User Relawan',
+                'slug' => str_slug('user-relawan').time(),
+                'email' => 'user@relawan.com',
+                'password' => bcrypt('asdqwe123'),
+                'nik' => $faker->creditCardNumber,
+                'address' => 'jl. Raya Krapyak rt 05',
+                'province_id' => 34,
+                'regency_id' => 3404,
+                'district_id' => 3404110,
+                'village_id' => 3404110001,
+                'phone' => $faker->unique()->e164PhoneNumber,
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ], 
+            [
+                'organization_id' => 1,
+                'role_id' => 4,
+                'name' => 'User Biasa',
+                'slug' => str_slug('user-biasa').time(),
+                'email' => 'user@biasa.com',
+                'password' => bcrypt('asdqwe123'),
+                'nik' => $faker->creditCardNumber,
+                'address' => 'jl. Raya Krapyak rt 05',
+                'province_id' => 34,
+                'regency_id' => 3404,
+                'district_id' => 3404110,
+                'village_id' => 3404110001,
+                'phone' => $faker->unique()->e164PhoneNumber,
+                'status' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
-        for ($i=1; $i < 100; $i++) { 
+        for ($i=4; $i < 100; $i++) { 
 
             $name = $faker->name;
             $organization = $faker->randomElement(DB::table('organizations')->pluck('id'));
@@ -48,11 +104,12 @@ class UsersTableSeeder extends Seeder
             $status = $faker->boolean(80);
 
             $data[$i] = [
+                'role_id' => $status ? rand(2,3) : 4,
+                'organization_id' => $organization,
                 'name' => $name,
                 'slug' => str_slug($name).strtotime($date_at),
                 'email' => $faker->unique()->freeEmail,
                 'password' => bcrypt('asdqwe123'),
-                'organization_id' => $organization,
                 'nik' => $faker->creditCardNumber,
                 'address' => 'jl. '.$faker->streetName,
                 'province_id' => $province,
@@ -60,16 +117,15 @@ class UsersTableSeeder extends Seeder
                 'district_id' => $district,
                 'village_id' => $village,
                 'phone' => $faker->unique()->e164PhoneNumber,
-                'role' => $status ? rand(2,3) : 4,
                 'status' => $status,
                 'created_at' => $date_at,
                 'updated_at' => $date_at,
             ];
         }
         
-        // DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        // DB::table('users')->truncate();
-        // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table('users')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         DB::table('users')->insert($data);
     }

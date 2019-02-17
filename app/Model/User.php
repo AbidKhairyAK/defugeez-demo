@@ -38,6 +38,11 @@ class User extends Authenticatable
         return 'slug';
     }
 
+    public function hasPermission($permission)
+    {
+        return $this->role->permissions()->where('slug', $permission)->exists();
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -71,6 +76,11 @@ class User extends Authenticatable
     public function proof()
     {
         return $this->hasOne(Proof::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     public function organization()

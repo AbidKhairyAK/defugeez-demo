@@ -51,6 +51,7 @@ class DemandsController extends Controller
         $request->merge([
             'user_id' => auth()->user()->id,
             'post_id' => $post->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         Demand::create($request->all());
@@ -100,6 +101,7 @@ class DemandsController extends Controller
         $request->merge([
             'user_id' => auth()->user()->id,
             'post_id' => $post->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         $demand->update($request->all());

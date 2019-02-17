@@ -13,7 +13,10 @@
 
       <div class="d-flex justify-content-between">
         <h4 class="border-bottom-0 mb-3"><b>{{ $organization->name }}</b></h4>
-        <a href="{{ route('organizations.edit', $organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+
+        @can('organizations.update', $organization)
+          <a href="{{ route('organizations.edit', $organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+        @endcan
       </div>
 
       <div class="row">
@@ -84,9 +87,11 @@
       <h3 class="text-center">- Daftar Relawan -</h3>
     </div>
 
-    <div class="text-center">
-      <a href="{{ route('users.create', $organization->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
-    </div>
+    @can('users.create')
+      <div class="text-center">
+        <a href="{{ route('users.create', $organization->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
+      </div>
+    @endcan
 
     <div id="users-section" class="rounded shadow p-3 mb-5 bg-light col-sm-12">
       <table id="users-table" class="table table-hover" style="width:100%">
@@ -94,7 +99,7 @@
           <tr>
             <th class="d-table-cell d-md-none">Opsi</th>
             <th>Nama</th>
-            <th>Email</th>
+            <th>Asal</th>
             <th>Role</th>
             <th>Status</th>
             <th class="d-none d-md-table-cell">Opsi</th>
@@ -105,56 +110,42 @@
           <tr>
             <td class="d-table-cell d-md-none">
 
-              @can('users.view', $organization)
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i>
               </a>
-              @endcan
 
-              @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
+              <a class="btn btn-sm btn-info @cannot('users.update', $user) disabled @endcan" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i>
               </a>
-              @endcan
 
-              @can('users.delete', $user)
               <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
-                @csrf
-                {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
+                @csrf @method('DELETE')
+                <button class="btn btn-sm btn-danger @cannot('users.delete', $user) disabled @endcan" type="submit" onclick="return @can('users.delete', $user) confirm('Apakah anda yakin?') @else false @endcan">
                   <i class="fa fa-trash"></i>
                 </button>
               </form>
-              @endcan
 
             </td>
             <td>{{ $user->name }}</td>
-            <td>{{ $user->email }}</td>
+            <td>{{ $user->regency->name }}</td>
             <td>{{ $user->present()->roleFormatted }}</td>
             <td>{!! $user->present()->statusFormatted !!}</td>
             <td class="d-none d-md-table-cell">
               
-              @can('users.view', $organization)
               <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
                 <i class="fa fa-address-card"></i> Detail
               </a>
-              @endcan
 
-              @can('users.update', $user)
-              <a class="btn btn-sm btn-info" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
+              <a class="btn btn-sm btn-info @cannot('users.update', $user) disabled @endcan" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
                 <i class="fa fa-edit"></i> Edit
               </a>
-              @endcan
 
-              @can('users.delete', $user)
               <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
-                @csrf
-                {{ method_field('DELETE') }}
-                <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
+                @csrf @method('DELETE')
+                <button class="btn btn-sm btn-danger @cannot('users.delete', $user) disabled @endcan" type="submit" onclick="return @can('users.delete', $user) confirm('Apakah anda yakin?') @else false @endcan">
                   <i class="fa fa-trash"></i> Hapus
                 </button>
               </form>
-              @endcan
 
             </td>
           </tr>
@@ -184,6 +175,8 @@
                     <span class="col-4"><b>Alamat Lengkap :</b></span>
                     <span class="col-8 text-right">{{ $user->present()->fullAddress }}</span>
                   </div>
+
+                  @can('users.view', $organization)
                   <div class="row py-2">
                     <span class="col-4"><b>Email :</b></span>
                     <span class="col-8 text-right">{{ $user->email }}</span>
@@ -192,6 +185,8 @@
                     <span class="col-4"><b>Nomor HP / WA :</b></span>
                     <span class="col-8 text-right">{{ $user->phone }}</span>
                   </div>
+                  @endcan
+
                   <div class="row py-2">
                     <span class="col-4"><b>Role / Peran :</b></span>
                     <span class="col-8 text-right">{{ $user->present()->roleFormatted }}</span>

@@ -4,11 +4,7 @@
   </div>
 
   <div class="text-center">
-    @can('demands.create')
-    <a href="{{ route('demands.create', [$event->slug, $post->id]) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
-    @else
-    <a href="{{ route('login') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Kebutuhan</a>
-    @endcan
+    <a href="{{ route('demands.create', [$event->slug, $post->id]) }}" class="btn btn-info mb-3 px-5 shadow-sm @cannot('demands.create') disabled @endcan">Tambah Kebutuhan</a>
   </div>
 
   <div class="row">
@@ -30,20 +26,11 @@
             <tr>
               <td>
                 <form action="{{ route('demands.destroy', [$event->slug, $post->slug, $demand->slug]) }}" method="post">
-                  {{ method_field('DELETE') }}
-                  @csrf
+                  @method('DELETE') @csrf
 
-                  @can('demands.update', $demand)
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('demands.edit', [$event->slug, $post->slug, $demand->slug]) }}"><i class="fa fa-edit"></i></a>
-                  @else
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('login') }}"><i class="fa fa-edit"></i></a>  
-                  @endcan
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info @cannot('demands.update', $demand) disabled @endcan" href="{{ route('demands.edit', [$event->slug, $post->slug, $demand->slug]) }}"><i class="fa fa-edit"></i></a>
 
-                  @can('demands.delete', $demand)
-                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i></button>
-                  @else
-                  <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
-                  @endcan
+                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger @cannot('demands.delete', $demand) disabled @endcan" onclick="return @can('demands.delete', $demand) confirm('Apakah anda yakin?') @else false @endcan"><i class="fa fa-trash"></i></button>
 
                 </form>
               </td>
@@ -74,20 +61,11 @@
             <tr>
               <td>
                 <form action="{{ route('demands.destroy', [$event->slug, $post->slug, $demand->slug]) }}" method="post">
-                  {{ method_field('DELETE') }}
-                  @csrf
+                  @method('DELETE') @csrf
 
-                  @can('demands.update', $demand)
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('demands.edit', [$event->slug, $post->slug, $demand->slug]) }}"><i class="fa fa-edit"></i></a>
-                  @else
-                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info" href="{{ route('login') }}"><i class="fa fa-edit"></i></a>  
-                  @endcan
+                  <a data-toggle="tooltip" title="Edit data" class="btn btn-sm btn-info @cannot('demands.update', $demand) disabled @endcan" href="{{ route('demands.edit', [$event->slug, $post->slug, $demand->slug]) }}"><i class="fa fa-edit"></i></a>
 
-                  @can('demands.delete', $demand)
-                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i></button>
-                  @else
-                  <a data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger" href="{{ route('login') }}"><i class="fa fa-trash"></i></a>  
-                  @endcan
+                  <button data-toggle="tooltip" title="Hapus data" class="btn btn-sm btn-danger @cannot('demands.delete', $demand) disabled @endcan" onclick="return @can('demands.delete', $demand) confirm('Apakah anda yakin?') @else false @endcan"><i class="fa fa-trash"></i></button>
 
                 </form>
               </td>

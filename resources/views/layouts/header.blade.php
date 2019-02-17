@@ -7,13 +7,15 @@
 		    <li class="nav-item">
 		      <a class="nav-link text-white pr-3" href="{{ url('/') }}"><i class="fa fa-home"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Beranda"><b>Beranda</b></span></a>
 		    </li>
+		    @can('transfers.list')
 		    <li class="nav-item">
 		      <a class="nav-link text-white pr-3" href="{{ route('transfers.index') }}"><i class="fa fa-credit-card-alt"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Transfer"><b>Transfer</b></span></a>
 		    </li>
+		    @endcan
 		    <li class="nav-item">
 		      <a class="nav-link text-white pr-3" href="{{ route('organizations.index') }}"><i class="fa fa-user"></i> <span class="d-none d-md-inline-block" data-toggle="tooltip" title="Organisasi"><b>Organisasi</b></span></a>
 		    </li>
-		    @if(!auth()->user())
+		    @if(!auth()->check())
 		    <li class="nav-item">
 		      <a class="nav-link text-white" href="{{ route('login') }}" data-toggle="tooltip" title="Login / Register"><i class="fa fa-sign-in"></i> <b>Login<span class="d-none d-md-inline-block"> / Register</span></b></a>
 		    </li>
@@ -28,7 +30,8 @@
 		    		<div class="dropdown-menu dropdown-menu-right shadow">
 		    			<div class="dropdown-item text-center">
 		    				<img src="{{ Avatar::create(auth()->user()->name)->toBase64() }}">
-		    				<p class="mt-3 mb-1"><b>{{ auth()->user()->name }}</b></p>
+		    				<p class="mt-3 mb-0"><b>{{ auth()->user()->name }}</b></p>
+		    				<small class="mb-1 d-block">({{ auth()->user()->role->name }})</small>
 		    				<p class="mt-0">{{ auth()->user()->organization->name }}</p>
 		    				<hr>
 		    			</div>

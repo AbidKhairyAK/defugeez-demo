@@ -8,6 +8,7 @@ use App\Model\Event;
 use App\Model\Post;
 use App\Http\Requests;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 class EventsController extends Controller
 {
@@ -52,11 +53,12 @@ class EventsController extends Controller
      */
     public function store(Requests\EventsStoreRequest $request)
     {
+        $this->authorize('events.create');
+
         $request->merge([
             'user_id' => auth()->user()->id,
+            'slug' => str_slug($request->name).time(),
         ]);
-
-        $this->authorize('events.create');
 
         Event::create($request->all());
 
@@ -102,6 +104,7 @@ class EventsController extends Controller
         
         $request->merge([
             'user_id' => auth()->user()->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         $event->update($request->all());

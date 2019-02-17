@@ -31,7 +31,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('organizations', 'App\Policies\OrganizationPolicy');
         Gate::resource('users', 'App\Policies\UserPolicy');
         Gate::resource('demands', 'App\Policies\DemandPolicy');
+        Gate::resource('donations', 'App\Policies\DonationPolicy');
+        Gate::resource('transfers', 'App\Policies\TransferPolicy');
         
         Gate::define('users.activate', 'App\Policies\UserPolicy@activate');
+        Gate::define('transfers.list', 'App\Policies\TransferPolicy@list');
     }
 }

@@ -18,7 +18,9 @@
 
       <div class="d-flex justify-content-between">
         <h4 class="border-bottom-0 mb-3"><b>{{ $my_organization->name }}</b></h4>
-        <a href="{{ route('organizations.edit', $my_organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+        @can('organizations.update', $my_organization)
+          <a href="{{ route('organizations.edit', $my_organization->slug) }}" class="text-info"><h3><i class="fa fa-gear"></i></h3></a>
+        @endcan
       </div>
 
       <div class="row">
@@ -90,9 +92,11 @@
       <h3 class="text-center">- Daftar Organisasi -</h3>
     </div>
 
-    <div class="text-center">
-      <a href="{{ route('organization-register') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Organisasi</a>
-    </div>
+    @can('organizations.create')
+      <div class="text-center">
+        <a href="{{ route('organization-register') }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Organisasi</a>
+      </div>
+    @endcan
 
     <div class="row">
 

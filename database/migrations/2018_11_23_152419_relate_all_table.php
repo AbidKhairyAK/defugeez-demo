@@ -13,20 +13,20 @@ class RelateAllTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function(Blueprint $table) {
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('regency_id')->references('id')->on('regencies');
             $table->foreign('district_id')->references('id')->on('districts');
             $table->foreign('village_id')->references('id')->on('villages');
         });
 
-        Schema::table('refugees', function($table) {
+        Schema::table('refugees', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_id')->references('id')->on('posts');
             $table->foreign('event_id')->references('id')->on('events');
         });
 
-        Schema::table('posts', function($table) {
+        Schema::table('posts', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('province_id')->references('id')->on('provinces');
@@ -35,7 +35,7 @@ class RelateAllTable extends Migration
             $table->foreign('village_id')->references('id')->on('villages');
         });
 
-        Schema::table('events', function($table) {
+        Schema::table('events', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('regency_id')->references('id')->on('regencies');
@@ -49,20 +49,20 @@ class RelateAllTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function($table) {
+        Schema::table('users', function(Blueprint $table) {
             $table->dropForeign(['province_id']);
             $table->dropForeign(['regency_id']);
             $table->dropForeign(['district_id']);
             $table->dropForeign(['village_id']);
         });
 
-        Schema::table('refugees', function($table) {
+        Schema::table('refugees', function(Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['post_id']);
             $table->dropForeign(['event_id']);
         });
 
-        Schema::table('posts', function($table) {
+        Schema::table('posts', function(Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['event_id']);
             $table->dropForeign(['province_id']);
@@ -71,7 +71,7 @@ class RelateAllTable extends Migration
             $table->dropForeign(['village_id']);
         });
         
-        Schema::table('refugees', function($table) {
+        Schema::table('refugees', function(Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['province_id']);
             $table->dropForeign(['regency_id']);

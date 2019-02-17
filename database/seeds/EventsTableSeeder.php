@@ -93,7 +93,7 @@ class EventsTableSeeder extends Seeder
 
             $province = $faker->randomElement(DB::table('provinces')->pluck('id'));
             $regency = $faker->randomElement(DB::table('regencies')->where('province_id', $province)->pluck('id'));
-            $id_user = $faker->randomElement(DB::table('users')->where('role', 2)->orWhere('role', 1)->pluck('id'));
+            $id_user = $faker->randomElement(DB::table('users')->where('role_id', 2)->orWhere('role_id', 1)->pluck('id'));
             $date_at = $carbon->subDay()->toDateString();
             $lat = $coords[$island]['lat'];
             $lng = $coords[$island]['lng'];

@@ -51,8 +51,7 @@
 
 		        @can('posts.delete', $post)
 		        <form action="{{ route('posts.destroy', [$post->event->slug, $post->slug]) }}" method="post">
-		          @csrf
-		          {{ method_field("DELETE") }}
+		          @csrf @method("DELETE")
 		          <button class="dropdown-item btn" type="submit" onclick="return confirm('Apakah anda yakin?')">Delete</button>
 		        </form>
 		        @endcan

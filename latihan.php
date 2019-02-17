@@ -2,37 +2,26 @@
 <html>
 <head>
 	<title></title>
-	<style type="text/css">
-		#pengurung {
-			display: flex;			
-		}
-		.kotak {
-			width: 20px;
-			height: 50px;
-			background: #da7;
-			margin: 0;
-			border-left: 10px solid #390
-		}
-		.miring {
-			padding-left: 10px;
-			padding-right: 30px;
-			height: 50px;
-			background: #da7;
-			margin-left: 20px;
-			transform: skewX(-20deg);
-		}
-		.miring p {
-			transform: skewX(20deg);
-		}
-
-	</style>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="pengurung">
-		<div class="kotak"></div>
-		<div class="miring">
-			<p>abid</p>
-		</div>
-	</div>
+	<select class="abid">
+		<option>abid</option>
+		<option>abid</option>
+		<option>abid</option>
+	</select>
+
+
+	<select class="abid">
+		<option>abid</option>
+		<option>abid</option>
+		<option>abid</option>
+	</select>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript">
+		$('.abid').select2();
+	</script>
 </body>
 </html>

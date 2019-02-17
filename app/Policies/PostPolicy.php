@@ -19,7 +19,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-
+        return $user->hasPermission('view-post');
     }
 
     /**
@@ -30,7 +30,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return auth()->check();
+        return $user->hasPermission('create-post');
     }
 
     /**
@@ -42,7 +42,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return ($user->role <= 2) || ($user->id == $post->user_id);
+        return $user->hasPermission('update-post') && $user->organization_id == $post->organization_id;
     }
 
     /**
@@ -54,7 +54,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return ($user->role <= 2) || ($user->id == $post->user_id);
+        return $user->hasPermission('delete-post');
     }
 
     /**

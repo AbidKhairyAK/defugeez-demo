@@ -14,8 +14,7 @@ class UserPresenter extends Presenter
 
 	public function roleFormatted()
 	{
-		$status = [1 => 'Developer', 'Admin', 'Relawan', 'Akun Biasa'];
-		return $status[$this->role];
+		return $this->role->name;
 	}
 
 	public function statusFormatted()

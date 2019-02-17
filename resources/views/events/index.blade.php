@@ -70,44 +70,6 @@
     @endif
     @endif
 
-    <div class="centered mb-3 mt-4">
-      <h3 class="text-center">- Daftar Penggalangan Dana -</h3>
-    </div>
-
-    <div class="text-center">
-      <a href="{{ route('donations.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Buat Pengalangan Dana</a>
-    </div>
-
-    <div class="owl-carousel owl-theme">
-      @foreach($donations as $donation)
-      <div class="item">
-        <div class="card rounded overflow-hidden shadow">
-          <div class="card-img-top" style="height: 150px; overflow: hidden;">
-            <img class="owl-lazy" data-src="/img/donation/{{ $donation->image }}" style="width: 100%;">
-          </div>
-          <div class="card-body" style="min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <h6 class="card-title">{{ $donation->name }}</h6>
-            </div>
-            <div>
-              <hr>
-              <div class="progress" style="height: 20px;">
-                <div class="progress-bar bg-info" style="height: 20px;width:{{ $donation->present()->percentage }}%"></div>
-              </div>
-              <div class="small">Terkumpul</div>
-              <div>{{ $donation->present()->collected }}</div>
-            </div>
-          </div>
-          <div class="bg-info text-center p-2">
-            <a href="{{ route('donations.show', $donation->slug) }}" class="text-white h6">Info Lebih Lanjut</a>
-          </div>
-        </div>
-      </div>
-      @endforeach
-    </div>
-
-    <h5 class="text-right text-info mb-5"><a href="{{ route('donations.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
-
     <div class="centered my-3">
       <h3 class="text-center">- Titik Bencana -</h3>
     </div>
@@ -176,6 +138,45 @@
 
     <h5 class="text-right text-info mb-5"><a href="{{ route('events.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
   
+
+    <div class="centered mb-3 mt-4">
+      <h3 class="text-center">- Daftar Penggalangan Dana -</h3>
+    </div>
+
+    <div class="text-center">
+      <a href="{{ route('donations.create') }}" class="btn btn-info mb-3 px-5 shadow-sm">Buat Pengalangan Dana</a>
+    </div>
+
+    <div class="owl-carousel owl-theme">
+      @foreach($donations as $donation)
+      <div class="item">
+        <div class="card rounded overflow-hidden shadow">
+          <div class="card-img-top" style="height: 150px; overflow: hidden;">
+            <img class="owl-lazy" data-src="/img/donation/{{ $donation->image }}" style="width: 100%;">
+          </div>
+          <div class="card-body" style="min-height: 210px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <h6 class="card-title">{{ $donation->name }}</h6>
+            </div>
+            <div>
+              <hr>
+              <div class="progress" style="height: 20px;">
+                <div class="progress-bar bg-info" style="height: 20px;width:{{ $donation->present()->percentage }}%"></div>
+              </div>
+              <div class="small">Terkumpul</div>
+              <div>{{ $donation->present()->collected }}</div>
+            </div>
+          </div>
+          <div class="bg-info text-center p-2">
+            <a href="{{ route('donations.show', $donation->slug) }}" class="text-white h6">Info Lebih Lanjut</a>
+          </div>
+        </div>
+      </div>
+      @endforeach
+    </div>
+
+    <h5 class="text-right text-info mb-5"><a href="{{ route('donations.list') }}">Tampilkan lebih banyak &raquo;</a></h5>
+
   </div>
 
 @endsection

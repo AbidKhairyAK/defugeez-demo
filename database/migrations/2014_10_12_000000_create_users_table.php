@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('organization_id')->default(1);
+            $table->unsignedInteger('role_id');
             $table->string('nik', 17)->unique()->nullable();
             $table->string('name');
             $table->string('slug');
@@ -29,7 +30,6 @@ class CreateUsersTable extends Migration
             $table->char('village_id', 10)->nullable();
             $table->string('phone', 15)->nullable();
             $table->boolean('status')->default(0);
-            $table->enum('role', [1,2,3,4])->default(4);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -18,6 +18,8 @@ class TransfersController extends Controller
 
     public function index()
     {
+        $this->authorize('transfers.list');
+
     	$transfers = Transfer::withTrashed()->orderBy('created_at', 'desc')->paginate(20)->onEachSide(1);
 
     	return view('transfers.index', compact('transfers'));
@@ -25,14 +27,19 @@ class TransfersController extends Controller
 
     public function create(Donation $donation)
     {
+        $this->authorize('transfers.create');
+
     	return view('transfers.create', compact('donation'));
     }
 
     public function store(Requests\TransfersStoreRequest $request, Donation $donation)
     {
+        $this->authorize('transfers.create');
+
         $request->merge([
             'user_id' => auth()->user()->id,
             'donation_id' => $donation->id,
+            'slug' => str_slug($request->account_number).time(),
         ]);
 
         $transfer = Transfer::create($request->all());
@@ -42,25 +49,33 @@ class TransfersController extends Controller
 
     public function show(Donation $donation, Transfer $transfer)
     {
-    	return view('transfers.show', compact('transfer', 'donation'));
+        $this->authorize('transfers.update', $transfer);
+    	
+        return view('transfers.show', compact('transfer', 'donation'));
     }
 
     public function update(Donation $donation, Transfer $transfer)
     {
-    	$transfer->update(['status' => 1]);
+        $this->authorize('transfers.update', $transfer);
+    	
+        $transfer->update(['status' => 1]);
 
     	return redirect()->back();
     }
 
     public function delete(Donation $donation, Transfer $transfer)
     {
-    	$transfer->delete();
+        $this->authorize('transfers.delete', $transfer);
+    	
+        $transfer->delete();
 
     	return redirect('/');
     }
 
     public function destroy(Donation $donation, Transfer $transfer)
     {
+        $this->authorize('transfers.delete', $transfer);
+        
     	$transfer->forceDelete();
 
     	return redirect('/');
@@ -82,6 +97,7 @@ class TransfersController extends Controller
             'user_id' => auth()->user()->id,
             'transfer_id' => $transfer->id,
             'image' => '/img/proof/'.$name,
+            'slug' => str_slug($transfer->id).time(),
         ]);
 
         Proof::create($request->all());

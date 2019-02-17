@@ -19,7 +19,7 @@ class EventPolicy
      */
     public function view(User $user, Event $event)
     {
-        
+        return $user->hasPermission('view-event');
     }
 
     /**
@@ -30,7 +30,7 @@ class EventPolicy
      */
     public function create(User $user)
     {
-        return $user->role <= 2;
+        return $user->hasPermission('create-event');
     }
 
     /**
@@ -42,7 +42,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        return ($user->role == 1) || ($user->id == $event->user_id);
+        return ($user->hasPermission('update-event') && $user->id == $event->user_id) || $user->role_id == 1;
     }
 
     /**
@@ -54,7 +54,7 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        return ($user->role == 1) || ($user->id == $event->user_id);
+        return $user->hasPermission('delete-event');
     }
 
     /**

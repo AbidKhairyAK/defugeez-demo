@@ -19,7 +19,7 @@ class RefugeePolicy
      */
     public function view(User $user, Refugee $refugee)
     {
-        //
+        return $user->hasPermission('view-refugee');
     }
 
     /**
@@ -30,7 +30,7 @@ class RefugeePolicy
      */
     public function create(User $user)
     {
-        return auth()->check();
+        return $user->hasPermission('create-refugee');
     }
 
     /**
@@ -42,7 +42,7 @@ class RefugeePolicy
      */
     public function update(User $user, Refugee $refugee)
     {
-        return auth()->check();
+        return $user->hasPermission('update-refugee');
     }
 
     /**
@@ -54,7 +54,7 @@ class RefugeePolicy
      */
     public function delete(User $user, Refugee $refugee)
     {
-        return auth()->check();
+        return $user->hasPermission('delete-refugee');
     }
 
     /**

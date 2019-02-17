@@ -19,7 +19,7 @@ class UserPolicy
      */
     public function view(User $user, Organization $organization)
     {
-        return ($user->role == 1) || ($user->organization_id == $organization->id);
+        return $user->hasPermission('view-user') && $user->organization_id == $organization->id;
     }
 
     /**
@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        $user->role <= 2;
+        return $user->hasPermission('create-user') && $user->organization_id == $organization->id;
     }
 
     /**
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return ($user->role <= 2) || ($user->id == $model->id);
+        return $user->hasPermission('update-user') && $user->id == $model->id;
     }
 
     /**
@@ -54,12 +54,12 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return ($user->role <= 2) || ($user->id == $model->id);
+        return $user->hasPermission('delete-user') && $user->id == $model->id;
     }
 
     public function activate(User $user, User $model)
     {
-        return ($user->role <= 2) && ($user->id != $model->id);
+        return $user->hasPermission('update-user') && $user->id == $model->id;
     }
 
     /**

@@ -44,6 +44,8 @@ class AuthController extends Controller
             ];
         }
 
+        $merge['slug'] = str_slug($request->name).time();
+
         $request->merge($merge);
 
         User::create($request->all());
@@ -67,7 +69,8 @@ class AuthController extends Controller
         $image->move($destinationPath, $name);
 
         $request->merge([
-            'logo' => $name
+            'logo' => $name,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         Organization::create($request->all());

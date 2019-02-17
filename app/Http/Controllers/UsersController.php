@@ -67,6 +67,7 @@ class UsersController extends Controller
 
         $request->merge([
             'organization_id' => $organization->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         User::create($request->all());
@@ -136,6 +137,10 @@ class UsersController extends Controller
             unset($request['password_old']);
             unset($request['password_confirmation']);
             unset($request['password']);
+        }
+
+        if ($user->name != $request->name) {
+            $request->merge(['slug' => str_slug($request->name).time()]);
         }
 
         $user->update($request->all());

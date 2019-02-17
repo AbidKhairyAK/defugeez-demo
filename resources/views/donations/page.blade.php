@@ -24,12 +24,12 @@
           <div class="progress-bar bg-info" style="height: 20px; width:{{ $donation->present()->percentage }}%"></div>
         </div>
         <div class="small">{{ $donation->present()->percentage }}% Terkumpul</div>
-        <div class=" text-center">
-          <a  href="{{ route('transfers.create', $donation->slug) }}" class="btn btn-info mt-3 col-md-12"><b>Donasi Sekarang</b></a>
-        </div>
         <div class="mb-3 text-center">
-          <a href="" class="btn btn-outline-success mt-3 col-md-12"><b>Share</b></a>
+          <a  href="{{ route('transfers.create', $donation->slug) }}" class="btn btn-lg btn-danger mt-3 col-md-12"><b>Donasi Sekarang</b></a>
         </div>
+        {{-- <div class="mb-3 text-center">
+          <a href="" class="btn btn-outline-success mt-3 col-md-12"><b>Share</b></a>
+        </div> --}}
         <p>Penggalangan dana dimulai pada <br>
         	<b>{{ $donation->present()->date_formatted }}</b>
         </p>

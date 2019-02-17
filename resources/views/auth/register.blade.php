@@ -84,6 +84,7 @@ $current_village = old('village_id');
   {!! $type['feedback'] !!}
 </div>
 
+
 <div class="form-group volunteers-input">
   {!! Form::label('organization_id', 'Organisasi', ['class' => 'font-weight-bold']) !!}
   {!! Form::select('organization_id', [
@@ -92,7 +93,9 @@ $current_village = old('village_id');
     'Dengan Organisasi' => $organizations
   ], null, ['class' => 'form-control'.$organization_id['invalid'], 'id' => 'organization_id']) !!}
   {!! $organization_id['feedback'] !!}
+  <small><a href="{{ route('organization-register') }}" class="text-info">Organisasi anda belum terdaftar?</a></small>
 </div>
+
 
 <div class="form-group">
   {!! Form::label('name', 'Nama Lengkap', ['class' => 'font-weight-bold']) !!}

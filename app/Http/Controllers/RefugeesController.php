@@ -100,6 +100,7 @@ class RefugeesController extends Controller
             'user_id' => auth()->user()->id,
             'post_id' => $post->id,
             'event_id' => $event->id,
+            'slug' => str_slug($request->name).time(),
         ]);
 
         Refugee::create($request->all());
@@ -149,6 +150,7 @@ class RefugeesController extends Controller
 
         $request->merge([
             'user_id' => auth()->user()->id,
+            'slug' => str_slug($request->name).time(),
         ]);
         
         $refugee->update($request->all());
@@ -188,6 +190,8 @@ class RefugeesController extends Controller
 
     public function import(Request $request, Event $event, Post $post)
     {
+        $this->authorize('refugees.create');
+
         (new RefugeesImport($event->id, $post->id, auth()->user()->id))->import($request->file('import'));
 
         Toastr::success('File Excel berhasil di-import!', 'Import Excel');

@@ -5,11 +5,7 @@
   </div>
 
   <div class="text-center mb-3">
-    @can('refugees.create')
-    <a href="{{ route('refugees.create', [$event->slug, $post->slug]) }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
-    @else
-    <a href="{{ route('login') }}" class="btn btn-info px-5 shadow-sm">Tambah Pengungsi</a>
-    @endcan
+    <a href="{{ route('refugees.create', [$event->slug, $post->slug]) }}" class="btn btn-info px-5 shadow-sm @cannot('refugees.create') disabled @endcan">Tambah Pengungsi</a>
     <b class="p-2 d-block d-md-inline">- OR -</b>
     <button type="button" data-toggle="modal" data-target="#excel" class="btn btn-success px-5 shadow-sm">Import / Export Excel</button>
   </div>
@@ -41,7 +37,6 @@
               <a href="{{ route('refugees.format', [$event->slug, $post->slug]) }}" class="btn btn-block btn-secondary" data-toggle="tooltip" title="Download file format excel sebelum meng-import data pengungsi">Download Format File</a>
             </div>
             <div class="col-sm-6">
-              @can('refugees.create')
               <form id="import-form" accept="application/vnd.ms-excel" method="post" action="{{ route('refugees.import', [$event->slug, $post->slug]) }}" enctype="multipart/form-data" class="d-block">
                 @csrf
                 <label class="d-block">
@@ -49,9 +44,6 @@
                   <input type="file" name="import" id="import-excel" class="d-none" accept=".xls,.xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
                 </label>
               </form>
-              @else
-                <a href="{{ route('login') }}" class="btn btn-block btn-success text-white" data-toggle="tooltip" title="Import data pengungsi dari file excel">Import Dari Excel</a>
-              @endcan
             </div>
           </div>
           <hr>
@@ -89,30 +81,17 @@
               <i class="fa fa-address-card"></i>
             </a>
 
-            @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
+            <a class="btn btn-sm btn-info @cannot('refugees.update', $refugee) disabled @endcan" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i>
             </a>
-            @else
-            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
-              <i class="fa fa-edit"></i>
-            </a>
-            @endcan
-
-            @can('refugees.delete', $refugee)
+            
             <form class="d-inline" action="{{ route('refugees.destroy', [$event->slug, $post->slug, $refugee->slug]) }}" method="post">
-              @csrf
-              {{ method_field('DELETE') }}
-              <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
+              @csrf @method('DELETE')
+              <button class="btn btn-sm btn-danger @cannot('refugees.delete', $refugee) disabled @endcan" type="submit" onclick="return @can('refugees.delete', $refugee) confirm('Apakah anda yakin?') @else false @endcan">
                 <i class="fa fa-trash"></i>
               </button>
             </form>
-            @else
-            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
-              <i class="fa fa-trash"></i>
-            </a>
-            @endcan
-
+            
           </td>
           <td>{{ $refugee->name }}</td>
           <td>{{ $refugee->gender }}</td>
@@ -124,29 +103,16 @@
               <i class="fa fa-address-card"></i> Detail
             </a>
 
-            @can('refugees.update', $refugee)
-            <a class="btn btn-sm btn-info" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
+            <a class="btn btn-sm btn-info @cannot('refugees.update', $refugee) disabled @endcan" href="{{ route('refugees.edit', [$event->slug, $post->slug, $refugee->slug]) }}">
               <i class="fa fa-edit"></i> Edit
             </a>
-            @else
-            <a class="btn btn-sm btn-info" href="{{ route('login') }}">
-              <i class="fa fa-edit"></i> Edit
-            </a>
-            @endcan
             
-            @can('refugees.delete', $refugee)
             <form class="d-inline" action="{{ route('refugees.destroy', [$event->slug, $post->slug, $refugee->slug]) }}" method="post">
-              @csrf
-              {{ method_field('DELETE') }}
-              <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Apakah anda yakin?')">
+              @csrf @method('DELETE')
+              <button class="btn btn-sm btn-danger @cannot('refugees.delete', $refugee) disabled @endcan" type="submit" onclick="return @can('refugees.delete', $refugee) confirm('Apakah anda yakin?') @else false @endcan">
                 <i class="fa fa-trash"></i> Hapus
               </button>
             </form>
-            @else
-            <a class="btn btn-sm btn-danger" href="{{ route('login') }}">
-              <i class="fa fa-trash"></i> Hapus
-            </a>
-            @endcan
 
           </td>
         </tr>

@@ -44,17 +44,9 @@ if (session('invalid')) {
 
 <button type="submit" class="btn btn-block btn-info"><b>LOGIN</b></button>
 
-<hr>
 <p class="text-center my-3"><b>- atau -</b></p>
 
-<div class="row">
-  <div class="col-md-6 mb-3">
-    <a href="{{ route('organization-register') }}" class="btn btn-block btn-outline-info">Register Organisasi</a>
-  </div>
-  <div class="col-md-6 mb-3">
-    <a href="{{ route('register') }}" class="btn btn-block btn-outline-info">Register Akun</a>
-  </div>
-</div>
+<a href="{{ route('register') }}" class="btn btn-block btn-outline-info">Daftar Akun</a>
 
 {!! Form::close() !!}
 @endsection
