@@ -52,9 +52,7 @@ img {
   right: 15px; top: 0;
 }
 
-#refugees-section,
-#users-section,
-#transfers-section {
+.dataTables_wrapper > .row:nth-child(2) {
   overflow-x: scroll;
 }
 

@@ -24,9 +24,7 @@ class UsersController extends Controller
      */
     public function index(Organization $organization)
     {
-        $users = User::where('organization_id', $organization->id)->orderBy('status', 'asc')->orderBy('name', 'asc')->get();
-
-        return view('users.index', compact('organization', 'users'));
+        return view('users.index', compact('organization'));
     }
 
     /**

@@ -28,7 +28,7 @@ class UserPolicy
      * @param  \App\Model\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Organization $organization)
     {
         return $user->hasPermission('create-user') && $user->organization_id == $organization->id;
     }

@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'organization_id', 'nik', 'address', 'province_id', 'regency_id', 'district_id', 'village_id', 'phone', 'status', 'role',
+        'name', 'email', 'password', 'organization_id', 'nik', 'address', 'province_id', 'regency_id', 'district_id', 'village_id', 'phone', 'status', 'role_id',
     ];
 
     /**
@@ -111,24 +111,5 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
     	$this->attributes['password'] = bcrypt($value);
-    }
-
-    public function statusLabel()
-    {
-        $status = $this->status ? 'Aktif' : 'Tidak Aktif';
-
-        return $status;
-    }
-
-    public function roleLabel()
-    {
-        $role = [
-            1 => 'Developer',
-            2 => 'Admin',
-            3 => 'Relawan',
-            4 => 'Akun Biasa',
-        ];
-
-        return $role[$this->role];
     }
 }

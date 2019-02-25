@@ -87,7 +87,7 @@
       <h3 class="text-center">- Daftar Relawan -</h3>
     </div>
 
-    @can('users.create')
+    @can('users.create', $organization)
       <div class="text-center">
         <a href="{{ route('users.create', $organization->slug) }}" class="btn btn-info mb-3 px-5 shadow-sm">Tambah Relawan</a>
       </div>
@@ -105,103 +105,7 @@
             <th class="d-none d-md-table-cell">Opsi</th>
           </tr>
         </thead>
-        <tbody>
-          @foreach($users as $user)
-          <tr>
-            <td class="d-table-cell d-md-none">
-
-              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
-                <i class="fa fa-address-card"></i>
-              </a>
-
-              <a class="btn btn-sm btn-info @cannot('users.update', $user) disabled @endcan" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
-                <i class="fa fa-edit"></i>
-              </a>
-
-              <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
-                @csrf @method('DELETE')
-                <button class="btn btn-sm btn-danger @cannot('users.delete', $user) disabled @endcan" type="submit" onclick="return @can('users.delete', $user) confirm('Apakah anda yakin?') @else false @endcan">
-                  <i class="fa fa-trash"></i>
-                </button>
-              </form>
-
-            </td>
-            <td>{{ $user->name }}</td>
-            <td>{{ $user->regency->name }}</td>
-            <td>{{ $user->present()->roleFormatted }}</td>
-            <td>{!! $user->present()->statusFormatted !!}</td>
-            <td class="d-none d-md-table-cell">
-              
-              <a class="btn btn-sm btn-success" href="" data-toggle="modal" data-target="#user{{ $user->id }}">
-                <i class="fa fa-address-card"></i> Detail
-              </a>
-
-              <a class="btn btn-sm btn-info @cannot('users.update', $user) disabled @endcan" href="{{ route('users.edit', [$organization->slug, $user->slug]) }}">
-                <i class="fa fa-edit"></i> Edit
-              </a>
-
-              <form class="d-inline" action="{{ route('users.destroy', [$organization->slug, $user->slug]) }}" method="post">
-                @csrf @method('DELETE')
-                <button class="btn btn-sm btn-danger @cannot('users.delete', $user) disabled @endcan" type="submit" onclick="return @can('users.delete', $user) confirm('Apakah anda yakin?') @else false @endcan">
-                  <i class="fa fa-trash"></i> Hapus
-                </button>
-              </form>
-
-            </td>
-          </tr>
-
-          <!-- The Modal -->
-          <div class="modal fade" id="user{{ $user->id }}">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header bg-info">
-                  <h4 class="modal-title text-white">Detail Relawan</h4>
-                  <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                  <div class="row py-2">
-                    <span class="col-4"><b>Organisasi :</b></span>
-                    <span class="col-8 text-right">{{ $user->organization->name }}</span>
-                  </div>
-                  <div class="row py-2">
-                    <span class="col-4"><b>Nama :</b></span>
-                    <span class="col-8 text-right">{{ $user->name }}</span>
-                  </div>
-                  <div class="row py-2">
-                    <span class="col-4"><b>Alamat Lengkap :</b></span>
-                    <span class="col-8 text-right">{{ $user->present()->fullAddress }}</span>
-                  </div>
-
-                  @can('users.view', $organization)
-                  <div class="row py-2">
-                    <span class="col-4"><b>Email :</b></span>
-                    <span class="col-8 text-right">{{ $user->email }}</span>
-                  </div>
-                  <div class="row py-2">
-                    <span class="col-4"><b>Nomor HP / WA :</b></span>
-                    <span class="col-8 text-right">{{ $user->phone }}</span>
-                  </div>
-                  @endcan
-
-                  <div class="row py-2">
-                    <span class="col-4"><b>Role / Peran :</b></span>
-                    <span class="col-8 text-right">{{ $user->present()->roleFormatted }}</span>
-                  </div>
-                  <div class="row py-2">
-                    <span class="col-4"><b>Status :</b></span>
-                    <span class="col-8 text-right">{!! $user->present()->statusFormatted !!}</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          @endforeach
-        </tbody>
+        
       </table>
     </div>
 
@@ -210,8 +114,23 @@
 
 @section('script')
 <script type="text/javascript">
-    $('#users-table').DataTable({
-      "order": []
-    });
+  $('#users-table').DataTable({
+    // order: [],
+    processing: true,
+    serverSide: true,
+    ajax: "{{ route('users.data', $organization->slug) }}",
+    columns: [
+        {data: 'action_min', searchable: false, orderable: false},
+        {data: 'username', name: 'users.name'},
+        {data: 'regency.name', name: 'regency.name'},
+        {data: 'role', name: 'users.role_id'},
+        {data: 'statusf', name: 'users.status'},
+        {data: 'action', searchable: false, orderable: false},
+    ],
+    drawCallback: function(settings) {
+      $('#users-table tbody tr td:first-child').addClass('d-table-cell d-md-none');
+      $('#users-table tbody tr td:last-child').addClass('d-none d-md-table-cell');
+    }
+  });
 </script>
 @endsection

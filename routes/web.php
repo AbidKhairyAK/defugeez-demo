@@ -80,3 +80,7 @@ Route::prefix('list')->group(function(){
 });
 
 // Route::get('/message', 'UsersController@message');
+
+Route::prefix('data')->group(function(){
+	Route::get('{organization}/users', 'DatatablesController@users')->name('users.data');
+});
